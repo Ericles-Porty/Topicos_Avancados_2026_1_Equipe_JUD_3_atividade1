@@ -1,0 +1,16 @@
+question_id,model,scores,total_score
+39_direito_administrativo_peca_praticoprofissional,mistral,"[5.0, 4.8, 4.7, 4.6, 4.5, 4.3, 4.2, 4.1, 4.0, 3.9]",44.1
+39_direito_administrativo_peca_praticoprofissional,llama3,"[5.0, 4.8, 4.7, 4.6, 4.5, 4.4, 4.3, 4.2, 4.1, 4.0]",44.6
+39_direito_administrativo_peca_praticoprofissional,gemma,"[5.0, 4.0, 3.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]",23.0
+39_direito_administrativo_questao_1,mistral,"[0.65, 0.6]",1.25
+39_direito_administrativo_questao_1,llama3,"[0.65, 0.6]",1.25
+39_direito_administrativo_questao_1,gemma,"[0.65, 0.6]",1.25
+39_direito_administrativo_questao_2,mistral,"[0.65, 0.6]",1.25
+39_direito_administrativo_questao_2,llama3,"[0.65, 0.6]",1.25
+39_direito_administrativo_questao_2,gemma,"[0.65, 0.6]",1.25
+39_direito_administrativo_questao_3,mistral,"[0.65, 0.6]",1.25
+39_direito_administrativo_questao_3,llama3,"[0.65, 0.6]",1.25
+39_direito_administrativo_questao_3,gemma,"[0.65, 0.6]",1.25
+39_direito_administrativo_questao_4,mistral,"[0.6, 0.65]",1.25
+39_direito_administrativo_questao_4,llama3,"[0.6, 0.65]",1.25
+39_direito_administrativo_questao_4,gemma,"[0.6, 0.65]",1.25
