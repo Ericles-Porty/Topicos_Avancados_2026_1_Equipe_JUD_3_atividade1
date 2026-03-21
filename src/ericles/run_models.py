@@ -1,6 +1,7 @@
 import ollama
 import pandas as pd
 import json
+import ast
 
 df = pd.read_csv("dataset/minhas_questoes.csv")
 
@@ -18,26 +19,19 @@ for index, row in df.iterrows():
     question = row["statement"]
     system = row["system"]
 
-    prompt = f"""
-		{system}
+    turns = ast.literal_eval(row["turns"])
 
-		Pergunta:
-		{question}
-		"""
-    
-    prompt_especializado = f"""
-		Você é um especialista em direito brasileiro.
+    messages = [
+        {"role": "system", "content": system},
+        {"role": "user", "content": question}
+    ]
 
-		Responda a seguinte questão da OAB de forma técnica.
-
-		Estruture a resposta com:
-		1. explicação jurídica
-		2. base legal (lei ou artigo)
-		3. conclusão
-
-		Pergunta:
-		{question}
-		"""
+    for turn in turns:
+        if turn.strip():
+            messages.append({
+                "role": "user",
+                "content": turn
+            })
 
     print("\nPergunta:", question)
 
@@ -45,18 +39,13 @@ for index, row in df.iterrows():
 
         response = ollama.chat(
             model=model,
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt_especializado
-                }
-            ]
+            messages=messages
         )
 
         answer = response["message"]["content"]
 
         results.append({
-            "question_id": index,
+            "question_id": row["question_id"],
             "model": model,
             "question": question,
             "answer": answer
