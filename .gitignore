@@ -116,6 +116,7 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm
 .venv
+.ruff_cache
 .pytest_cache
 __pycache__
 plot_melhor_rota.png

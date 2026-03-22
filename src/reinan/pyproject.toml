@@ -1,0 +1,9 @@
+[project]
+name = "reinan-jud"
+version = "0.1.0"
+description = "Repositório com os resultados da avaliação feita por Reinan."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ruff>=0.15.7",
+]
