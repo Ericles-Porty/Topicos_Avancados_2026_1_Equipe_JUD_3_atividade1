@@ -38,6 +38,8 @@ uv run python main.py
 
 ## 2. Distribuição e mapeamento das questões
 
+### 2.1 Dataset J1 — Questões abertas (`maritaca-ai/oab-bench`)
+
 Conforme as orientações da atividade, o dataset **J1** (`maritaca-ai/oab-bench`) contém **210 registros** distribuídos em dois subsets:
 
 | Subset       | Intervalo (contagem geral) | Quantidade |
@@ -47,15 +49,19 @@ Conforme as orientações da atividade, o dataset **J1** (`maritaca-ai/oab-bench
 
 As questões designadas para esta análise correspondem ao intervalo **177 a 188** (12 questões). Como esse intervalo está inteiramente contido na segunda metade da contagem geral (106 a 210), todas as 12 questões pertencem exclusivamente ao subset `questions`. Nenhuma questão deste lote pertence ao subset `guidelines`.
 
-### 2.1 Filtragem via código
+**Filtragem via código:** Na implementação em Python, a indexação é baseada em zero. Dessa forma, para acessar as questões de número 177 a 188, os dois subsets são concatenados (preservando a ordem `guidelines` + `questions`) e os registros são extraídos pelos **índices 176 a 187** (inclusive).
 
-Na implementação em Python, a indexação é baseada em zero. Dessa forma, para acessar as questões de número 177 a 188, os dois subsets são concatenados (preservando a ordem `guidelines` + `questions`) e os registros são extraídos pelos **índices 176 a 187** (inclusive).
+### 2.2 Dataset J2 — Questões objetivas de múltipla escolha (`eduagarcia/oab_exams`)
+
+O dataset **J2** (`eduagarcia/oab_exams`) é composto por **2210 questões objetivas de múltipla escolha**, provenientes da 1ª fase do Exame da OAB. Diferentemente do dataset J1 (questões discursivas), este dataset não possui divisão em subsets.
+
+As questões designadas para esta análise correspondem ao intervalo **1846 a 1968**, totalizando **122 questões objetivas**. Na implementação em Python, considerando que a indexação inicia em zero, o intervalo correspondente é **1845 a 1967** (inclusive).
 
 ---
 
 ## 3. Estrutura dos datasets
 
-A seguir, apresenta-se a descrição dos campos que compõem o dataset utilizado nas questões abertas.
+A seguir, apresenta-se a descrição dos campos que compõem cada um dos datasets utilizados nesta atividade.
 
 ### 3.1 Dataset `maritaca-ai/oab-bench` — Subset `questions`
 
@@ -70,7 +76,7 @@ Este dataset contém os enunciados das questões discursivas da 2ª fase do Exam
 | `values`      | `array[number]` | Pesos ou pontuações atribuídas a cada item de `turns`. Os valores refletem a distribuição de pontos do exame (ex.: `[0.65, 0.6]` para subperguntas ou `[5.0]` para o valor total de uma peça).                                                                  |
 | `system`      | `string`        | Instrução de sistema (*system prompt*) para o modelo de linguagem, definindo o papel do candidato, as regras da prova e as restrições de formatação exigidas pelo exame.                                                                                        |
 
-### 3.2 Exemplo de registro
+#### 3.1.1 Exemplo de registro
 
 ```json
 {
@@ -126,6 +132,48 @@ Destacando-se que, no corpo das respostas, você não deverá criar nenhum dado 
 A partir de agora, todas as suas respostas comporão o texto definitivo (não o caderno de rascunhos).
 
 </details>
+
+### 3.2 Dataset `eduagarcia/oab_exams` — Questões objetivas
+
+Este dataset reúne questões objetivas de múltipla escolha da 1ª fase do Exame da OAB, contemplando diversas edições da prova. Cada registro contém o enunciado da questão, as alternativas de resposta e o respectivo gabarito oficial, além de metadados como o ano e a edição do exame.
+
+| Campo             | Tipo             | Descrição                                                                                                                                                                                                       |
+|-------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`              | `string`         | Identificador único da questão. Combina o identificador do exame com o número da questão (ex.: `2016-21_52` representa a questão 52 do exame `2016-21`).                                                        |
+| `question_number` | `integer`        | Número ordinal da questão dentro da prova, indicando sua posição sequencial no caderno do exame.                                                                                                                |
+| `exam_id`         | `string`         | Identificador da edição do exame, utilizado para agrupar as questões pertencentes a uma mesma aplicação da prova da OAB.                                                                                        |
+| `exam_year`       | `string`         | Ano de realização do exame, representando o recorte temporal da questão.                                                                                                                                        |
+| `question_type`   | `string \| null` | Classificação temática da questão, quando disponível. Pode indicar áreas como `ETHICS`, `INTERNATIONAL` ou `CONSTITUTIONAL`. Quando o valor é `null`, a questão não possui classificação atribuída neste campo. |
+| `nullified`       | `boolean`        | Indicador de anulação da questão. O valor `false` denota que a questão permanece válida; o valor `true` indica que foi anulada pela banca examinadora.                                                          |
+| `question`        | `string`         | Enunciado principal da questão, contendo a situação-problema e o comando a ser analisado pelo candidato.                                                                                                        |
+| `choices`         | `object`         | Objeto que agrupa as alternativas da questão objetiva, composto pelos subcampos `text` e `label`.                                                                                                               |
+| `choices.text`    | `array[string]`  | Lista contendo o texto completo de cada alternativa de resposta. Cada posição do array corresponde a uma opção da questão.                                                                                      |
+| `choices.label`   | `array[string]`  | Lista com os rótulos identificadores das alternativas (ex.: `A`, `B`, `C`, `D`). Cada rótulo está alinhado posicionalmente ao texto correspondente em `choices.text`.                                           |
+| `answerKey`       | `string`         | Gabarito oficial da questão, indicando o rótulo da alternativa considerada correta (ex.: `A`, `B`, `C` ou `D`).                                                                                                 |
+
+#### 3.2.1 Exemplo de registro
+
+```json
+{
+  "id": "2016-21_52",
+  "question_number": 52,
+  "exam_id": "2016-21",
+  "exam_year": "2016",
+  "question_type": null,
+  "nullified": false,
+  "question": "Bernardino adquiriu de Lorena ações preferenciais escriturais da companhia Campos Logística S/A e recebeu do(a) advogado(a) orientação de como se dará a formalização da transferência da propriedade.\nA resposta do(a) advogado(a) é a de que a transferência das ações se opera",
+  "choices": {
+    "text": [
+      "pelo extrato a ser fornecido pela instituição custodiante, na qualidade de proprietária fiduciária das ações.",
+      "pela inscrição do nome de Bernardino no livro de Registro de Ações Nominativas em poder da companhia.",
+      "pelo lançamento efetuado pela instituição depositária em seus livros, a débito da conta de ações de Lorena e a crédito da conta de ações de Bernardino.",
+      "por termo lavrado no livro de Transferência de Ações Nominativas, datado e assinado por Lorena e por Bernardino ou por seus legítimos representantes."
+    ],
+    "label": ["A", "B", "C", "D"]
+  },
+  "answerKey": "C"
+}
+```
 
 ---
 
