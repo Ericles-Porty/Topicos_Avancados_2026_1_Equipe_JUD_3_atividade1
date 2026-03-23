@@ -6,16 +6,68 @@ O trabalho consiste na curadoria de datasets jurídicos e na realização de inf
 
 ---
 
-## 1. Instruções de execução
+## 1. Ambiente de execução
 
-### 1.1 Pré-requisitos
+### 1.1 Configuração de hardware
+
+Os experimentos de inferência foram executados em uma máquina local com a seguinte configuração de GPU:
+
+| Componente                | Especificação           |
+|---------------------------|-------------------------|
+| **GPU**                   | NVIDIA GeForce GTX 1050 |
+| **VRAM dedicada**         | 4,0 GB                  |
+| **Memória compartilhada** | 8,0 GB                  |
+| **Versão do driver**      | 32.0.15.8228            |
+| **Data do driver**        | 20/01/2026              |
+| **Versão do DirectX**     | 12 (FL 12.1)            |
+
+Dado o limite de **4 GB de VRAM dedicada**, a seleção dos modelos foi direcionada para LLMs compactos (até ~3B de parâmetros) com versões quantizadas que cabem confortavelmente na memória disponível da GPU.
+
+### 1.2 Modelos de linguagem selecionados
+
+Foram escolhidos **três modelos de linguagem** de diferentes organizações para garantir diversidade de arquiteturas e bases de treinamento na comparação. Todos os modelos são executados localmente via [Ollama](https://ollama.com/).
+
+| # | Modelo       | Desenvolvedor | Parâmetros | Quantização | Tamanho (download) | Contexto máximo | Comando Ollama           |
+|---|--------------|---------------|------------|-------------|--------------------|-----------------|--------------------------|
+| 1 | Llama 3.2 3B | Meta          | 3,21B      | Q4_K_M      | ~2,0 GB            | 128K tokens     | `ollama run llama3.2:3b` |
+| 2 | Gemma 2 2B   | Google        | 2,61B      | Q4_0        | ~1,6 GB            | 8K tokens       | `ollama run gemma2:2b`   |
+| 3 | Qwen 2.5 3B  | Alibaba Cloud | 3,09B      | Q4_K_M      | ~1,9 GB            | 32K tokens      | `ollama run qwen2.5:3b`  |
+
+#### 1.3 Justificativa da escolha
+
+- **Compatibilidade com o hardware:** Todos os modelos possuem tamanho inferior a 2 GB em suas versões quantizadas, garantindo execução integral na VRAM dedicada de 4 GB sem necessidade de *offloading* para a memória compartilhada.
+- **Diversidade de origem:** Os três modelos provêm de organizações distintas (Meta, Google e Alibaba Cloud), o que permite comparar diferentes abordagens de treinamento e arquiteturas em um mesmo conjunto de questões jurídicas.
+- **Suporte multilíngue:** Os três modelos oferecem suporte ao idioma português, requisito essencial para a inferência em questões do Exame da OAB redigidas em português brasileiro.
+
+#### 1.4 Instalação dos modelos
+
+```bash
+# Instalar o Ollama (caso ainda não instalado)
+curl -fsSL https://ollama.com/install.sh | sh
+# Windows (PowerShell)
+# irm https://ollama.com/install.ps1 | iex
+
+# Baixar os três modelos
+ollama pull llama3.2:3b
+ollama pull gemma2:2b
+ollama pull qwen2.5:3b
+
+# Verificar os modelos instalados
+ollama list
+```
+
+---
+
+## 2. Instruções de execução
+
+### 2.1 Pré-requisitos
 
 Para reproduzir os experimentos, é necessário ter instalado:
 
 - **Python** 3.12 ou superior
 - **uv** 0.10 ou superior (gerenciador de pacotes e runner Python)
 
-### 1.2 Instalação e execução
+### 2.2 Instalação e execução
 
 ```bash
 # (Opcional) Criar e ativar um ambiente virtual
@@ -36,9 +88,9 @@ uv run python main.py
 
 ---
 
-## 2. Distribuição e mapeamento das questões
+## 3. Distribuição e mapeamento das questões
 
-### 2.1 Dataset J1 — Questões abertas (`maritaca-ai/oab-bench`)
+### 3.1 Dataset J1 — Questões abertas (`maritaca-ai/oab-bench`)
 
 Conforme as orientações da atividade, o dataset **J1** (`maritaca-ai/oab-bench`) contém **210 registros** distribuídos em dois subsets:
 
@@ -51,7 +103,7 @@ As questões designadas para esta análise correspondem ao intervalo **177 a 188
 
 **Filtragem via código:** Na implementação em Python, a indexação é baseada em zero. Dessa forma, para acessar as questões de número 177 a 188, os dois subsets são concatenados (preservando a ordem `guidelines` + `questions`) e os registros são extraídos pelos **índices 176 a 187** (inclusive).
 
-### 2.2 Dataset J2 — Questões objetivas de múltipla escolha (`eduagarcia/oab_exams`)
+### 3.2 Dataset J2 — Questões objetivas de múltipla escolha (`eduagarcia/oab_exams`)
 
 O dataset **J2** (`eduagarcia/oab_exams`) é composto por **2210 questões objetivas de múltipla escolha**, provenientes da 1ª fase do Exame da OAB. Diferentemente do dataset J1 (questões discursivas), este dataset não possui divisão em subsets.
 
@@ -59,11 +111,11 @@ As questões designadas para esta análise correspondem ao intervalo **1846 a 19
 
 ---
 
-## 3. Estrutura dos datasets
+## 4. Estrutura dos datasets
 
 A seguir, apresenta-se a descrição dos campos que compõem cada um dos datasets utilizados nesta atividade.
 
-### 3.1 Dataset `maritaca-ai/oab-bench` — Subset `questions`
+### 4.1 Dataset `maritaca-ai/oab-bench` — Subset `questions`
 
 Este dataset contém os enunciados das questões discursivas da 2ª fase do Exame da OAB, acompanhados de metadados e instruções de sistema para os modelos de linguagem.
 
@@ -76,7 +128,7 @@ Este dataset contém os enunciados das questões discursivas da 2ª fase do Exam
 | `values`      | `array[number]` | Pesos ou pontuações atribuídas a cada item de `turns`. Os valores refletem a distribuição de pontos do exame (ex.: `[0.65, 0.6]` para subperguntas ou `[5.0]` para o valor total de uma peça).                                                                  |
 | `system`      | `string`        | Instrução de sistema (*system prompt*) para o modelo de linguagem, definindo o papel do candidato, as regras da prova e as restrições de formatação exigidas pelo exame.                                                                                        |
 
-#### 3.1.1 Exemplo de registro
+#### 4.1.1 Exemplo de registro
 
 ```json
 {
@@ -133,7 +185,7 @@ A partir de agora, todas as suas respostas comporão o texto definitivo (não o 
 
 </details>
 
-### 3.2 Dataset `eduagarcia/oab_exams` — Questões objetivas
+### 4.2 Dataset `eduagarcia/oab_exams` — Questões objetivas
 
 Este dataset reúne questões objetivas de múltipla escolha da 1ª fase do Exame da OAB, contemplando diversas edições da prova. Cada registro contém o enunciado da questão, as alternativas de resposta e o respectivo gabarito oficial, além de metadados como o ano e a edição do exame.
 
@@ -151,7 +203,7 @@ Este dataset reúne questões objetivas de múltipla escolha da 1ª fase do Exam
 | `choices.label`   | `array[string]`  | Lista com os rótulos identificadores das alternativas (ex.: `A`, `B`, `C`, `D`). Cada rótulo está alinhado posicionalmente ao texto correspondente em `choices.text`.                                           |
 | `answerKey`       | `string`         | Gabarito oficial da questão, indicando o rótulo da alternativa considerada correta (ex.: `A`, `B`, `C` ou `D`).                                                                                                 |
 
-#### 3.2.1 Exemplo de registro
+#### 4.2.1 Exemplo de registro
 
 ```json
 {
@@ -177,25 +229,25 @@ Este dataset reúne questões objetivas de múltipla escolha da 1ª fase do Exam
 
 ---
 
-## 4. Metodologia
+## 5. Metodologia
 
 > **Nota:** Esta seção será complementada à medida que os experimentos forem executados e os resultados consolidados.
 
-### 4.1 Curadoria (Classificação criativa)
+### 5.1 Curadoria (Classificação criativa)
 
 Cada questão do lote atribuído será classificada de acordo com os parâmetros definidos em conjunto pela equipe, incluindo nível de dificuldade, área de especialidade jurídica e legislação de referência.
 
-### 4.2 Inferência com LLMs
+### 5.2 Inferência com LLMs
 
 Serão selecionados **três modelos de linguagem** para submeter as questões abertas do lote. A escolha dos modelos, bem como os parâmetros de inferência utilizados, serão documentados nesta seção após a execução dos experimentos.
 
-### 4.3 Avaliação e comparação
+### 5.3 Avaliação e comparação
 
 Por se tratar do domínio jurídico, as questões abertas **não possuem gabarito oficial**. A avaliação será realizada por meio da comparação entre as respostas dos três modelos, considerando critérios como argumentação jurídica, precisão técnica e coesão textual. As métricas adotadas (quantitativas e/ou qualitativas) serão detalhadas após a definição em equipe.
 
 ---
 
-## 5. Referências
+## 6. Referências
 
 - Databricks. [Best Practices and Methods for LLM Evaluation](https://www.databricks.com/br/blog/best-practices-and-methods-llm-evaluation).
 - Confident AI. [LLM Evaluation Metrics: Everything You Need for LLM Evaluation](https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation).
