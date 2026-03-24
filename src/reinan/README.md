@@ -88,6 +88,10 @@ uv run python main.py
 # Baixar os datasets
 uv run python main.py pull oab_bench
 uv run python main.py pull oab_exams
+
+# Executar inferência
+uv run python main.py run oab_bench --model llama3.2:3b
+uv run python main.py run oab_exams --model llama3.2:3b
 ```
 
 ---
