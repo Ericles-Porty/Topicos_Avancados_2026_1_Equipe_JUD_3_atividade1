@@ -84,6 +84,10 @@ uv sync
 
 # Executar o script principal
 uv run python main.py
+
+# Baixar os datasets
+uv run python main.py pull oab_bench
+uv run python main.py pull oab_exams
 ```
 
 ---
