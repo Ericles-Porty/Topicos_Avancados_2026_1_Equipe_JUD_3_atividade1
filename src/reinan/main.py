@@ -1,8 +1,8 @@
 import typer
-from data.dataset_manager import DatasetManager
-from data.storage_manager import StorageManager
-from data.ollama_manager import OllamaManager
-from data.execution_manager import ExecutionManager
+from src.dataset_manager import DatasetManager
+from src.storage_manager import StorageManager
+from src.ollama_manager import OllamaManager
+from src.execution_manager import ExecutionManager
 
 app = typer.Typer(no_args_is_help=True)
 dataset_manager = DatasetManager()
