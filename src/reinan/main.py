@@ -63,7 +63,7 @@ def run(
     
     with typer.progressbar(questions, label="Processando inferências") as progress:
         for q in progress:
-            q_result = execution_manager.process_question(q, model)
+            q_result = execution_manager.process_question(q, model, dataset)
             results.append(q_result)
             
     output_path = execution_manager.save_results(results, dataset, model)

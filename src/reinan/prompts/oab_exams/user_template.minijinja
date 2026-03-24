@@ -1,0 +1,9 @@
+Abaixo segue uma questão múltipla escolha proveniente do Exame da Ordem dos Advogados do Brasil (OAB).
+
+Questão:
+{{ question }}
+
+Alternativas:
+{% for i in range(choices.label | length) %}
+{{ choices.label[i] }}) {{ choices.text[i] }}
+{% endfor %}

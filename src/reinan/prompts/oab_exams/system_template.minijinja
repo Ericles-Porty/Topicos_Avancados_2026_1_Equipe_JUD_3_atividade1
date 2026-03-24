@@ -1,0 +1,7 @@
+Instrução Final:
+Escolha a alternativa correta referente à questão. 
+ATENÇÃO: Não adicione justificativas, pensamentos, textos complementares ou marcações de markdown. Você deve me retornar ESSTRITAMENTE um objeto JSON válido, contendo apenas a letra da alternativa correta da seguinte forma:
+
+{% raw %}{
+  "resposta_objetiva": "Você deverá informar a letra da alternativa que você escolheu"
+}{% endraw %}

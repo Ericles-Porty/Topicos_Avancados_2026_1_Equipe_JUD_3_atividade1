@@ -1,0 +1,13 @@
+Responda à situação abaixo de forma estruturada, com argumentação jurídica clara e fundamentada no ordenamento jurídico brasileiro aplicável.
+
+Contexto Fático:
+{{ statement }}
+
+{% if turns | length == 1 and turns[0] == "" %}
+Com base no contexto apresentado acima, redija a peça prático-profissional cabível na íntegra, observando todos os requisitos legais.
+{% else %}
+Com base no caso acima, responda fundamentadamente aos seguintes itens:
+{% for turn in turns %}
+{{ loop.index }}) {{ turn }}
+{% endfor %}
+{% endif %}
