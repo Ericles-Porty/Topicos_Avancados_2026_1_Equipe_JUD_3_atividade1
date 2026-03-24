@@ -1,27 +1,34 @@
+import typer
 from datasets import load_dataset
 
-def main():
-    load_dataset_oab_bench()
-    load_dataset_oab_exams()
+app = typer.Typer(help="CLI para manipulação de datasets da OAB.", no_args_is_help=True)
 
-def load_dataset_oab_bench():
+@app.command()
+def load_oab_bench():
+    """
+    Carrega e seleciona um lote de questões do dataset maritaca-ai/oab-bench.
+    """
     ds_guidelines = load_dataset("maritaca-ai/oab-bench", "guidelines")
     ds_questions = load_dataset("maritaca-ai/oab-bench", "questions")
     
     questions = list(ds_guidelines['train']) + list(ds_questions['train'])
     questions_reinan = questions[176:188]
     
-    print(f"Foram selecionadas {len(questions_reinan)} questões para o lote.")
-    print("Conjuntos de dados carregados com sucesso!")
+    typer.echo(f"Foram selecionadas {len(questions_reinan)} questões para o lote.")
+    typer.echo("Conjuntos de dados carregados com sucesso!")
 
-def load_dataset_oab_exams():
+@app.command()
+def load_oab_exams():
+    """
+    Carrega e seleciona um lote de questões do dataset eduagarcia/oab_exams.
+    """
     ds_exams = load_dataset("eduagarcia/oab_exams")
     
     questions = list(ds_exams['train'])
     questions_reinan = questions[1845:1967]
 
-    print(f"Foram selecionadas {len(questions_reinan)} questões para o lote.")
-    print("Conjuntos de dados carregados com sucesso!")
+    typer.echo(f"Foram selecionadas {len(questions_reinan)} questões para o lote.")
+    typer.echo("Conjuntos de dados carregados com sucesso!")
 
 if __name__ == "__main__":
-    main()
+    app()

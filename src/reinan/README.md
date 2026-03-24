@@ -255,3 +255,4 @@ Por se tratar do domínio jurídico, as questões abertas **não possuem gabarit
 - Zhao, H. *et al.* [LLM Evaluation: A Comprehensive Survey](https://arxiv.org/html/2504.21202v1). arXiv, 2025.
 - Astral. [uv — Python package manager](https://docs.astral.sh/uv/).
 - Astral. [Ruff — An extremely fast Python linter](https://docs.astral.sh/ruff/).
+- Typer. [Typer - Typer is a library for building CLIs in Python](https://typer.tiangolo.com/)
