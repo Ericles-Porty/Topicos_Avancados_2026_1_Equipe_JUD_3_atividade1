@@ -70,8 +70,6 @@ class ExecutionManager:
         q_result = q.copy()
         q_result['ollama_response'] = response
         q_result['model_used'] = model
-        q_result['user_prompt'] = user_prompt
-        q_result['system_prompt'] = system_prompt
         
         return q_result
 
