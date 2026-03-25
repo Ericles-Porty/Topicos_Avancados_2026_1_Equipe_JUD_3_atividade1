@@ -3,12 +3,14 @@ from src.dataset_manager import DatasetManager
 from src.storage_manager import StorageManager
 from src.ollama_manager import OllamaManager
 from src.execution_manager import ExecutionManager
+from src.evaluation_manager import EvaluationManager
 
 app = typer.Typer(no_args_is_help=True)
 dataset_manager = DatasetManager()
 storage_manager = StorageManager()
 ollama_manager = OllamaManager()
 execution_manager = ExecutionManager(dataset_manager, storage_manager, ollama_manager)
+evaluation_manager = EvaluationManager(dataset_manager, storage_manager)
 
 @app.callback()
 def main_callback():
@@ -70,6 +72,33 @@ def run(
     
     typer.echo("Inferência finalizada com sucesso!")
     typer.echo(f"Resultados salvos em: {output_path}")
+
+@app.command()
+def evaluate(
+    dataset: str = typer.Argument(..., help="Nome do dataset para avaliar (ex: oab_bench)"),
+    model: str = typer.Option(..., "--model", "-m", help=f"Modelo do ollama usado na execução: {', '.join(OllamaManager.AVAILABLE_MODELS)}")
+):
+    """
+    Avalia as respostas geradas comparando-as com o gabarito oficial através do Hugging Face evaluate.
+    """
+    if model not in OllamaManager.AVAILABLE_MODELS:
+        typer.echo(f"Erro: Modelo '{model}' não é suportado.", err=True)
+        raise typer.Exit(code=1)
+        
+    if dataset not in ["oab_bench"]:
+        typer.echo("Erro: Atualmente a avaliação está implementada apenas para 'oab_bench'.", err=True)
+        raise typer.Exit(code=1)
+
+    typer.echo(f"Iniciando a avaliação do dataset {dataset} com modelo {model}...")
+    
+    try:
+        scores = evaluation_manager.evaluate_results(dataset, model)
+        typer.echo("\n--- Resultados da Avaliação ---")
+        for metric, score in scores.items():
+            typer.echo(f"{metric.upper()}: {score:.4f}")
+    except Exception as e:
+        typer.echo(f"Erro durante a avaliação: {e}", err=True)
+        raise typer.Exit(code=1)
 
 if __name__ == "__main__":
     app()
