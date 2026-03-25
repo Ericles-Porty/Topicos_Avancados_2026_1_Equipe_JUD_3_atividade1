@@ -75,27 +75,35 @@ def run(
 
 @app.command()
 def evaluate(
-    dataset: str = typer.Argument(..., help="Nome do dataset para avaliar (ex: oab_bench)"),
-    model: str = typer.Option(..., "--model", "-m", help=f"Modelo do ollama usado na execução: {', '.join(OllamaManager.AVAILABLE_MODELS)}")
+    dataset: str = typer.Argument(..., help="Nome do dataset para avaliar cruzamento dos modelos (ex: oab_bench)")
 ):
     """
-    Avalia as respostas geradas comparando-as com o gabarito oficial através do Hugging Face evaluate.
+    Avalia as respostas geradas comparando-as de forma cruzada (um modelo como referência para o outro).
+    O sistema detecta automaticamente quais modelos já possuem resultados salvos para este dataset.
     """
-    if model not in OllamaManager.AVAILABLE_MODELS:
-        typer.echo(f"Erro: Modelo '{model}' não é suportado.", err=True)
-        raise typer.Exit(code=1)
-        
     if dataset not in ["oab_bench"]:
         typer.echo("Erro: Atualmente a avaliação está implementada apenas para 'oab_bench'.", err=True)
         raise typer.Exit(code=1)
 
-    typer.echo(f"Iniciando a avaliação do dataset {dataset} com modelo {model}...")
+    typer.echo(f"Buscando modelos disponíveis para o dataset {dataset}...")
+    models = storage_manager.list_available_models(dataset)
+    
+    if len(models) < 2:
+        typer.echo(f"Foram encontrados resultados para apenas {len(models)} modelo(s): {models}.")
+        typer.echo("Erro: Para a avaliação cruzada, é necessário primeiro fazer a execução para ter os resultados salvos (no mínimo 2 modelos).", err=True)
+        typer.echo(f"Sugestão: Execute 'uv run python main.py run {dataset} --model <nome_do_modelo>' para novos modelos.")
+        raise typer.Exit(code=1)
+        
+    typer.echo(f"Modelos encontrados ({len(models)}): {', '.join(models)}")
+    typer.echo("Iniciando a avaliação cruzada (Pairwise Metrics)...")
     
     try:
-        scores = evaluation_manager.evaluate_results(dataset, model)
-        typer.echo("\n--- Resultados da Avaliação ---")
-        for metric, score in scores.items():
-            typer.echo(f"{metric.upper()}: {score:.4f}")
+        cross_scores = evaluation_manager.evaluate_cross_models(dataset, models)
+        typer.echo("\n--- Resultados da Avaliação Cruzada ---")
+        for pair, scores in cross_scores.items():
+            typer.echo(f"\n[{pair}]")
+            for metric, score in scores.items():
+                typer.echo(f"  {metric.upper()}: {score:.4f}")
     except Exception as e:
         typer.echo(f"Erro durante a avaliação: {e}", err=True)
         raise typer.Exit(code=1)

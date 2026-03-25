@@ -1,6 +1,5 @@
 import evaluate
 from typing import Dict, Any
-from datasets import load_dataset
 
 class EvaluationManager:
     """
@@ -14,63 +13,54 @@ class EvaluationManager:
         self.bleu = evaluate.load("bleu")
         self.rouge = evaluate.load("rouge")
         self.bertscore = evaluate.load("bertscore")
-        
-    def _build_reference_map(self) -> Dict[str, str]:
-        """
-        Constrói um dicionário mapeando question_id -> texto de referência 
-        baseado no conjunto guidelines do dataset oab_bench.
-        """
 
-        ds_guidelines = load_dataset("maritaca-ai/oab-bench", "guidelines")
-        ref_map = {}
-        for item in ds_guidelines['train']:
-            q_id = item['question_id']
-            choices = item.get('choices', [])
-            ref_map[q_id] = "\n".join(str(c) for c in choices) if isinstance(choices, list) else str(choices)
-            
-        return ref_map
-
-    def evaluate_results(self, dataset_name: str, model_name: str) -> Dict[str, Any]:
+    def evaluate_cross_models(self, dataset_name: str, models: list) -> Dict[str, Dict[str, Any]]:
         """
-        Lê os resultados inferidos do cache e calcula as métricas.
+        Executa a avaliação cruzada (pairwise) entre os modelos disponíveis.
         """
-        filename = f"{dataset_name}_{model_name.replace(':', '-')}_results"
-        results = self.storage_manager.load_data(filename, fmt="json", sub_dir="results")
-        
-        if dataset_name == "oab_bench":
-            ref_map = self._build_reference_map()
-        else:
-            raise ValueError(f"Avaliação não implementada para o dataset: {dataset_name}")
+        if len(models) < 2:
+            raise ValueError("São necessários pelo menos 2 modelos para rodar a avaliação cruzada.")
             
-        predictions = []
-        references = []
-        
-        for res in results:
-            q_id = res['question_id']
-            pred = res.get('ollama_response', "")
-            ref = ref_map.get(q_id, "")
+        all_results = {}
+        for model in models:
+            filename = f"{dataset_name}_{model.replace(':', '-')}_results"
+            results = self.storage_manager.load_data(filename, fmt="json", sub_dir="results")
+            model_responses = {res['question_id']: res.get('ollama_response', "") for res in results}
+            all_results[model] = model_responses
             
-            predictions.append(pred)
-            references.append(ref)
+        cross_scores = {}
+        import itertools
+        
+        pairs = list(itertools.combinations(models, 2))
+        for model_ref, model_pred in pairs:
+            predictions = []
+            references = []
             
-        # Calcula BLEU
-        bleu_score = self.bleu.compute(predictions=predictions, references=references)
-        
-        # Calcula ROUGE
-        rouge_score = self.rouge.compute(predictions=predictions, references=references)
-        
-        # Calcula BERTScore
-        bert_score_raw = self.bertscore.compute(predictions=predictions, references=references, lang="pt")
-        
-        # Resumir BERTScore (calcular apenas a média do F1)
-        bert_f1_mean = sum(bert_score_raw['f1']) / len(bert_score_raw['f1']) if bert_score_raw['f1'] else 0.0
-        
-        final_scores = {
-            "bleu": bleu_score.get("bleu", 0.0),
-            "rouge1": rouge_score.get("rouge1", 0.0),
-            "rouge2": rouge_score.get("rouge2", 0.0),
-            "rougeL": rouge_score.get("rougeL", 0.0),
-            "bertscore_f1": bert_f1_mean
-        }
-        
-        return final_scores
+            common_qs = set(all_results[model_ref].keys()).intersection(set(all_results[model_pred].keys()))
+            
+            for q_id in common_qs:
+                ref_text = all_results[model_ref][q_id]
+                pred_text = all_results[model_pred][q_id]
+                
+                references.append(ref_text)
+                predictions.append(pred_text)
+                
+            if not predictions:
+                continue
+                
+            bleu_score = self.bleu.compute(predictions=predictions, references=references)
+            rouge_score = self.rouge.compute(predictions=predictions, references=references)
+            bert_score_raw = self.bertscore.compute(predictions=predictions, references=references, lang="pt")
+            
+            bert_f1_mean = sum(bert_score_raw['f1']) / len(bert_score_raw['f1']) if bert_score_raw['f1'] else 0.0
+            
+            pair_name = f"{model_ref} vs {model_pred}"
+            cross_scores[pair_name] = {
+                "bleu": bleu_score.get("bleu", 0.0),
+                "rouge1": rouge_score.get("rouge1", 0.0),
+                "rouge2": rouge_score.get("rouge2", 0.0),
+                "rougeL": rouge_score.get("rougeL", 0.0),
+                "bertscore_f1": bert_f1_mean
+            }
+            
+        return cross_scores

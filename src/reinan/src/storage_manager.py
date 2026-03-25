@@ -60,3 +60,23 @@ class StorageManager:
                 return [dict(row) for row in reader]
         else:
             raise ValueError(f"Formato de arquivo não suportado: {fmt}")
+
+    def list_available_models(self, dataset_name: str, sub_dir: str = "results") -> List[str]:
+        """
+        Retorna a lista de nomes de modelos que possuem resultados salvos em cache 
+        para um determinado dataset.
+        """
+        target_dir = self.cache_dir / sub_dir
+        if not target_dir.exists():
+            return []
+            
+        models = []
+        prefix = f"{dataset_name}_"
+        suffix = "_results.json"
+        
+        for file in target_dir.glob(f"{prefix}*{suffix}"):
+            model_name_dashed = file.name[len(prefix):-len(suffix)]
+            model_name = model_name_dashed.replace('-', ':')
+            models.append(model_name)
+            
+        return models

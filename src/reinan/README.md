@@ -89,12 +89,18 @@ uv run python main.py
 uv run python main.py pull oab_bench
 uv run python main.py pull oab_exams
 
-# Executar inferência
+# Executar inferência oab_bench
 uv run python main.py run oab_bench --model llama3.2:3b
+uv run python main.py run oab_bench --model gemma2:2b
+uv run python main.py run oab_bench --model qwen2.5:3b
+
+# Executar inferência oab_exams
 uv run python main.py run oab_exams --model llama3.2:3b
+uv run python main.py run oab_exams --model gemma2:2b
+uv run python main.py run oab_exams --model qwen2.5:3b
 
 # Avaliar inferência
-uv run python main.py evaluate oab_bench --model llama3.2:3b
+uv run python main.py evaluate oab_bench
 ```
 
 ---
