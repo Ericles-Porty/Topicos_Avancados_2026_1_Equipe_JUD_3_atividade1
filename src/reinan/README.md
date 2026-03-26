@@ -295,3 +295,4 @@ Por se tratar do domínio jurídico, as questões abertas **não possuem gabarit
 - Astral. [Ruff — An extremely fast Python linter](https://docs.astral.sh/ruff/).
 - Typer. [Typer - Typer is a library for building CLIs in Python](https://typer.tiangolo.com/)
 - Medium. [A Guide to Word Embedding](https://medium.com/data-science/a-guide-to-word-embeddings-8a23817ab60f)
+- IBM. [Tokenização: o que é e como funciona](https://www.ibm.com/br-pt/think/topics/tokenization)
