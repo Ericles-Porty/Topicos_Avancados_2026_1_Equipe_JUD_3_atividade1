@@ -88,15 +88,7 @@ class EvaluationManager:
             
             for res in results:
                 ref = res.get("answerKey", "")
-                resp_str = res.get("ollama_response", "")
-                pred = ""
-                if resp_str:
-                    resp_str_clean = resp_str.replace("```json", "").replace("```", "").strip()
-                    try:
-                        resp_json = json.loads(resp_str_clean)
-                        pred = resp_json.get("resposta_objetiva", "")
-                    except json.JSONDecodeError:
-                        pred = ""
+                pred = res.get("objective_answer", "")
                         
                 ref_int = letter_to_int.get(ref, -1)
                 pred_int = letter_to_int.get(pred, 0)

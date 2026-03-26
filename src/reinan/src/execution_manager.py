@@ -1,6 +1,7 @@
 from typing import List, Dict, Any
 from pathlib import Path
 import jinja2
+import json
 
 class ExecutionManager:
     """
@@ -70,6 +71,12 @@ class ExecutionManager:
         q_result = q.copy()
         q_result['ollama_response'] = response
         q_result['model_used'] = model
+
+        if dataset == "oab_exams":
+            resp_str_clean = response.replace("```json", "").replace("```", "").strip()
+            resp_json = json.loads(resp_str_clean)
+
+            q_result['objective_answer'] = resp_json.get("resposta_objetiva", "")
         
         return q_result
 

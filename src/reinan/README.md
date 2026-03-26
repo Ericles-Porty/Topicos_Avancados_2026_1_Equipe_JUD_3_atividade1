@@ -265,7 +265,27 @@ Por se tratar do domínio jurídico, as questões abertas **não possuem gabarit
 
 ---
 
-## 6. Referências
+## 6. Resultados
+
+### 6.1 Avaliação Cruzada — Questões Abertas (maritaca-ai/oab-bench)
+
+| Par de Modelos               | BLEU   | ROUGE-1 | ROUGE-2 | ROUGE-L | BERTScore F1 |
+|------------------------------|--------|---------|---------|---------|--------------|
+| gemma2:2b vs llama3.2:3b     | 0.1474 | 0.5094  | 0.2208  | 0.2627  | 0.7665       |
+| gemma2:2b vs qwen2.5:3b      | 0.1413 | 0.5063  | 0.1985  | 0.2440  | 0.7588       |
+| llama3.2:3b vs qwen2.5:3b    | 0.1515 | 0.5222  | 0.2206  | 0.2620  | 0.7672       |
+
+### 6.2 Avaliação Exata — Múltipla Escolha (eduagarcia/oab_exams)
+
+| Modelo      | Acurácia | Precisão | Recall | F1     |
+|-------------|----------|----------|--------|--------|
+| gemma2:2b   | 0.4508   | 0.4846   | 0.4532 | 0.4457 |
+| llama3.2:3b | 0.3852   | 0.3896   | 0.3845 | 0.3781 |
+| qwen2.5:3b  | 0.4016   | 0.4344   | 0.4064 | 0.4059 |
+
+---
+
+## 7. Referências
 
 - Databricks. [Best Practices and Methods for LLM Evaluation](https://www.databricks.com/br/blog/best-practices-and-methods-llm-evaluation).
 - Confident AI. [LLM Evaluation Metrics: Everything You Need for LLM Evaluation](https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation).
