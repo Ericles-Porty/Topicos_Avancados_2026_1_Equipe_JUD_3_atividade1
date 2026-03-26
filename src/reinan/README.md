@@ -101,6 +101,7 @@ uv run python main.py run oab_exams --model qwen2.5:3b
 
 # Avaliar inferência
 uv run python main.py evaluate oab_bench
+uv run python main.py evaluate oab_exams
 ```
 
 ---

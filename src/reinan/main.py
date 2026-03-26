@@ -75,38 +75,58 @@ def run(
 
 @app.command()
 def evaluate(
-    dataset: str = typer.Argument(..., help="Nome do dataset para avaliar cruzamento dos modelos (ex: oab_bench)")
+    dataset: str = typer.Argument(..., help="Nome do dataset para avaliar o resultado dos modelos.")
 ):
     """
-    Avalia as respostas geradas comparando-as de forma cruzada (um modelo como referência para o outro).
+    Avalia as respostas geradas comparando-as de forma cruzada (um modelo como referência para o outro) ou exata.
     O sistema detecta automaticamente quais modelos já possuem resultados salvos para este dataset.
     """
-    if dataset not in ["oab_bench"]:
-        typer.echo("Erro: Atualmente a avaliação está implementada apenas para 'oab_bench'.", err=True)
+    if dataset not in ["oab_bench", "oab_exams"]:
+        typer.echo("Erro: Atualmente a avaliação está implementada apenas para 'oab_bench' e 'oab_exams'.", err=True)
         raise typer.Exit(code=1)
 
     typer.echo(f"Buscando modelos disponíveis para o dataset {dataset}...")
     models = storage_manager.list_available_models(dataset)
     
-    if len(models) < 2:
-        typer.echo(f"Foram encontrados resultados para apenas {len(models)} modelo(s): {models}.")
-        typer.echo("Erro: Para a avaliação cruzada, é necessário primeiro fazer a execução para ter os resultados salvos (no mínimo 2 modelos).", err=True)
-        typer.echo(f"Sugestão: Execute 'uv run python main.py run {dataset} --model <nome_do_modelo>' para novos modelos.")
-        raise typer.Exit(code=1)
+    if dataset == "oab_bench":
+        if len(models) < 2:
+            typer.echo(f"Foram encontrados resultados para apenas {len(models)} modelo(s): {models}.")
+            typer.echo("Erro: Para a avaliação cruzada, é necessário primeiro fazer a execução para ter os resultados salvos (no mínimo 2 modelos).", err=True)
+            typer.echo(f"Sugestão: Execute 'uv run python main.py run {dataset} --model <nome_do_modelo>' para novos modelos.")
+            raise typer.Exit(code=1)
+            
+        typer.echo(f"Modelos encontrados ({len(models)}): {', '.join(models)}")
+        typer.echo("Iniciando a avaliação cruzada (Pairwise Metrics)...")
         
-    typer.echo(f"Modelos encontrados ({len(models)}): {', '.join(models)}")
-    typer.echo("Iniciando a avaliação cruzada (Pairwise Metrics)...")
-    
-    try:
-        cross_scores = evaluation_manager.evaluate_cross_models(dataset, models)
-        typer.echo("\n--- Resultados da Avaliação Cruzada ---")
-        for pair, scores in cross_scores.items():
-            typer.echo(f"\n[{pair}]")
-            for metric, score in scores.items():
-                typer.echo(f"  {metric.upper()}: {score:.4f}")
-    except Exception as e:
-        typer.echo(f"Erro durante a avaliação: {e}", err=True)
-        raise typer.Exit(code=1)
+        try:
+            cross_scores = evaluation_manager.evaluate_cross_models(dataset, models)
+            typer.echo("\n--- Resultados da Avaliação Cruzada ---")
+            for pair, scores in cross_scores.items():
+                typer.echo(f"\n[{pair}]")
+                for metric, score in scores.items():
+                    typer.echo(f"  {metric.upper()}: {score:.4f}")
+        except Exception as e:
+            typer.echo(f"Erro durante a avaliação: {e}", err=True)
+            raise typer.Exit(code=1)
+            
+    elif dataset == "oab_exams":
+        if len(models) < 1:
+            typer.echo("Erro: Nenhum modelo encontrado para 'oab_exams'. Execute o comando 'run' primeiro para gerar os resultados.", err=True)
+            raise typer.Exit(code=1)
+            
+        typer.echo(f"Modelos encontrados ({len(models)}): {', '.join(models)}")
+        typer.echo("Iniciando a avaliação exata (Acurácia, Precisão, Recall, F1)...")
+        
+        try:
+            model_scores = evaluation_manager.evaluate_oab_exams(dataset, models)
+            typer.echo("\n--- Resultados da Avaliação ---")
+            for mod, scores in model_scores.items():
+                typer.echo(f"\n[{mod}]")
+                for metric, score in scores.items():
+                    typer.echo(f"  {metric.upper()}: {score:.4f}")
+        except Exception as e:
+            typer.echo(f"Erro durante a avaliação: {e}", err=True)
+            raise typer.Exit(code=1)
 
 if __name__ == "__main__":
     app()

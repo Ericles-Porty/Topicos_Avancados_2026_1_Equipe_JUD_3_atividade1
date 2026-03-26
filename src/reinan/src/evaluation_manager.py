@@ -1,4 +1,5 @@
 import evaluate
+import json
 from typing import Dict, Any
 
 class EvaluationManager:
@@ -13,6 +14,11 @@ class EvaluationManager:
         self.bleu = evaluate.load("bleu")
         self.rouge = evaluate.load("rouge")
         self.bertscore = evaluate.load("bertscore")
+        
+        self.accuracy = evaluate.load("accuracy")
+        self.precision = evaluate.load("precision")
+        self.recall = evaluate.load("recall")
+        self.f1 = evaluate.load("f1")
 
     def evaluate_cross_models(self, dataset_name: str, models: list) -> Dict[str, Dict[str, Any]]:
         """
@@ -64,3 +70,52 @@ class EvaluationManager:
             }
             
         return cross_scores
+
+    def evaluate_oab_exams(self, dataset_name: str, models: list) -> Dict[str, Dict[str, float]]:
+        """
+        Executa a avaliação exata para os modelos disponíveis usando Acurácia, Precisão, Recall e F1.
+        """
+        all_results = {}
+        
+        letter_to_int = {"A": 1, "B": 2, "C": 3, "D": 4}
+        
+        for model in models:
+            filename = f"{dataset_name}_{model.replace(':', '-')}_results"
+            results = self.storage_manager.load_data(filename, fmt="json", sub_dir="results")
+            
+            predictions = []
+            references = []
+            
+            for res in results:
+                ref = res.get("answerKey", "")
+                resp_str = res.get("ollama_response", "")
+                pred = ""
+                if resp_str:
+                    try:
+                        resp_json = json.loads(resp_str)
+                        pred = resp_json.get("resposta_objetiva", "")
+                    except json.JSONDecodeError:
+                        pred = ""
+                        
+                ref_int = letter_to_int.get(ref, -1)
+                pred_int = letter_to_int.get(pred, 0)
+                
+                references.append(ref_int)
+                predictions.append(pred_int)
+                
+            if not predictions:
+                continue
+            
+            acc_score = self.accuracy.compute(predictions=predictions, references=references)
+            prec_score = self.precision.compute(predictions=predictions, references=references, average="macro", zero_division=0)
+            rec_score = self.recall.compute(predictions=predictions, references=references, average="macro", zero_division=0)
+            f1_score = self.f1.compute(predictions=predictions, references=references, average="macro")
+            
+            all_results[model] = {
+                "accuracy": acc_score.get("accuracy", 0.0),
+                "precision": prec_score.get("precision", 0.0),
+                "recall": rec_score.get("recall", 0.0),
+                "f1": f1_score.get("f1", 0.0)
+            }
+            
+        return all_results
