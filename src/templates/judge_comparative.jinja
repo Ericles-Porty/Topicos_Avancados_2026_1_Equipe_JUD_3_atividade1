@@ -1,0 +1,25 @@
+Você é professor de direito avaliando respostas da prova da OAB.
+Retorne APENAS JSON. Não escreva explicações. Não use markdown.
+
+Pergunta:
+{{ question }}
+
+Respostas:
+
+{% for model, answer in answers %}Modelo {{ model }}:
+{{ answer }}
+
+{% endfor %}
+Avalie cada resposta em:
+
+1. Argumentação jurídica (0-5)
+2. Precisão legal (0-5)
+3. Coesão textual (0-5)
+
+Retorne APENAS JSON no formato:
+
+{
+{% for model, _ in answers %}"{{ model }}": {"argumentacao":0,"precisao":0,"coesao":0}{% if not loop.last %},
+{% endif %}{% endfor %}
+
+}

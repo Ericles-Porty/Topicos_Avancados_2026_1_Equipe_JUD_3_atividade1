@@ -120,3 +120,7 @@ fabric.properties
 __pycache__
 plot_melhor_rota.png
 plot_convergencia.png
+
+# ── src: datasets e resultados ────────────────────────────
+src/dataset/
+src/results/

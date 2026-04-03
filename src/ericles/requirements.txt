@@ -1,4 +1,0 @@
-datasets
-pandas
-ollama
-matplotlib
