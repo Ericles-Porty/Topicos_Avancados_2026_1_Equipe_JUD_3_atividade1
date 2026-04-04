@@ -1,6 +1,7 @@
 import ast
 import json
 import os
+import re
 
 import ollama
 import pandas as pd
@@ -85,8 +86,12 @@ def run_multiple_choice_questions() -> None:
             for label in CHOICE_LABELS
         ]
 
-        prompt = env.render_template("multiple_choice.jinja", question=question, choices=choices)
-        messages = [{"role": "user", "content": prompt}]
+        system_prompt = env.render_template("multiple_choice_system.jinja")
+        user_prompt = env.render_template("multiple_choice.jinja", question=question, choices=choices)
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
 
         for model in MODELS:
             step += 1
@@ -110,8 +115,98 @@ def run_multiple_choice_questions() -> None:
     print(f"\nRespostas de múltipla escolha salvas em {dest}")
 
 
+# ── Curadoria (dificuldade + legislação) ──────────────────────────────────────
+
+CURATOR_MODEL = "llama3"
+
+
+def _extract_json(text: str) -> str | None:
+    text = text.replace("```json", "").replace("```", "").strip()
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    return match.group(0) if match else None
+
+
+def run_curator_tasks() -> None:
+    """Classifica dificuldade e identifica legislação base de cada questão."""
+    df_open = pd.read_csv(os.path.join(ld.MY_QUESTIONS_DIR, "open_questions.csv"))
+    df_mc = pd.read_csv(os.path.join(ld.MY_QUESTIONS_DIR, "multiple_choice.csv"))
+
+    all_questions = []
+
+    for _, row in df_open.iterrows():
+        turns = ast.literal_eval(row["turns"])
+        all_questions.append({
+            "question_id": row["question_id"],
+            "statement": row["statement"],
+            "turns": turns,
+            "type": "open",
+        })
+
+    for _, row in df_mc.iterrows():
+        all_questions.append({
+            "question_id": row["id"],
+            "statement": row["question"].replace("\\n", "\n"),
+            "turns": None,
+            "type": "multiple_choice",
+        })
+
+    total = len(all_questions)
+    results = []
+
+    for i, q in enumerate(all_questions, 1):
+        _progress(i, total, f"curadoria: {q['question_id']}")
+
+        difficulty_prompt = env.render_template(
+            "curator_difficulty.jinja",
+            question_id=q["question_id"],
+            statement=q["statement"],
+            turns=q["turns"],
+        )
+        diff_resp = ollama.chat(
+            model=CURATOR_MODEL,
+            options={"temperature": 0},
+            messages=[{"role": "user", "content": difficulty_prompt}],
+        )
+
+        legislation_prompt = env.render_template(
+            "curator_legislation.jinja",
+            question_id=q["question_id"],
+            statement=q["statement"],
+            turns=q["turns"],
+        )
+        leg_resp = ollama.chat(
+            model=CURATOR_MODEL,
+            options={"temperature": 0},
+            messages=[{"role": "user", "content": legislation_prompt}],
+        )
+
+        entry = {"question_id": q["question_id"], "type": q["type"]}
+
+        try:
+            diff_json = json.loads(_extract_json(diff_resp["message"]["content"]))
+            entry["dificuldade"] = diff_json.get("dificuldade")
+            entry["nivel"] = diff_json.get("nivel", "")
+        except Exception:
+            entry["dificuldade"] = None
+            entry["nivel"] = None
+
+        try:
+            leg_json = json.loads(_extract_json(leg_resp["message"]["content"]))
+            entry["legislacao_base"] = leg_json.get("legislacao_base", "")
+        except Exception:
+            entry["legislacao_base"] = None
+
+        results.append(entry)
+
+    dest = os.path.join(RESULTS_DIR, "curator_annotations.json")
+    with open(dest, "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=4, ensure_ascii=False)
+    print(f"\nAnotações de curadoria salvas em {dest}")
+
+
 # ── Execução direta ────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     run_open_questions()
     run_multiple_choice_questions()
+    run_curator_tasks()

@@ -1,4 +1,5 @@
 import ast
+import itertools
 import json
 import os
 import re
@@ -7,6 +8,7 @@ import matplotlib.pyplot as plt
 import ollama
 import pandas as pd
 from minijinja import Environment
+from sklearn.metrics import precision_score, recall_score, f1_score
 
 import load_dataset as ld
 
@@ -29,6 +31,7 @@ def _progress(current: int, total: int, label: str = "") -> None:
 
 def _extract_json(text: str) -> str | None:
     """Extrai o primeiro objeto JSON encontrado no texto."""
+    text = text.replace("```json", "").replace("```", "").strip()
     match = re.search(r"\{.*\}", text, re.DOTALL)
     return match.group(0) if match else None
 
@@ -118,9 +121,20 @@ def evaluate_multiple_choice() -> pd.DataFrame:
     results = []
 
     for entry in answers:
-        model_answer = entry["answer"].strip().upper()
-        match = re.search(r"\b([A-D])\b", model_answer)
-        extracted = match.group(1) if match else model_answer[:1]
+        model_answer = entry["answer"].strip()
+        extracted = None
+
+        json_str = _extract_json(model_answer)
+        if json_str:
+            try:
+                resp = json.loads(json_str)
+                extracted = resp.get("resposta", "").strip().upper()[:1]
+            except Exception:
+                pass
+
+        if not extracted or extracted not in "ABCD":
+            match = re.search(r"\b([A-D])\b", model_answer.upper())
+            extracted = match.group(1) if match else model_answer[:1].upper()
 
         correct = entry["correct"].strip().upper()
 
@@ -191,30 +205,102 @@ def evaluate_comparative() -> pd.DataFrame:
     return df_result
 
 
+# ── Métricas Cross-Model (BLEU, ROUGE, BERTScore) ────────────────────────────
+
+def evaluate_cross_metrics() -> pd.DataFrame:
+    """Compara respostas entre pares de modelos usando métricas automatizadas."""
+    import evaluate as hf_evaluate
+
+    with open(os.path.join(RESULTS_DIR, "open_questions.json"), encoding="utf-8") as f:
+        data = json.load(f)
+
+    df = pd.DataFrame(data)
+    models = df["model"].unique().tolist()
+    pairs = list(itertools.combinations(models, 2))
+
+    bleu_metric = hf_evaluate.load("bleu")
+    rouge_metric = hf_evaluate.load("rouge")
+    bertscore_metric = hf_evaluate.load("bertscore")
+
+    total = len(pairs)
+    results = []
+
+    for i, (model_a, model_b) in enumerate(pairs, 1):
+        _progress(i, total, f"{model_a} vs {model_b}")
+
+        df_a = df[df["model"] == model_a].set_index("question_id")
+        df_b = df[df["model"] == model_b].set_index("question_id")
+        common = df_a.index.intersection(df_b.index)
+
+        refs = [df_a.loc[q, "answer"] for q in common]
+        preds = [df_b.loc[q, "answer"] for q in common]
+
+        bleu = bleu_metric.compute(predictions=preds, references=refs)
+        rouge = rouge_metric.compute(predictions=preds, references=refs)
+        bert = bertscore_metric.compute(predictions=preds, references=refs, lang="pt")
+
+        results.append({
+            "pair": f"{model_a} vs {model_b}",
+            "bleu": bleu["bleu"],
+            "rouge1": rouge["rouge1"],
+            "rouge2": rouge["rouge2"],
+            "rougeL": rouge["rougeL"],
+            "bertscore_f1": sum(bert["f1"]) / len(bert["f1"]),
+        })
+
+    df_result = pd.DataFrame(results)
+    df_result.to_csv(os.path.join(RESULTS_DIR, "eval_cross_metrics.csv"), index=False)
+    print()
+    return df_result
+
+
 # ── Leaderboard ────────────────────────────────────────────────────────────────
 
 def generate_leaderboard(
     df_open: pd.DataFrame,
     df_mc: pd.DataFrame,
     df_comparative: pd.DataFrame,
+    df_cross: pd.DataFrame,
 ) -> None:
     """Gera o leaderboard consolidado e gráficos separados por tipo de avaliação."""
+
+    # ── Métricas por modelo ───────────────────────────────────────────────
     open_avg = df_open.groupby("model")["total_score"].mean().rename("open_score")
+
     mc_accuracy = (df_mc.groupby("model")["is_correct"].mean() * 100).rename("mc_accuracy_%")
+
+    # sklearn: precision, recall, f1 por modelo
+    letter_to_int = {"A": 1, "B": 2, "C": 3, "D": 4}
+    mc_sklearn = {}
+    for model, grp in df_mc.groupby("model"):
+        y_true = [letter_to_int.get(c, 0) for c in grp["correct"]]
+        y_pred = [letter_to_int.get(a, 0) for a in grp["answer"]]
+        mc_sklearn[model] = {
+            "mc_precision": precision_score(y_true, y_pred, average="macro", zero_division=0),
+            "mc_recall": recall_score(y_true, y_pred, average="macro", zero_division=0),
+            "mc_f1": f1_score(y_true, y_pred, average="macro", zero_division=0),
+        }
+    df_sklearn = pd.DataFrame(mc_sklearn).T
+
     comp_metrics = df_comparative.groupby("model")[
         ["argumentacao", "precisao", "coesao", "final_score"]
     ].mean()
 
-    leaderboard = pd.concat([open_avg, mc_accuracy, comp_metrics], axis=1).fillna(0)
+    leaderboard = pd.concat([open_avg, mc_accuracy, df_sklearn, comp_metrics], axis=1).fillna(0)
     leaderboard.to_csv(os.path.join(RESULTS_DIR, "leaderboard.csv"))
 
     print("\n=== LEADERBOARD ===")
     print(leaderboard)
 
-    fig = plt.figure(figsize=(14, 9))
-    gs = fig.add_gridspec(2, 2, hspace=0.35, wspace=0.3)
+    # ── Cross-metrics (pares de modelos — tabela separada) ────────────────
+    print("\n=== MÉTRICAS CROSS-MODEL ===")
+    print(df_cross.to_string(index=False))
 
-    # ── Linha 1: Questões Abertas ──────────────────────────────────────────
+    # ── Plots ─────────────────────────────────────────────────────────────
+    fig = plt.figure(figsize=(16, 12))
+    gs = fig.add_gridspec(3, 2, hspace=0.45, wspace=0.3)
+
+    # Linha 1: Questões Abertas
     ax_rubrica = fig.add_subplot(gs[0, 0])
     open_avg.plot(kind="bar", ax=ax_rubrica, color="#4C72B0")
     ax_rubrica.set_title("Rubrica")
@@ -231,19 +317,33 @@ def generate_leaderboard(
     ax_comp.tick_params(axis="x", rotation=0)
     ax_comp.legend(["Argumentação", "Precisão", "Coesão"], fontsize=8)
 
-    fig.text(0.5, 0.95, "Questões Abertas", ha="center", fontsize=13, fontweight="bold")
+    fig.text(0.5, 0.97, "Questões Abertas", ha="center", fontsize=13, fontweight="bold")
 
-    # ── Linha 2: Múltipla Escolha (centralizado) ──────────────────────────
-    ax_mc = fig.add_subplot(gs[1, :])
-    mc_accuracy.plot(kind="bar", ax=ax_mc, color="#55A868", width=0.4)
-    ax_mc.set_title("Múltipla Escolha — Acurácia (%)")
-    ax_mc.set_ylabel("Acurácia (%)")
-    ax_mc.set_ylim(0, 100)
+    # Linha 2: Cross-Metrics (BLEU, ROUGE, BERTScore)
+    ax_cross = fig.add_subplot(gs[1, :])
+    cross_plot = df_cross.set_index("pair")[["bleu", "rouge1", "rougeL", "bertscore_f1"]]
+    cross_plot.plot(kind="bar", ax=ax_cross)
+    ax_cross.set_title("Métricas Cross-Model (Questões Abertas)")
+    ax_cross.set_ylabel("Score")
+    ax_cross.set_ylim(0, 1)
+    ax_cross.set_xlabel("")
+    ax_cross.tick_params(axis="x", rotation=0)
+    ax_cross.legend(["BLEU", "ROUGE-1", "ROUGE-L", "BERTScore F1"], fontsize=8)
+
+    # Linha 3: Múltipla Escolha (accuracy + precision + recall + f1)
+    ax_mc = fig.add_subplot(gs[2, :])
+    mc_all = pd.concat([mc_accuracy / 100, df_sklearn], axis=1)
+    mc_all.columns = ["Acurácia", "Precision", "Recall", "F1"]
+    mc_all.plot(kind="bar", ax=ax_mc)
+    ax_mc.set_title("Múltipla Escolha — Métricas de Classificação")
+    ax_mc.set_ylabel("Score")
+    ax_mc.set_ylim(0, 1)
     ax_mc.set_xlabel("")
     ax_mc.tick_params(axis="x", rotation=0)
+    ax_mc.legend(fontsize=8)
 
     plt.suptitle("Comparação de Modelos - Avaliação OAB", fontsize=15, y=1.01)
-    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
     plt.savefig(os.path.join(RESULTS_DIR, "model_comparison.png"), dpi=150, bbox_inches="tight")
     plt.show()
 
@@ -254,4 +354,5 @@ if __name__ == "__main__":
     df_open = evaluate_open_questions()
     df_mc = evaluate_multiple_choice()
     df_comparative = evaluate_comparative()
-    generate_leaderboard(df_open, df_mc, df_comparative)
+    df_cross = evaluate_cross_metrics()
+    generate_leaderboard(df_open, df_mc, df_comparative, df_cross)
