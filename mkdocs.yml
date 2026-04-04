@@ -1,0 +1,74 @@
+site_name: Equipe 3 — Curadoria e Inferencia com LLMs
+site_description: Documentacao do projeto de curadoria de datasets juridicos e inferencia basica com LLMs — OAB
+site_url: https://ericles-porty.github.io/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1/
+
+repo_name: Ericles-Porty/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1
+repo_url: https://github.com/Ericles-Porty/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1
+
+theme:
+  name: material
+  language: pt-BR
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Modo escuro
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Modo claro
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.details
+  - attr_list
+
+nav:
+  - Introducao: intro.md
+  - Primeiros passos:
+      - Pre-requisitos: getting-started/prerequisites.md
+      - Instalacao: getting-started/installation.md
+      - Inicio rapido: getting-started/quick-start.md
+      - Estrutura do projeto: getting-started/project-structure.md
+  - Datasets:
+      - Visao geral: datasets/overview.md
+      - OAB Bench (J1): datasets/oab-bench.md
+      - OAB Exams (J2): datasets/oab-exams.md
+      - Distribuicao da equipe: datasets/team-distribution.md
+  - Curadoria:
+      - Visao geral: curation/overview.md
+      - Nivel de dificuldade: curation/difficulty-level.md
+      - Legislacao base: curation/basic-legislation.md
+      - Prompts: curation/prompts.md
+  - Inferencia:
+      - Visao geral: inference/overview.md
+      - Hardware: inference/hardware.md
+      - Modelos: inference/models.md
+      - Prompts: inference/prompts.md
+  - Avaliacao:
+      - Visao geral: evaluation/overview.md
+      - Questoes abertas (rubrica): evaluation/open-questions.md
+      - Multipla escolha: evaluation/multiple-choice.md
+      - Comparativa: evaluation/comparative.md
+      - Metricas automatizadas: evaluation/cross-metrics.md
+      - Metricas:
+          - Acuracia, Precision, Recall, F1: evaluation/metrics/accuracy-precision.md
+          - BLEU: evaluation/metrics/bleu.md
+          - ROUGE: evaluation/metrics/rouge.md
+          - BERTScore: evaluation/metrics/bertscore.md
+  - Resultados: results/overview.md
+  - Referencias: references.md
