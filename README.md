@@ -54,36 +54,10 @@ A Equipe 3 atua no **Dominio Juridico**, trabalhando com os seguintes datasets:
       <a href="https://github.com/Ericles-Porty">Ericles dos Santos</a>
     </td>
     <td align="center">
-      <a href="#">
-        <img src="https://github.com/undefinid.png" height="64" width="64" alt="Fernanda Mirely"/>
-      </a><br/>
-      <a href="#">Fernanda Mirely</a>
-    </td>
-    <td align="center">
-      <a href="#">
-        <img src="https://github.com/undefinid.png" height="64" width="64" alt="Julia de Souza"/>
-      </a><br/>
-      <a href="#">Julia de Souza</a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <a href="#">
-        <img src="https://github.com/undefinid.png" height="64" width="64" alt="Mikaela de Andrade"/>
-      </a><br/>
-      <a href="#">Mikaela de Andrade</a>
-    </td>
-    <td align="center">
       <a href="https://github.com/ReinanHS">
         <img src="https://github.com/reinanhs.png" height="64" width="64" alt="Reinan Gabriel"/>
       </a><br/>
       <a href="https://github.com/ReinanHS">Reinan Gabriel</a>
-    </td>
-    <td align="center">
-      <a href="#">
-        <img src="https://github.com/undefinid.png" height="64" width="64" alt="Victor Leonardo"/>
-      </a><br/>
-      <a href="#">Victor Leonardo</a>
     </td>
   </tr>
 </table>
@@ -99,10 +73,10 @@ Os experimentos de inferencia foram executados em uma maquina local com a seguin
 
 | Componente | Especificacao |
 |---|---|
-| **GPU** | NVIDIA GeForce GTX 1650 |
-| **VRAM dedicada** | 4,0 GB |
-| **RAM** | 16 GB |
-| **SO** | Windows 11 Pro |
+| **GPU** | NVIDIA GeForce RTX 4050 |
+| **VRAM dedicada** | 6,0 GB |
+| **RAM** | 32 GB |
+| **SO** | Windows 11 |
 
 ### 1.2 Modelos de linguagem selecionados
 
