@@ -36,7 +36,7 @@ O script `src/run_models.py` executa:
 
 1. **`run_open_questions()`** — Inferencia de questoes abertas com os 3 modelos
 2. **`run_multiple_choice_questions()`** — Inferencia de multipla escolha com os 3 modelos
-3. **`run_curator_tasks()`** — Curadoria automatizada com llama3
+3. **`run_curator_tasks()`** — Curadoria automatizada com llama3.2:3b
 
 ## Detalhes
 

@@ -38,9 +38,9 @@ git --version
 Os seguintes modelos devem ser baixados antes da execucao:
 
 ```bash
-ollama pull mistral
-ollama pull llama3
-ollama pull gemma
+ollama pull llama3.2:3b
+ollama pull gemma2:2b
+ollama pull qwen2.5:3b
 ```
 
 ## Dependencias Python

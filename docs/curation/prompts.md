@@ -40,5 +40,5 @@ O prompt solicita a identificacao da legislacao principal que fundamenta a quest
 
 Ambos os templates:
 - Solicitam retorno **exclusivamente em JSON valido**, sem markdown
-- Utilizam o modelo `llama3` com `temperature=0`
+- Utilizam o modelo `llama3.2:3b` com `temperature=0`
 - Processam tanto questoes abertas quanto de multipla escolha

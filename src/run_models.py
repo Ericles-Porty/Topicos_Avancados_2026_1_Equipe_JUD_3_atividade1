@@ -3,11 +3,16 @@ import json
 import os
 import re
 
+import logging
+
 import ollama
 import pandas as pd
 from minijinja import Environment
 
 import load_dataset as ld
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logger = logging.getLogger(__name__)
 
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
 os.makedirs(RESULTS_DIR, exist_ok=True)
@@ -20,6 +25,9 @@ MODELS = [
     "gemma2:2b",
     "qwen2.5:3b",
 ]
+
+OLLAMA_TIMEOUT = 120.0
+client = ollama.Client(timeout=OLLAMA_TIMEOUT)
 
 
 def _progress(current: int, total: int, label: str = "") -> None:
@@ -52,8 +60,12 @@ def run_open_questions() -> None:
             step += 1
             _progress(step, total, f"q:{row['question_id']} | {model}")
 
-            response = ollama.chat(model=model, messages=messages)
-            answer   = response["message"]["content"]
+            try:
+                response = client.chat(model=model, messages=messages)
+                answer   = response["message"]["content"]
+            except Exception as e:
+                logger.warning("Ollama falhou em q:%s model:%s — %s", row["question_id"], model, e)
+                answer = ""
 
             results.append({
                 "question_id": row["question_id"],
@@ -97,8 +109,12 @@ def run_multiple_choice_questions() -> None:
             step += 1
             _progress(step, total, f"q:{row['id']} | {model}")
 
-            response = ollama.chat(model=model, messages=messages)
-            answer   = response["message"]["content"]
+            try:
+                response = client.chat(model=model, messages=messages)
+                answer   = response["message"]["content"]
+            except Exception as e:
+                logger.warning("Ollama falhou em q:%s model:%s — %s", row["id"], model, e)
+                answer = ""
 
             results.append({
                 "question_id": row["id"],
@@ -162,11 +178,15 @@ def run_curator_tasks() -> None:
             statement=q["statement"],
             turns=q["turns"],
         )
-        diff_resp = ollama.chat(
-            model=CURATOR_MODEL,
-            options={"temperature": 0},
-            messages=[{"role": "user", "content": difficulty_prompt}],
-        )
+        try:
+            diff_resp = client.chat(
+                model=CURATOR_MODEL,
+                options={"temperature": 0},
+                messages=[{"role": "user", "content": difficulty_prompt}],
+            )
+        except Exception as e:
+            logger.warning("Ollama falhou (dificuldade) q:%s — %s", q["question_id"], e)
+            diff_resp = None
 
         legislation_prompt = env.render_template(
             "curator_legislation.jinja",
@@ -174,11 +194,15 @@ def run_curator_tasks() -> None:
             statement=q["statement"],
             turns=q["turns"],
         )
-        leg_resp = ollama.chat(
-            model=CURATOR_MODEL,
-            options={"temperature": 0},
-            messages=[{"role": "user", "content": legislation_prompt}],
-        )
+        try:
+            leg_resp = client.chat(
+                model=CURATOR_MODEL,
+                options={"temperature": 0},
+                messages=[{"role": "user", "content": legislation_prompt}],
+            )
+        except Exception as e:
+            logger.warning("Ollama falhou (legislação) q:%s — %s", q["question_id"], e)
+            leg_resp = None
 
         entry = {"question_id": q["question_id"], "type": q["type"]}
 
@@ -186,14 +210,16 @@ def run_curator_tasks() -> None:
             diff_json = json.loads(_extract_json(diff_resp["message"]["content"]))
             entry["dificuldade"] = diff_json.get("dificuldade")
             entry["nivel"] = diff_json.get("nivel", "")
-        except Exception:
+        except Exception as e:
+            logger.warning("JSON inválido (dificuldade) q:%s — %s", q["question_id"], e)
             entry["dificuldade"] = None
             entry["nivel"] = None
 
         try:
             leg_json = json.loads(_extract_json(leg_resp["message"]["content"]))
             entry["legislacao_base"] = leg_json.get("legislacao_base", "")
-        except Exception:
+        except Exception as e:
+            logger.warning("JSON inválido (legislação) q:%s — %s", q["question_id"], e)
             entry["legislacao_base"] = None
 
         results.append(entry)

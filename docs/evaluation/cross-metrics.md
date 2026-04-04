@@ -53,7 +53,7 @@ O BERTScore utiliza `lang="pt"` para selecionar o modelo multilingual adequado (
 ## Saida
 
 Os resultados sao salvos em `src/results/eval_cross_metrics.csv` com as colunas:
-- `pair` — Par de modelos (ex: "mistral vs llama3")
+- `pair` — Par de modelos (ex: "llama3.2:3b vs gemma2:2b")
 - `bleu`, `rouge1`, `rouge2`, `rougeL`, `bertscore_f1`
 
 ## Complementaridade com a avaliacao por juiz

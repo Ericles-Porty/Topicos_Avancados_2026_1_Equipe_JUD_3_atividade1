@@ -13,7 +13,7 @@ Avaliar as respostas dos modelos as questoes discursivas utilizando a **rubrica 
    - A resposta do modelo
    - Os criterios de correcao oficiais (`rubric`, extraidos do subset `guidelines`)
 
-2. O prompt e enviado ao modelo juiz (`llama3`) com `temperature=0`
+2. O prompt e enviado ao modelo juiz (`llama3.2:3b`) com `temperature=0`
 
 3. O modelo juiz retorna um JSON com notas para cada subquestao:
    ```json

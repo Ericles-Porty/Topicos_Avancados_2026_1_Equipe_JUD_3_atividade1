@@ -34,9 +34,9 @@ pip install pandas ollama minijinja matplotlib scikit-learn requests datasets ev
 Certifique-se de que o servidor Ollama esta em execucao e baixe os modelos:
 
 ```bash
-ollama pull mistral
-ollama pull llama3
-ollama pull gemma
+ollama pull llama3.2:3b
+ollama pull gemma2:2b
+ollama pull qwen2.5:3b
 ```
 
 ## 5. Verificacao

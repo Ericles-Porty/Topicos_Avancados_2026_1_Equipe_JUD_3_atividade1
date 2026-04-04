@@ -85,13 +85,14 @@ Foram escolhidos **três modelos de linguagem** de diferentes organizações, ex
 
 | # | Modelo | Desenvolvedor | Comando Ollama |
 |---|---|---|---|
-| 1 | Mistral | Mistral AI | `ollama run mistral` |
-| 2 | Llama 3 | Meta | `ollama run llama3` |
-| 3 | Gemma | Google | `ollama run gemma` |
+| 1 | Llama 3.2 3B | Meta | `ollama run llama3.2:3b` |
+| 2 | Gemma 2 2B | Google | `ollama run gemma2:2b` |
+| 3 | Qwen 2.5 3B | Alibaba | `ollama run qwen2.5:3b` |
 
 ### 1.3 Justificativa da escolha
 
-- **Diversidade de origem:** Os três modelos provêm de organizações distintas (Mistral AI, Meta e Google), permitindo comparar diferentes abordagens de treinamento e arquiteturas.
+- **Diversidade de origem:** Os três modelos provêm de organizações distintas (Meta, Google e Alibaba), permitindo comparar diferentes abordagens de treinamento e arquiteturas.
+- **Modelos compactos:** Todos possuem até 3B de parâmetros, viabilizando execução em hardware modesto.
 - **Suporte multilíngue:** Os três modelos oferecem suporte ao idioma português, requisito essencial para inferência em questões da OAB.
 - **Compatibilidade com Ollama:** Todos os modelos estão disponíveis no ecossistema Ollama, facilitando a execução local padronizada.
 
@@ -101,9 +102,9 @@ Foram escolhidos **três modelos de linguagem** de diferentes organizações, ex
 # Instalar o Ollama (Windows: baixar de https://ollama.com/download)
 
 # Baixar os três modelos
-ollama pull mistral
-ollama pull llama3
-ollama pull gemma
+ollama pull llama3.2:3b
+ollama pull gemma2:2b
+ollama pull qwen2.5:3b
 
 # Verificar os modelos instalados
 ollama list
@@ -116,7 +117,7 @@ ollama list
 ### 2.1 Pré-requisitos
 
 - **Python** 3.12 ou superior
-- **Ollama** com os modelos `mistral`, `llama3` e `gemma` instalados
+- **Ollama** com os modelos `llama3.2:3b`, `gemma2:2b` e `qwen2.5:3b` instalados
 - **pip** para instalação de dependências
 
 ### 2.2 Instalação e execução
@@ -197,7 +198,7 @@ Cada questão do lote é enriquecida automaticamente com:
 - **Nível de dificuldade** (1=Fácil, 2=Médio, 3=Difícil)
 - **Legislação base** (Constituição Federal, Código Civil, etc.)
 
-A classificação é realizada pelo modelo `llama3` via prompts especializados.
+A classificação é realizada pelo modelo `llama3.2:3b` via prompts especializados.
 
 ### 5.2 Inferência com LLMs
 
@@ -207,7 +208,7 @@ As questões são submetidas aos três modelos selecionados. Questões abertas u
 
 A avaliação utiliza múltiplas estratégias:
 
-- **Questões abertas — Rubrica:** Modelo juiz (`llama3`) avalia com base nos critérios oficiais
+- **Questões abertas — Rubrica:** Modelo juiz (`llama3.2:3b`) avalia com base nos critérios oficiais
 - **Questões abertas — Comparativa:** Modelo juiz avalia argumentação, precisão e coesão (0-5)
 - **Questões abertas — Métricas automatizadas:** BLEU, ROUGE-1/2/L e BERTScore F1 entre pares de modelos
 - **Múltipla escolha:** Acurácia, Precision, Recall e F1 (macro) via sklearn
@@ -220,17 +221,17 @@ A avaliação utiliza múltiplas estratégias:
 
 | Par de Modelos | BLEU | ROUGE-1 | ROUGE-2 | ROUGE-L | BERTScore F1 |
 |---|---|---|---|---|---|
-| mistral vs llama3 | — | — | — | — | — |
-| mistral vs gemma | — | — | — | — | — |
-| llama3 vs gemma | — | — | — | — | — |
+| llama3.2:3b vs gemma2:2b | — | — | — | — | — |
+| llama3.2:3b vs qwen2.5:3b | — | — | — | — | — |
+| gemma2:2b vs qwen2.5:3b | — | — | — | — | — |
 
 ### 6.2 Avaliação Exata — Múltipla Escolha
 
 | Modelo | Acurácia | Precision | Recall | F1 |
 |---|---|---|---|---|
-| mistral | — | — | — | — |
-| llama3 | — | — | — | — |
-| gemma | — | — | — | — |
+| llama3.2:3b | — | — | — | — |
+| gemma2:2b | — | — | — | — |
+| qwen2.5:3b | — | — | — | — |
 
 > **Nota:** Os valores serão preenchidos após a execução completa dos experimentos.
 

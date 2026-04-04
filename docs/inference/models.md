@@ -4,15 +4,15 @@
 
 | # | Modelo | Desenvolvedor | Comando Ollama |
 |---|---|---|---|
-| 1 | **Mistral** | Mistral AI | `ollama run mistral` |
-| 2 | **Llama 3** | Meta | `ollama run llama3` |
-| 3 | **Gemma** | Google | `ollama run gemma` |
+| 1 | **Llama 3.2 3B** | Meta | `ollama run llama3.2:3b` |
+| 2 | **Gemma 2 2B** | Google | `ollama run gemma2:2b` |
+| 3 | **Qwen 2.5 3B** | Alibaba | `ollama run qwen2.5:3b` |
 
 ## Justificativa da escolha
 
 ### Diversidade de origem
 
-Os tres modelos provem de organizacoes distintas (Mistral AI, Meta e Google), permitindo comparar diferentes abordagens de treinamento e arquiteturas em um mesmo conjunto de questoes juridicas.
+Os tres modelos provem de organizacoes distintas (Meta, Google e Alibaba), permitindo comparar diferentes abordagens de treinamento e arquiteturas em um mesmo conjunto de questoes juridicas.
 
 ### Suporte multilingue
 
@@ -27,17 +27,17 @@ Todos os modelos estao disponiveis no ecossistema Ollama, garantindo:
 
 ## Modelo juiz
 
-Alem da inferencia, o modelo **Llama 3** (`llama3`) e utilizado como **modelo juiz** para:
+Alem da inferencia, o modelo **Llama 3.2 3B** (`llama3.2:3b`) e utilizado como **modelo juiz** para:
 - Avaliacao por rubrica de questoes abertas
 - Avaliacao comparativa entre respostas dos modelos
 - Tarefas de curadoria (dificuldade + legislacao)
 
-A escolha do Llama 3 como juiz se deve ao seu bom desempenho em tarefas de compreensao e avaliacao de texto em portugues.
+A escolha do Llama 3.2 3B como juiz se deve ao seu bom desempenho em tarefas de compreensao e avaliacao de texto em portugues.
 
 ## Instalacao
 
 ```bash
-ollama pull mistral
-ollama pull llama3
-ollama pull gemma
+ollama pull llama3.2:3b
+ollama pull gemma2:2b
+ollama pull qwen2.5:3b
 ```

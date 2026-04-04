@@ -8,7 +8,7 @@ Comparar as respostas de **diferentes modelos** a uma mesma questao aberta, aval
 
 1. Para cada questao, todas as respostas dos modelos sao agrupadas
 2. Um prompt e montado contendo a questao e todas as respostas (identificadas por modelo)
-3. O modelo juiz (`llama3`) avalia cada resposta em tres dimensoes
+3. O modelo juiz (`llama3.2:3b`) avalia cada resposta em tres dimensoes
 
 ## Dimensoes de avaliacao
 
@@ -38,9 +38,9 @@ Formato de saida esperado:
 
 ```json
 {
-  "mistral": {"argumentacao": 3, "precisao": 4, "coesao": 3},
-  "llama3":  {"argumentacao": 4, "precisao": 3, "coesao": 4},
-  "gemma":   {"argumentacao": 2, "precisao": 3, "coesao": 3}
+  "llama3.2:3b": {"argumentacao": 4, "precisao": 3, "coesao": 4},
+  "gemma2:2b":   {"argumentacao": 2, "precisao": 3, "coesao": 3},
+  "qwen2.5:3b":  {"argumentacao": 3, "precisao": 4, "coesao": 3}
 }
 ```
 

@@ -34,4 +34,4 @@ O modelo analisa o enunciado da questao e identifica a legislacao principal, com
 
 ## Implementacao
 
-A identificacao e feita pelo modelo `llama3` com `temperature=0`. O prompt completo esta em `src/templates/curator_legislation.jinja`.
+A identificacao e feita pelo modelo `llama3.2:3b` com `temperature=0`. O prompt completo esta em `src/templates/curator_legislation.jinja`.

@@ -7,10 +7,14 @@ import re
 import matplotlib.pyplot as plt
 import ollama
 import pandas as pd
+import logging
 from minijinja import Environment
 from sklearn.metrics import precision_score, recall_score, f1_score
 
 import load_dataset as ld
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logger = logging.getLogger(__name__)
 
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
 os.makedirs(RESULTS_DIR, exist_ok=True)
@@ -19,6 +23,8 @@ TEMPLATES_DIR = os.path.join(os.path.dirname(__file__), "templates")
 env = Environment(loader=lambda name: open(os.path.join(TEMPLATES_DIR, name), encoding="utf-8").read())
 
 JUDGE_MODEL = "llama3.2:3b"
+OLLAMA_TIMEOUT = 120.0
+client = ollama.Client(timeout=OLLAMA_TIMEOUT)
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
@@ -83,18 +89,27 @@ def evaluate_open_questions() -> pd.DataFrame:
             rubric=rubric,
         )
 
-        response = ollama.chat(
-            model=JUDGE_MODEL,
-            options={"temperature": 0},
-            messages=[{"role": "user", "content": judge_prompt}],
-        )
-        content = response["message"]["content"]
+        try:
+            response = client.chat(
+                model=JUDGE_MODEL,
+                options={"temperature": 0},
+                messages=[{"role": "user", "content": judge_prompt}],
+            )
+            content = response["message"]["content"]
+        except Exception as e:
+            logger.warning("Ollama falhou em q:%s model:%s — %s", question_id, model, e)
+            results.append({
+                "question_id": question_id, "model": model,
+                "scores": None, "total_score": None,
+            })
+            continue
 
         try:
             result = json.loads(_extract_json(content))
             scores = [_clean_score(s) for s in result.get("scores", [])]
             score_total = sum(scores)
-        except Exception:
+        except Exception as e:
+            logger.warning("JSON inválido em q:%s model:%s — %s\nResposta: %s", question_id, model, e, content[:200])
             scores = None
             score_total = None
 
@@ -177,12 +192,16 @@ def evaluate_comparative() -> pd.DataFrame:
             answers=answers,
         )
 
-        response = ollama.chat(
-            model=JUDGE_MODEL,
-            options={"temperature": 0},
-            messages=[{"role": "user", "content": prompt}],
-        )
-        content = response["message"]["content"]
+        try:
+            response = client.chat(
+                model=JUDGE_MODEL,
+                options={"temperature": 0},
+                messages=[{"role": "user", "content": prompt}],
+            )
+            content = response["message"]["content"]
+        except Exception as e:
+            logger.warning("Ollama falhou na comparativa q:%s — %s", q_id, e)
+            continue
 
         try:
             scores = json.loads(_extract_json(content))
@@ -196,8 +215,8 @@ def evaluate_comparative() -> pd.DataFrame:
                     "coesao": r["coesao"],
                     "final_score": final,
                 })
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning("JSON inválido na comparativa q:%s — %s\nResposta: %s", q_id, e, content[:200])
 
     df_result = pd.DataFrame(results)
     df_result.to_csv(os.path.join(RESULTS_DIR, "eval_comparative.csv"), index=False)

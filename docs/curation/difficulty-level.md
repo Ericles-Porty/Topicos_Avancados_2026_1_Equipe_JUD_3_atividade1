@@ -34,4 +34,4 @@ O modelo retorna um JSON estruturado:
 
 ## Implementacao
 
-A classificacao e feita pelo modelo `llama3` com `temperature=0` para garantir determinismo. O prompt completo esta em `src/templates/curator_difficulty.jinja`.
+A classificacao e feita pelo modelo `llama3.2:3b` com `temperature=0` para garantir determinismo. O prompt completo esta em `src/templates/curator_difficulty.jinja`.

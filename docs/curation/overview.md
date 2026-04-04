@@ -9,7 +9,7 @@ Curadoria e o processo de **enriquecimento dos dados** com metadados juridicos a
 
 ## Abordagem automatizada
 
-A curadoria e realizada de forma automatizada usando um **modelo de linguagem como curador** (LLM-as-Curator). O modelo `llama3` e utilizado como curador, recebendo prompts especializados para cada tarefa.
+A curadoria e realizada de forma automatizada usando um **modelo de linguagem como curador** (LLM-as-Curator). O modelo `llama3.2:3b` e utilizado como curador, recebendo prompts especializados para cada tarefa.
 
 ### Vantagens da abordagem automatizada
 
@@ -20,9 +20,9 @@ A curadoria e realizada de forma automatizada usando um **modelo de linguagem co
 ## Pipeline de curadoria
 
 ```
-Questao → Prompt de Dificuldade → LLM (llama3) → JSON {dificuldade, nivel}
-                                                        ↓
-Questao → Prompt de Legislacao  → LLM (llama3) → JSON {legislacao_base}
+Questao → Prompt de Dificuldade → LLM (llama3.2:3b) → JSON {dificuldade, nivel}
+                                                           ↓
+Questao → Prompt de Legislacao  → LLM (llama3.2:3b) → JSON {legislacao_base}
                                                         ↓
                                               curator_annotations.json
 ```

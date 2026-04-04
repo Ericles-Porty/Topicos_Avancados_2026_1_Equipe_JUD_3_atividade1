@@ -22,7 +22,7 @@ Cada abordagem captura aspectos diferentes da qualidade das respostas:
 
 ## Modelo juiz
 
-As avaliacoes por rubrica e comparativa utilizam o modelo `llama3` como **juiz**, com `temperature=0` para garantir determinismo.
+As avaliacoes por rubrica e comparativa utilizam o modelo `llama3.2:3b` como **juiz**, com `temperature=0` para garantir determinismo.
 
 ## Implementacao
 
