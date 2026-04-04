@@ -2,19 +2,19 @@
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Ufs_principal_positiva-nova.png" alt="ufs-logo" width="20%">
 
-<h1>Topicos Avancados ES e SI</h1>
+<h1>Tópicos Avançados ES e SI</h1>
 
-<h3>Atividade Avaliativa 1 — Curadoria de Datasets e Inferencia Basica com LLMs</h3>
+<h3>Atividade Avaliativa 1 — Curadoria de Datasets e Inferência Básica com LLMs</h3>
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Ericles-Porty/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1?machine=standardLinux2gb)
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.12%2B-blue.svg" alt="Python 3.12+">
   <a href="LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="Licenca MIT">
+    <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="Licença MIT">
   </a>
   <a href="https://github.com/Ericles-Porty/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1/commits/main">
-    <img src="https://img.shields.io/github/last-commit/Ericles-Porty/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1.svg" alt="Ultimo commit">
+    <img src="https://img.shields.io/github/last-commit/Ericles-Porty/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1.svg" alt="Último commit">
   </a>
   <a href="https://github.com/Ericles-Porty/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1/stargazers">
     <img src="https://img.shields.io/github/stars/Ericles-Porty/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1.svg?style=social" alt="Stars">
@@ -25,22 +25,22 @@
 
 ## Sobre
 
-Repositorio da **Equipe 3 (Juridica)** para a primeira atividade avaliativa da disciplina **Topicos Avancados em Engenharia de Software e Sistemas de Informacao I**. O projeto consiste na curadoria de datasets juridicos e na realizacao de inferencia basica utilizando Modelos de Linguagem (LLMs), com foco em questoes do Exame da OAB (Ordem dos Advogados do Brasil).
+Repositório individual de **Éricles dos Santos** para a primeira atividade avaliativa da disciplina **Tópicos Avançados em Engenharia de Software e Sistemas de Informação I** (UFS — 2026.1). O projeto consiste na curadoria de datasets jurídicos e na realização de inferência básica utilizando Modelos de Linguagem (LLMs), com foco em questões do Exame da OAB (Ordem dos Advogados do Brasil).
 
-## Onde esta a documentacao
+## Onde está a documentação
 
-A documentacao completa do projeto esta disponivel na pasta [`docs/`](docs/), e a leitura deve comecar por [`docs/intro.md`](docs/intro.md).
+A documentação completa do projeto está disponível na pasta [`docs/`](docs/), e a leitura deve começar por [`docs/intro.md`](docs/intro.md).
 
-## Dominio de atuacao
+## Domínio de atuação
 
-A Equipe 3 atua no **Dominio Juridico**, trabalhando com os seguintes datasets:
+Este projeto atua no **Domínio Jurídico**, trabalhando com os seguintes datasets:
 
 | Dataset | Tipo | Quantidade | Fonte |
 |---|---|---|---|
-| **J1 — OAB Bench** | Questoes Abertas | 210 questoes | [maritaca-ai/oab-bench](https://github.com/maritaca-ai/oab-bench) |
-| **J2 — OAB Exams** | Multipla Escolha | 2210 questoes | [eduagarcia/oab_exams](https://huggingface.co/datasets/eduagarcia/oab_exams) |
+| **J1 — OAB Bench** | Questões Abertas | 210 questões | [maritaca-ai/oab-bench](https://github.com/maritaca-ai/oab-bench) |
+| **J2 — OAB Exams** | Múltipla Escolha | 2210 questões | [eduagarcia/oab_exams](https://huggingface.co/datasets/eduagarcia/oab_exams) |
 
-> **Artigo de referencia:** [ACM Digital Library — OAB Bench](https://dl.acm.org/doi/pdf/10.1145/3769126.3769227)
+> **Artigo de referência:** [ACM Digital Library — OAB Bench](https://dl.acm.org/doi/pdf/10.1145/3769126.3769227)
 
 ## Colaboradores
 
@@ -49,29 +49,30 @@ A Equipe 3 atua no **Dominio Juridico**, trabalhando com os seguintes datasets:
   <tr>
     <td align="center">
       <a href="https://github.com/Ericles-Porty">
-        <img src="https://github.com/Ericles-Porty.png" height="64" width="64" alt="Ericles dos Santos"/>
+        <img src="https://github.com/Ericles-Porty.png" height="64" width="64" alt="Éricles dos Santos"/>
       </a><br/>
-      <a href="https://github.com/Ericles-Porty">Ericles dos Santos</a>
+      <a href="https://github.com/Ericles-Porty">Éricles dos Santos</a>
     </td>
-    <td align="center">
+	<td align="center">
       <a href="https://github.com/ReinanHS">
         <img src="https://github.com/reinanhs.png" height="64" width="64" alt="Reinan Gabriel"/>
       </a><br/>
       <a href="https://github.com/ReinanHS">Reinan Gabriel</a>
     </td>
+
   </tr>
 </table>
 </div>
 
 ---
 
-## 1. Ambiente de execucao
+## 1. Ambiente de execução
 
-### 1.1 Configuracao de hardware
+### 1.1 Configuração de hardware
 
-Os experimentos de inferencia foram executados em uma maquina local com a seguinte configuracao:
+Os experimentos de inferência foram executados em uma máquina local com a seguinte configuração:
 
-| Componente | Especificacao |
+| Componente | Especificação |
 |---|---|
 | **GPU** | NVIDIA GeForce RTX 4050 |
 | **VRAM dedicada** | 6,0 GB |
@@ -80,7 +81,7 @@ Os experimentos de inferencia foram executados em uma maquina local com a seguin
 
 ### 1.2 Modelos de linguagem selecionados
 
-Foram escolhidos **tres modelos de linguagem** de diferentes organizacoes, executados localmente via [Ollama](https://ollama.com/):
+Foram escolhidos **três modelos de linguagem** de diferentes organizações, executados localmente via [Ollama](https://ollama.com/):
 
 | # | Modelo | Desenvolvedor | Comando Ollama |
 |---|---|---|---|
@@ -90,16 +91,16 @@ Foram escolhidos **tres modelos de linguagem** de diferentes organizacoes, execu
 
 ### 1.3 Justificativa da escolha
 
-- **Diversidade de origem:** Os tres modelos provem de organizacoes distintas (Mistral AI, Meta e Google), permitindo comparar diferentes abordagens de treinamento e arquiteturas.
-- **Suporte multilingue:** Os tres modelos oferecem suporte ao idioma portugues, requisito essencial para inferencia em questoes da OAB.
-- **Compatibilidade com Ollama:** Todos os modelos estao disponiveis no ecossistema Ollama, facilitando a execucao local padronizada.
+- **Diversidade de origem:** Os três modelos provêm de organizações distintas (Mistral AI, Meta e Google), permitindo comparar diferentes abordagens de treinamento e arquiteturas.
+- **Suporte multilíngue:** Os três modelos oferecem suporte ao idioma português, requisito essencial para inferência em questões da OAB.
+- **Compatibilidade com Ollama:** Todos os modelos estão disponíveis no ecossistema Ollama, facilitando a execução local padronizada.
 
-### 1.4 Instalacao dos modelos
+### 1.4 Instalação dos modelos
 
 ```bash
 # Instalar o Ollama (Windows: baixar de https://ollama.com/download)
 
-# Baixar os tres modelos
+# Baixar os três modelos
 ollama pull mistral
 ollama pull llama3
 ollama pull gemma
@@ -110,37 +111,37 @@ ollama list
 
 ---
 
-## 2. Instrucoes de execucao
+## 2. Instruções de execução
 
-### 2.1 Pre-requisitos
+### 2.1 Pré-requisitos
 
 - **Python** 3.12 ou superior
 - **Ollama** com os modelos `mistral`, `llama3` e `gemma` instalados
-- **pip** para instalacao de dependencias
+- **pip** para instalação de dependências
 
-### 2.2 Instalacao e execucao
+### 2.2 Instalação e execução
 
 ```bash
-# Clonar o repositorio
+# Clonar o repositório
 git clone https://github.com/Ericles-Porty/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1.git
 cd Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1
 
 # Criar e ativar ambiente virtual
 python -m venv src/.venv
 
-# Ativacao no Windows (PowerShell)
+# Ativação no Windows (PowerShell)
 src\.venv\Scripts\activate
 
-# Ativacao no Linux/macOS
+# Ativação no Linux/macOS
 # source src/.venv/bin/activate
 
-# Instalar dependencias
+# Instalar dependências
 pip install pandas ollama minijinja matplotlib scikit-learn requests datasets evaluate rouge-score bert-score
 
 # 1. Carregar e preparar os datasets
 python src/load_dataset.py
 
-# 2. Executar inferencia com os tres modelos + curadoria
+# 2. Executar inferência com os três modelos + curadoria
 python src/run_models.py
 
 # 3. Avaliar resultados e gerar leaderboard
@@ -149,15 +150,15 @@ python src/evaluation.py
 
 ---
 
-## 3. Distribuicao e mapeamento das questoes
+## 3. Mapeamento das questões
 
-### 3.1 Dataset J1 — Questoes abertas (`maritaca-ai/oab-bench`)
+### 3.1 Dataset J1 — Questões abertas (`maritaca-ai/oab-bench`)
 
-O dataset J1 contem **210 registros**. As questoes designadas para esta analise correspondem ao intervalo de indices **153 a 164** (Python, base zero), totalizando **12 questoes abertas**.
+O dataset J1 contém **210 registros**. As questões designadas para minha análise correspondem ao intervalo de índices **153 a 164** (Python, base zero), totalizando **12 questões abertas**.
 
-### 3.2 Dataset J2 — Questoes objetivas (`eduagarcia/oab_exams`)
+### 3.2 Dataset J2 — Questões objetivas (`eduagarcia/oab_exams`)
 
-O dataset J2 contem **2210 questoes objetivas**. As questoes designadas correspondem ao intervalo de indices **1600 a 1722** (Python, base zero), totalizando **123 questoes de multipla escolha**.
+O dataset J2 contém **2210 questões objetivas**. As questões designadas correspondem ao intervalo de índices **1600 a 1722** (Python, base zero), totalizando **123 questões de múltipla escolha**.
 
 ---
 
@@ -165,24 +166,24 @@ O dataset J2 contem **2210 questoes objetivas**. As questoes designadas correspo
 
 ### 4.1 Dataset `maritaca-ai/oab-bench`
 
-| Campo | Tipo | Descricao |
+| Campo | Tipo | Descrição |
 |---|---|---|
-| `question_id` | `string` | Identificador unico da questao |
-| `category` | `string` | Categoria tematica (exame + area juridica) |
-| `statement` | `string` | Enunciado completo da questao |
+| `question_id` | `string` | Identificador único da questão |
+| `category` | `string` | Categoria temática (exame + área jurídica) |
+| `statement` | `string` | Enunciado completo da questão |
 | `turns` | `array[string]` | Subperguntas ou desdobramentos |
 | `values` | `array[number]` | Pesos de cada item de `turns` |
 | `system` | `string` | System prompt para o modelo |
 
 ### 4.2 Dataset `eduagarcia/oab_exams`
 
-| Campo | Tipo | Descricao |
+| Campo | Tipo | Descrição |
 |---|---|---|
-| `id` | `string` | Identificador unico da questao |
-| `question_number` | `integer` | Numero da questao na prova |
-| `exam_id` | `string` | Identificador da edicao do exame |
-| `exam_year` | `string` | Ano de realizacao do exame |
-| `question` | `string` | Enunciado da questao |
+| `id` | `string` | Identificador único da questão |
+| `question_number` | `integer` | Número da questão na prova |
+| `exam_id` | `string` | Identificador da edição do exame |
+| `exam_year` | `string` | Ano de realização do exame |
+| `question` | `string` | Enunciado da questão |
 | `choices` | `object` | Alternativas (`label` + `text`) |
 | `answerKey` | `string` | Gabarito oficial (A, B, C ou D) |
 
@@ -192,30 +193,30 @@ O dataset J2 contem **2210 questoes objetivas**. As questoes designadas correspo
 
 ### 5.1 Curadoria
 
-Cada questao do lote e enriquecida automaticamente com:
-- **Nivel de dificuldade** (1=Facil, 2=Medio, 3=Dificil)
-- **Legislacao base** (Constituicao Federal, Codigo Civil, etc.)
+Cada questão do lote é enriquecida automaticamente com:
+- **Nível de dificuldade** (1=Fácil, 2=Médio, 3=Difícil)
+- **Legislação base** (Constituição Federal, Código Civil, etc.)
 
-A classificacao e realizada pelo modelo `llama3` via prompts especializados.
+A classificação é realizada pelo modelo `llama3` via prompts especializados.
 
-### 5.2 Inferencia com LLMs
+### 5.2 Inferência com LLMs
 
-As questoes sao submetidas aos tres modelos selecionados. Questoes abertas utilizam system prompt do dataset original. Questoes de multipla escolha utilizam system prompt estruturado que solicita resposta em JSON (`{"resposta": "letra"}`).
+As questões são submetidas aos três modelos selecionados. Questões abertas utilizam system prompt do dataset original. Questões de múltipla escolha utilizam system prompt estruturado que solicita resposta em JSON (`{"resposta": "letra"}`).
 
-### 5.3 Avaliacao e comparacao
+### 5.3 Avaliação e comparação
 
-A avaliacao utiliza multiplas estrategias:
+A avaliação utiliza múltiplas estratégias:
 
-- **Questoes abertas — Rubrica:** Modelo juiz (`llama3`) avalia com base nos criterios oficiais
-- **Questoes abertas — Comparativa:** Modelo juiz avalia argumentacao, precisao e coesao (0-5)
-- **Questoes abertas — Metricas automatizadas:** BLEU, ROUGE-1/2/L e BERTScore F1 entre pares de modelos
-- **Multipla escolha:** Acuracia, Precision, Recall e F1 (macro) via sklearn
+- **Questões abertas — Rubrica:** Modelo juiz (`llama3`) avalia com base nos critérios oficiais
+- **Questões abertas — Comparativa:** Modelo juiz avalia argumentação, precisão e coesão (0-5)
+- **Questões abertas — Métricas automatizadas:** BLEU, ROUGE-1/2/L e BERTScore F1 entre pares de modelos
+- **Múltipla escolha:** Acurácia, Precision, Recall e F1 (macro) via sklearn
 
 ---
 
 ## 6. Resultados
 
-### 6.1 Avaliacao Cruzada — Questoes Abertas
+### 6.1 Avaliação Cruzada — Questões Abertas
 
 | Par de Modelos | BLEU | ROUGE-1 | ROUGE-2 | ROUGE-L | BERTScore F1 |
 |---|---|---|---|---|---|
@@ -223,19 +224,19 @@ A avaliacao utiliza multiplas estrategias:
 | mistral vs gemma | — | — | — | — | — |
 | llama3 vs gemma | — | — | — | — | — |
 
-### 6.2 Avaliacao Exata — Multipla Escolha
+### 6.2 Avaliação Exata — Múltipla Escolha
 
-| Modelo | Acuracia | Precision | Recall | F1 |
+| Modelo | Acurácia | Precision | Recall | F1 |
 |---|---|---|---|---|
 | mistral | — | — | — | — |
 | llama3 | — | — | — | — |
 | gemma | — | — | — | — |
 
-> **Nota:** Os valores serao preenchidos apos a execucao completa dos experimentos.
+> **Nota:** Os valores serão preenchidos após a execução completa dos experimentos.
 
 ---
 
-## 7. Referencias
+## 7. Referências
 
 - Databricks. [Best Practices and Methods for LLM Evaluation](https://www.databricks.com/br/blog/best-practices-and-methods-llm-evaluation).
 - Confident AI. [LLM Evaluation Metrics](https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation).
@@ -244,12 +245,17 @@ A avaliacao utiliza multiplas estrategias:
 - HuggingFace. [OAB Exams](https://huggingface.co/datasets/eduagarcia/oab_exams).
 - Ollama. [Ollama](https://ollama.com/).
 
-## Licenca
+## Licença
 
-Este projeto esta licenciado sob a Licenca MIT — veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto está licenciado sob a Licença MIT — veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## Inspiração
+
+Este projeto teve grande inspiração nos conceitos e tecnologias aplicadas no repositório de [Reinan Gabriel](https://github.com/ReinanHS):
+- [ReinanHS/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1](https://github.com/ReinanHS/Topicos_Avancados_2026_1_Equipe_JUD_3_atividade1)
 
 ---
 
 <div align="center">
-  <sub>Desenvolvido pela Equipe 3 — Dominio Juridico | UFS — 2026.1</sub>
+  <sub>Desenvolvido por Éricles dos Santos — Domínio Jurídico | UFS — 2026.1</sub>
 </div>
