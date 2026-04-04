@@ -16,9 +16,9 @@ TEMPLATES_DIR = os.path.join(os.path.dirname(__file__), "templates")
 env = Environment(loader=lambda name: open(os.path.join(TEMPLATES_DIR, name), encoding="utf-8").read())
 
 MODELS = [
-    "mistral",
-    "llama3",
-    "gemma",
+    "llama3.2:3b",
+    "gemma2:2b",
+    "qwen2.5:3b",
 ]
 
 
@@ -117,7 +117,7 @@ def run_multiple_choice_questions() -> None:
 
 # ── Curadoria (dificuldade + legislação) ──────────────────────────────────────
 
-CURATOR_MODEL = "llama3"
+CURATOR_MODEL = "llama3.2:3b"
 
 
 def _extract_json(text: str) -> str | None:
