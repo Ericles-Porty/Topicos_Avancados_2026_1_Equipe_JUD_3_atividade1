@@ -228,11 +228,11 @@ A avaliação utiliza múltiplas estratégias:
 
 ### 6.1 Leaderboard Consolidado
 
-| Modelo | Rubrica (aberta) | Acurácia MC (%) | Precision MC | Recall MC | F1 MC | Argumentação | Precisão | Coesão | Score Comparativo |
+| Modelo | Rubrica (%) | Acurácia MC (%) | Precision MC | Recall MC | F1 MC | Argumentação | Precisão | Coesão | Score Comparativo |
 |---|---|---|---|---|---|---|---|---|---|
-| llama3.2:3b | 31.20 | 46.34 | 0.4096 | 0.3662 | 0.3632 | 4.00 | 3.92 | 4.00 | 3.97 |
-| gemma2:2b | 5.85 | 40.65 | 0.4124 | 0.3979 | 0.3884 | 4.83 | 4.83 | 4.83 | 4.83 |
-| qwen2.5:3b | 1.26 | 50.41 | 0.5250 | 0.4903 | 0.4742 | 4.67 | 4.67 | 4.67 | 4.67 |
+| llama3.2:3b | 25.00 | 46.34 | 0.4096 | 0.3662 | 0.3632 | 4.00 | 3.92 | 4.00 | 3.97 |
+| gemma2:2b | 21.45 | 40.65 | 0.4124 | 0.3979 | 0.3884 | 4.83 | 4.83 | 4.83 | 4.83 |
+| qwen2.5:3b | 16.67 | 50.41 | 0.5250 | 0.4903 | 0.4742 | 4.67 | 4.67 | 4.67 | 4.67 |
 
 ### 6.2 Avaliação Cruzada — Questões Abertas
 

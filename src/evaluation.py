@@ -104,20 +104,27 @@ def evaluate_open_questions() -> pd.DataFrame:
             })
             continue
 
+        max_score = sum(values)
+
         try:
             result = json.loads(_extract_json(content))
-            scores = [_clean_score(s) for s in result.get("scores", [])]
+            raw_scores = [_clean_score(s) for s in result.get("scores", [])]
+            scores = [min(s, v) for s, v in zip(raw_scores, values)]
             score_total = sum(scores)
+            score_normalized = (score_total / max_score * 100) if max_score > 0 else 0.0
         except Exception as e:
             logger.warning("JSON inválido em q:%s model:%s — %s\nResposta: %s", question_id, model, e, content[:200])
             scores = None
             score_total = None
+            score_normalized = None
 
         results.append({
             "question_id": question_id,
             "model": model,
             "scores": scores,
             "total_score": score_total,
+            "max_score": max_score,
+            "score_normalized": score_normalized,
         })
 
     df = pd.DataFrame(results)
@@ -284,7 +291,7 @@ def generate_leaderboard(
     """Gera o leaderboard consolidado e gráficos separados por tipo de avaliação."""
 
     # ── Métricas por modelo ───────────────────────────────────────────────
-    open_avg = df_open.groupby("model")["total_score"].mean().rename("open_score")
+    open_avg = df_open.groupby("model")["score_normalized"].mean().rename("open_score_%")
 
     mc_accuracy = (df_mc.groupby("model")["is_correct"].mean() * 100).rename("mc_accuracy_%")
 
@@ -322,8 +329,9 @@ def generate_leaderboard(
     # Linha 1: Questões Abertas
     ax_rubrica = fig.add_subplot(gs[0, 0])
     open_avg.plot(kind="bar", ax=ax_rubrica, color="#4C72B0")
-    ax_rubrica.set_title("Rubrica")
-    ax_rubrica.set_ylabel("Pontuação média")
+    ax_rubrica.set_title("Rubrica (normalizada)")
+    ax_rubrica.set_ylabel("Aproveitamento médio (%)")
+    ax_rubrica.set_ylim(0, 100)
     ax_rubrica.set_xlabel("")
     ax_rubrica.tick_params(axis="x", rotation=0)
 
