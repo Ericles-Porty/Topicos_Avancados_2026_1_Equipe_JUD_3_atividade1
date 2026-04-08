@@ -1,0 +1,37 @@
+question_id,model,scores,total_score,max_score,score_normalized
+43_direito_do_trabalho_questao_3,llama3.2:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_do_trabalho_questao_3,gemma2:2b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_do_trabalho_questao_3,qwen2.5:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_do_trabalho_questao_4,llama3.2:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_do_trabalho_questao_4,gemma2:2b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_do_trabalho_questao_4,qwen2.5:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_peca_profissional,llama3.2:3b,[5.0],5.0,5.0,100.0
+43_direito_constitucional_peca_profissional,gemma2:2b,,,5.0,
+43_direito_constitucional_peca_profissional,qwen2.5:3b,[0.0],0.0,5.0,0.0
+43_direito_constitucional_questao_1,llama3.2:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_questao_1,gemma2:2b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_questao_1,qwen2.5:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_questao_2,llama3.2:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_questao_2,gemma2:2b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_questao_2,qwen2.5:3b,"[0.0, 0.65]",0.65,1.25,52.0
+43_direito_constitucional_questao_3,llama3.2:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_questao_3,gemma2:2b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_questao_3,qwen2.5:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_questao_4,llama3.2:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_questao_4,gemma2:2b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_constitucional_questao_4,qwen2.5:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_empresarial_peca_profissional,llama3.2:3b,[0.0],0.0,5.0,0.0
+43_direito_empresarial_peca_profissional,gemma2:2b,[5.0],5.0,5.0,100.0
+43_direito_empresarial_peca_profissional,qwen2.5:3b,[0.0],0.0,5.0,0.0
+43_direito_empresarial_questao_1,llama3.2:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_empresarial_questao_1,gemma2:2b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_empresarial_questao_1,qwen2.5:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_empresarial_questao_2,llama3.2:3b,"[0.65, 0.6000000000000001]",1.25,1.25,100.0
+43_direito_empresarial_questao_2,gemma2:2b,"[0.65, 0.6000000000000001]",1.25,1.25,100.0
+43_direito_empresarial_questao_2,qwen2.5:3b,"[0.0, 0.6000000000000001]",0.6000000000000001,1.25,48.00000000000001
+43_direito_empresarial_questao_3,llama3.2:3b,"[0.65, 0.6000000000000001]",1.25,1.25,100.0
+43_direito_empresarial_questao_3,gemma2:2b,"[0.25, 0.2]",0.45,1.25,36.0
+43_direito_empresarial_questao_3,qwen2.5:3b,"[0.65, 0.6000000000000001]",1.25,1.25,100.0
+43_direito_empresarial_questao_4,llama3.2:3b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_empresarial_questao_4,gemma2:2b,"[0.0, 0.0]",0.0,1.25,0.0
+43_direito_empresarial_questao_4,qwen2.5:3b,"[0.0, 0.0]",0.0,1.25,0.0
