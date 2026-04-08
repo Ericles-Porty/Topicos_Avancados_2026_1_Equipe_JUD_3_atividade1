@@ -226,23 +226,29 @@ A avaliação utiliza múltiplas estratégias:
 
 ## 6. Resultados
 
-### 6.1 Avaliação Cruzada — Questões Abertas
+### 6.1 Leaderboard Consolidado
+
+| Modelo | Rubrica (aberta) | Acurácia MC (%) | Precision MC | Recall MC | F1 MC | Argumentação | Precisão | Coesão | Score Comparativo |
+|---|---|---|---|---|---|---|---|---|---|
+| llama3.2:3b | 31.20 | 46.34 | 0.4096 | 0.3662 | 0.3632 | 4.00 | 3.92 | 4.00 | 3.97 |
+| gemma2:2b | 5.85 | 40.65 | 0.4124 | 0.3979 | 0.3884 | 4.83 | 4.83 | 4.83 | 4.83 |
+| qwen2.5:3b | 1.26 | 50.41 | 0.5250 | 0.4903 | 0.4742 | 4.67 | 4.67 | 4.67 | 4.67 |
+
+### 6.2 Avaliação Cruzada — Questões Abertas
 
 | Par de Modelos | BLEU | ROUGE-1 | ROUGE-2 | ROUGE-L | BERTScore F1 |
 |---|---|---|---|---|---|
-| llama3.2:3b vs gemma2:2b | — | — | — | — | — |
-| llama3.2:3b vs qwen2.5:3b | — | — | — | — | — |
-| gemma2:2b vs qwen2.5:3b | — | — | — | — | — |
+| llama3.2:3b vs gemma2:2b | 0.1550 | 0.4997 | 0.2249 | 0.2651 | 0.7568 |
+| llama3.2:3b vs qwen2.5:3b | 0.1288 | 0.4796 | 0.2081 | 0.2405 | 0.7534 |
+| gemma2:2b vs qwen2.5:3b | 0.1145 | 0.5003 | 0.1855 | 0.2222 | 0.7502 |
 
-### 6.2 Avaliação Exata — Múltipla Escolha
+### 6.3 Avaliação Exata — Múltipla Escolha
 
-| Modelo | Acurácia | Precision | Recall | F1 |
+| Modelo | Acurácia (%) | Precision | Recall | F1 |
 |---|---|---|---|---|
-| llama3.2:3b | — | — | — | — |
-| gemma2:2b | — | — | — | — |
-| qwen2.5:3b | — | — | — | — |
-
-> **Nota:** Os valores serão preenchidos após a execução completa dos experimentos.
+| llama3.2:3b | 46.34 | 0.4096 | 0.3662 | 0.3632 |
+| gemma2:2b | 40.65 | 0.4124 | 0.3979 | 0.3884 |
+| qwen2.5:3b | 50.41 | 0.5250 | 0.4903 | 0.4742 |
 
 ---
 
