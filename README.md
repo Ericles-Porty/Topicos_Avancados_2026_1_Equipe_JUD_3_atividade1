@@ -42,6 +42,10 @@ Este projeto atua no **Domínio Jurídico**, trabalhando com os seguintes datase
 
 > **Artigo de referência:** [ACM Digital Library — OAB Bench](https://dl.acm.org/doi/pdf/10.1145/3769126.3769227)
 
+## Vídeo Demonstrativo
+
+> **Link do vídeo:** [A ser adicionado](#)
+
 ## Colaboradores
 
 <div align="center">
@@ -196,6 +200,7 @@ O dataset J2 contém **2210 questões objetivas**. As questões designadas corre
 
 Cada questão do lote é enriquecida automaticamente com:
 - **Nível de dificuldade** (1=Fácil, 2=Médio, 3=Difícil)
+- **Área de especialidade** (Direito Civil, Direito Penal, Direito Constitucional, Direito Trabalhista, etc.)
 - **Legislação base** (Constituição Federal, Código Civil, etc.)
 
 A classificação é realizada pelo modelo `llama3.2:3b` via prompts especializados.

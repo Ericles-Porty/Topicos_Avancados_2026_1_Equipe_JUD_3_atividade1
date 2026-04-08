@@ -204,6 +204,22 @@ def run_curator_tasks() -> None:
             logger.warning("Ollama falhou (legislação) q:%s — %s", q["question_id"], e)
             leg_resp = None
 
+        specialty_prompt = env.render_template(
+            "curator_specialty.jinja",
+            question_id=q["question_id"],
+            statement=q["statement"],
+            turns=q["turns"],
+        )
+        try:
+            spec_resp = client.chat(
+                model=CURATOR_MODEL,
+                options={"temperature": 0},
+                messages=[{"role": "user", "content": specialty_prompt}],
+            )
+        except Exception as e:
+            logger.warning("Ollama falhou (especialidade) q:%s — %s", q["question_id"], e)
+            spec_resp = None
+
         entry = {"question_id": q["question_id"], "type": q["type"]}
 
         try:
@@ -221,6 +237,13 @@ def run_curator_tasks() -> None:
         except Exception as e:
             logger.warning("JSON inválido (legislação) q:%s — %s", q["question_id"], e)
             entry["legislacao_base"] = None
+
+        try:
+            spec_json = json.loads(_extract_json(spec_resp["message"]["content"]))
+            entry["area_especialidade"] = spec_json.get("area_especialidade", "")
+        except Exception as e:
+            logger.warning("JSON inválido (especialidade) q:%s — %s", q["question_id"], e)
+            entry["area_especialidade"] = None
 
         results.append(entry)
 
