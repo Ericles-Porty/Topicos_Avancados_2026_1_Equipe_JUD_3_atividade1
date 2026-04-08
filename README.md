@@ -198,12 +198,16 @@ O dataset J2 contém **2210 questões objetivas**. As questões designadas corre
 
 ### 5.1 Curadoria
 
-Cada questão do lote é enriquecida automaticamente com:
-- **Nível de dificuldade** (1=Fácil, 2=Médio, 3=Difícil)
-- **Área de especialidade** (Direito Civil, Direito Penal, Direito Constitucional, Direito Trabalhista, etc.)
-- **Legislação base** (Constituição Federal, Código Civil, etc.)
+A curadoria avalia cada questão sob a ótica da **Complexidade de Raciocínio (Reasoning)** e do **Aterramento (Grounding)** exigidos da IA. Cada questão é enriquecida automaticamente com:
 
-A classificação é realizada pelo modelo `llama3.2:3b` via prompts especializados.
+- **Nível de Dificuldade — Complexidade do Raciocínio do LLM:**
+  - Nível 1: Recuperação Factual Direta (*Fact Retrieval*)
+  - Nível 2: Raciocínio Lógico-Dedutivo (*Logical Deduction*)
+  - Nível 3: Hermenêutica Jurídica Complexa (*Complex Hermeneutics*)
+- **Subdomínio Semântico** — Área de especialidade jurídica (Direito Civil, Direito Penal, Direito Constitucional, etc.)
+- **Corpus de Referência** — Ground truth onde a resposta deve estar ancorada (Constituição Federal de 1988, Código Civil - Lei 10.406/2002, etc.)
+
+A classificação é realizada pelo modelo `llama3.2:3b` com `temperature=0` via prompts especializados.
 
 ### 5.2 Inferência com LLMs
 

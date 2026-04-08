@@ -1,12 +1,14 @@
-# Area de especialidade
+# Subdominio semantico — Area de especialidade
 
-## Categorias de classificacao
+## Abordagem
 
-Cada questao e classificada em uma das seguintes areas de especialidade juridica:
+As areas do direito sao tratadas como **subdominios semanticos**, ou seja, subconjuntos de dados estruturados que permitem agrupar e analisar o desempenho dos LLMs por area tematica.
 
-| Area | Descricao |
+## Subdominios disponiveis
+
+| Subdominio Semantico | Descricao |
 |---|---|
-| **Direito Constitucional** | Questoes sobre principios, direitos fundamentais e organizacao do Estado |
+| **Direito Constitucional** | Principios, direitos fundamentais e organizacao do Estado |
 | **Direito Civil** | Obrigacoes, contratos, familia, sucessoes e propriedade |
 | **Direito Penal** | Crimes, penas, imputabilidade e legislacao penal |
 | **Direito Trabalhista** | Relacoes de trabalho, CLT e direitos do trabalhador |
@@ -24,9 +26,9 @@ Cada questao e classificada em uma das seguintes areas de especialidade juridica
 
 ## Regras de classificacao
 
-- Escolha a area que **melhor representa** o tema central da questao
-- Se a questao envolve mais de uma area, escolha a **predominante**
-- Caso nenhuma categoria se aplique, retorne "Outra"
+- Escolha o subdominio que **melhor representa** o tema central da questao
+- Se a questao envolve mais de um subdominio, escolha o **predominante**
+- Caso nenhum subdominio se aplique, retorne "Outro"
 
 ## Formato de saida
 
@@ -35,7 +37,7 @@ O modelo retorna um JSON estruturado:
 ```json
 {
   "question_id": "41_direito_administrativo_questao_1",
-  "area_especialidade": "Direito Administrativo"
+  "subdominio_semantico": "Direito Administrativo"
 }
 ```
 

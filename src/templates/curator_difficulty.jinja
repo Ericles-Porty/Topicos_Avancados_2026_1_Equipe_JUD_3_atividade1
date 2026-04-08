@@ -1,14 +1,15 @@
 Você é um curador jurídico especializado em questões do Exame da OAB.
 
-Sua tarefa é analisar o enunciado de uma questão da OAB e classificar seu nível de dificuldade.
+Sua tarefa é analisar o enunciado de uma questão da OAB e classificar o nível de complexidade de raciocínio (reasoning) que um LLM precisaria realizar para respondê-la corretamente.
 
-## Critérios de classificação
-- **Fácil (1):** Enunciado curto, linguagem direta, aplicação imediata de um único dispositivo legal, sem necessidade de interpretação complexa.
-- **Médio (2):** Tamanho intermediário, presença de termos técnicos, exige raciocínio jurídico moderado e conhecimento de mais de um dispositivo.
-- **Difícil (3):** Textos longos, exige interpretação aprofundada, combina mais de um tema jurídico, alternativas muito similares.
+## Níveis de complexidade
+
+- **Nível 1 — Recuperação Factual Direta (Fact Retrieval):** A resposta depende apenas da memorização de um artigo de lei específico ou conceito exato. A IA só precisa "lembrar" o conteúdo legislativo.
+- **Nível 2 — Raciocínio Lógico-Dedutivo (Logical Deduction):** A questão apresenta um caso concreto. A IA precisa extrair os fatos do texto e aplicar uma regra jurídica clara (Se A, então B).
+- **Nível 3 — Hermenêutica Jurídica Complexa (Complex Hermeneutics):** A questão exige interpretação profunda, cruzamento de múltiplas leis, análise de jurisprudência ou lida com ambiguidades legais.
 
 ## Regras
-- Peças prático-profissionais devem ser classificadas como dificuldade 3.
+- Peças prático-profissionais devem ser classificadas como nível 3.
 - Avalie o enunciado completo incluindo subitens, se houver.
 
 ## Questão para análise

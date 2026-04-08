@@ -2,11 +2,14 @@
 
 ## O que e curadoria
 
-Curadoria e o processo de **enriquecimento dos dados** com metadados juridicos adicionais, agregando valor analitico ao dataset original. Neste projeto, cada questao e anotada automaticamente com:
+Curadoria e o processo de **enriquecimento dos dados** com metadados que avaliam cada questao sob a otica da **Complexidade de Raciocinio (Reasoning)** e do **Aterramento (Grounding)** exigidos da IA. Neste projeto, cada questao e anotada automaticamente com:
 
-1. **Nivel de dificuldade** — Classificacao em Facil (1), Medio (2) ou Dificil (3)
-2. **Area de especialidade** — Classificacao da area juridica (Direito Civil, Penal, Constitucional, Trabalhista, etc.)
-3. **Legislacao base** — Identificacao da legislacao principal que fundamenta a questao
+1. **Nivel de dificuldade (Complexidade do Raciocinio do LLM)** — Classificacao do tipo de processamento cognitivo que o LLM precisa realizar:
+    - Nivel 1: Recuperacao Factual Direta (*Fact Retrieval*)
+    - Nivel 2: Raciocinio Logico-Dedutivo (*Logical Deduction*)
+    - Nivel 3: Hermeneutica Juridica Complexa (*Complex Hermeneutics*)
+2. **Subdominio Semantico** — Area de especialidade juridica (ex: Direito Civil, Direito Penal, Direito Constitucional)
+3. **Corpus de Referencia (Ground Truth)** — Legislacao ou fonte normativa onde a resposta correta deve estar ancorada para evitar alucinacoes
 
 ## Abordagem automatizada
 
@@ -23,9 +26,9 @@ A curadoria e realizada de forma automatizada usando um **modelo de linguagem co
 ```
 Questao → Prompt de Dificuldade    → LLM (llama3.2:3b) → JSON {dificuldade, nivel}
                                                               ↓
-Questao → Prompt de Especialidade  → LLM (llama3.2:3b) → JSON {area_especialidade}
+Questao → Prompt de Subdominio     → LLM (llama3.2:3b) → JSON {subdominio_semantico}
                                                               ↓
-Questao → Prompt de Legislacao     → LLM (llama3.2:3b) → JSON {legislacao_base}
+Questao → Prompt de Corpus         → LLM (llama3.2:3b) → JSON {corpus_referencia}
                                                            ↓
                                                  curator_annotations.json
 ```
@@ -36,7 +39,7 @@ A funcao `run_curator_tasks()` em `src/run_models.py` processa todas as questoes
 
 ## Detalhes
 
-- [Nivel de dificuldade](difficulty-level.md) — Criterios e classificacao
-- [Area de especialidade](specialty-area.md) — Classificacao por area juridica
-- [Legislacao base](basic-legislation.md) — Identificacao de legislacao
+- [Nivel de dificuldade](difficulty-level.md) — Complexidade do raciocinio do LLM
+- [Subdominio semantico](specialty-area.md) — Area de especialidade juridica
+- [Corpus de referencia](basic-legislation.md) — Ground truth (legislacao base)
 - [Prompts](prompts.md) — Templates utilizados

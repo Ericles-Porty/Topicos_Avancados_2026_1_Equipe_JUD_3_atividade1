@@ -51,9 +51,9 @@ nav:
       - Distribuicao da equipe: datasets/team-distribution.md
   - Curadoria:
       - Visao geral: curation/overview.md
-      - Nivel de dificuldade: curation/difficulty-level.md
-      - Area de especialidade: curation/specialty-area.md
-      - Legislacao base: curation/basic-legislation.md
+      - Nivel de dificuldade (Reasoning): curation/difficulty-level.md
+      - Subdominio semantico: curation/specialty-area.md
+      - Corpus de referencia (Grounding): curation/basic-legislation.md
       - Prompts: curation/prompts.md
   - Inferencia:
       - Visao geral: inference/overview.md

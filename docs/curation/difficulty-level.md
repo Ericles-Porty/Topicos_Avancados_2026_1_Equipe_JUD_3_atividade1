@@ -1,24 +1,20 @@
-# Nivel de dificuldade
+# Nivel de dificuldade — Complexidade do Raciocinio do LLM
 
-## Criterios de classificacao
+## Abordagem
 
-A classificacao de dificuldade segue tres niveis, baseados em criterios objetivos:
+Em vez de classificar as questoes como Facil/Medio/Dificil, esta curadoria classifica o **tipo de processamento cognitivo** que um LLM precisa realizar para acertar a questao.
 
-| Nivel | Valor | Criterios |
-|---|---|---|
-| **Facil** | 1 | Enunciado curto, linguagem direta, aplicacao imediata de um unico dispositivo legal, sem necessidade de interpretacao complexa |
-| **Medio** | 2 | Tamanho intermediario, presenca de termos tecnicos, exige raciocinio juridico moderado e conhecimento de mais de um dispositivo |
-| **Dificil** | 3 | Textos longos, exige interpretacao aprofundada, combina mais de um tema juridico, alternativas muito similares |
+## Niveis de complexidade
+
+| Nivel | Nome | Tipo (EN) | Criterios |
+|---|---|---|---|
+| **1** | Recuperacao Factual Direta | *Fact Retrieval* | A resposta depende apenas da memorizacao de um artigo de lei especifico ou conceito exato. A IA so precisa "lembrar" o conteudo legislativo |
+| **2** | Raciocinio Logico-Dedutivo | *Logical Deduction* | A questao apresenta um caso concreto. A IA precisa extrair os fatos do texto e aplicar uma regra juridica clara (Se A, entao B) |
+| **3** | Hermeneutica Juridica Complexa | *Complex Hermeneutics* | A questao exige interpretacao profunda, cruzamento de multiplas leis, analise de jurisprudencia ou lida com ambiguidades legais |
 
 ### Regra especial
 
-Pecas pratico-profissionais devem ser classificadas como **dificuldade 3** (Dificil), independentemente de outros criterios, devido a sua complexidade inerente.
-
-## Fonte dos criterios
-
-Os criterios foram definidos com base em:
-- Padroes de classificacao da **Estrategia OAB**
-- Analise de padroes das provas organizadas pela **FGV**
+Pecas pratico-profissionais devem ser classificadas como **nivel 3** (Complex Hermeneutics), independentemente de outros criterios, devido a sua complexidade inerente.
 
 ## Formato de saida
 
@@ -28,7 +24,7 @@ O modelo retorna um JSON estruturado:
 {
   "question_id": "41_direito_administrativo_questao_1",
   "dificuldade": 2,
-  "nivel": "Medio"
+  "nivel": "Raciocínio Lógico-Dedutivo"
 }
 ```
 

@@ -233,17 +233,17 @@ def run_curator_tasks() -> None:
 
         try:
             leg_json = json.loads(_extract_json(leg_resp["message"]["content"]))
-            entry["legislacao_base"] = leg_json.get("legislacao_base", "")
+            entry["corpus_referencia"] = leg_json.get("corpus_referencia", "")
         except Exception as e:
-            logger.warning("JSON inválido (legislação) q:%s — %s", q["question_id"], e)
-            entry["legislacao_base"] = None
+            logger.warning("JSON inválido (corpus de referência) q:%s — %s", q["question_id"], e)
+            entry["corpus_referencia"] = None
 
         try:
             spec_json = json.loads(_extract_json(spec_resp["message"]["content"]))
-            entry["area_especialidade"] = spec_json.get("area_especialidade", "")
+            entry["subdominio_semantico"] = spec_json.get("subdominio_semantico", "")
         except Exception as e:
-            logger.warning("JSON inválido (especialidade) q:%s — %s", q["question_id"], e)
-            entry["area_especialidade"] = None
+            logger.warning("JSON inválido (subdomínio semântico) q:%s — %s", q["question_id"], e)
+            entry["subdominio_semantico"] = None
 
         results.append(entry)
 

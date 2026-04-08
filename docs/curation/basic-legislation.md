@@ -1,24 +1,26 @@
-# Legislacao base
+# Corpus de referencia — Ground Truth
 
 ## Objetivo
 
-Enriquecer cada questao com a **referencia normativa principal** que a fundamenta, adicionando metadados uteis para analise tematica do dataset.
+Identificar o **corpus de referencia (ground truth)** onde a resposta correta de cada questao deve estar ancorada, evitando alucinacoes do LLM. Em vez de apenas "Legislacao Base", este campo usa a terminologia de IA para indicar a fonte normativa que fundamenta a questao.
 
 ## O que e identificado
 
-O modelo analisa o enunciado da questao e identifica a legislacao principal, como:
+O modelo analisa o enunciado da questao e identifica a legislacao principal com seu nome oficial e numero da lei quando possivel:
 
-- Constituicao Federal
-- Codigo Civil
-- Codigo Penal
-- Codigo de Processo Civil
-- Codigo de Defesa do Consumidor
-- Leis especificas (ex: Lei n. 8.112/90)
+- Constituicao Federal de 1988
+- Codigo Civil (Lei 10.406/2002)
+- Codigo Penal (Decreto-Lei 2.848/1940)
+- Codigo de Processo Civil (Lei 13.105/2015)
+- Codigo de Defesa do Consumidor (Lei 8.078/1990)
+- Consolidacao das Leis do Trabalho - CLT (Decreto-Lei 5.452/1943)
+- Leis especificas (ex: Lei 8.112/1990)
 - Artigos especificos, quando ha certeza
 
 ## Regras
 
 - Identificar apenas a legislacao principal
+- Incluir o nome oficial e numero da lei quando possivel
 - Citar artigos especificos **somente quando houver certeza**
 - Nao fazer referencia a normas ficticias
 - Retornar "Inconclusivo" quando nao for possivel determinar com seguranca
@@ -28,7 +30,7 @@ O modelo analisa o enunciado da questao e identifica a legislacao principal, com
 ```json
 {
   "question_id": "41_direito_administrativo_questao_1",
-  "legislacao_base": "Constituicao Federal, art. 71; Lei n. 9.784/99"
+  "corpus_referencia": "Constituição Federal de 1988, art. 71; Lei 9.784/1999"
 }
 ```
 
