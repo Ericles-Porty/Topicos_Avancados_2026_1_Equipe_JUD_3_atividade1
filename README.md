@@ -141,7 +141,7 @@ src\.venv\Scripts\activate
 # source src/.venv/bin/activate
 
 # Instalar dependências
-pip install pandas ollama minijinja matplotlib scikit-learn requests datasets evaluate rouge-score bert-score
+pip install -r requirements.txt
 
 # 1. Carregar e preparar os datasets
 python src/load_dataset.py

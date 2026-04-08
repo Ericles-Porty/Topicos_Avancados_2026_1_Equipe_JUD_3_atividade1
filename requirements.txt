@@ -1,0 +1,10 @@
+pandas
+ollama
+minijinja
+matplotlib
+scikit-learn
+requests
+datasets
+evaluate
+rouge-score
+bert-score
