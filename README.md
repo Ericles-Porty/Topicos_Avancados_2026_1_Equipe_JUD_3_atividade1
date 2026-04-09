@@ -44,7 +44,7 @@ Este projeto atua no **Domínio Jurídico**, trabalhando com os seguintes datase
 
 ## Vídeo Demonstrativo
 
-> **Link do vídeo:** [A ser adicionado](#)
+> **Link do vídeo:** [A ser adicionado](https://youtu.be/1QMsz2wOlt0)
 
 ## Colaboradores
 
