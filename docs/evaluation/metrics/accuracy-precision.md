@@ -12,10 +12,10 @@ A acuracia mede a proporcao de respostas corretas sobre o total de questoes:
 Acuracia = respostas corretas / total de questoes
 ```
 
-**Exemplo:** Se um modelo acerta 55 de 123 questoes:
+**Exemplo:** Se um modelo acerta 55 de 122 questoes:
 
 ```
-Acuracia = 55 / 123 = 0.4472 (44.72%)
+Acuracia = 55 / 122 = 0.4472 (44.72%)
 ```
 
 ### Limitacoes

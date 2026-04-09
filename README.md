@@ -163,7 +163,7 @@ O dataset J1 contém **210 registros**. As questões designadas para minha anál
 
 ### 3.2 Dataset J2 — Questões objetivas (`eduagarcia/oab_exams`)
 
-O dataset J2 contém **2210 questões objetivas**. As questões designadas correspondem ao intervalo de índices **1600 a 1722** (Python, base zero), totalizando **123 questões de múltipla escolha**.
+O dataset J2 contém **2210 questões objetivas**. As questões designadas correspondem ao intervalo de índices **1600 a 1722** (Python, base zero), totalizando **122 questões de múltipla escolha**.
 
 ---
 

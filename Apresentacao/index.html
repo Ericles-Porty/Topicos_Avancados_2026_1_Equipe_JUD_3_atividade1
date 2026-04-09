@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Avaliação de LLMs no Exame da OAB</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/night.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/monokai.min.css">
+
+	<style>
+		:root {
+			--accent: #4FC3F7;
+			--accent2: #81C784;
+			--accent3: #FFB74D;
+		}
+
+		.reveal h1,
+		.reveal h2,
+		.reveal h3 {
+			text-transform: none;
+		}
+
+		.reveal table {
+			margin: 0.5em auto;
+			border-collapse: collapse;
+			font-size: 0.65em;
+		}
+
+		.reveal table th {
+			background: #37474F;
+			color: var(--accent);
+			padding: 0.5em 0.8em;
+			border: 1px solid #546E7A;
+		}
+
+		.reveal table td {
+			padding: 0.4em 0.8em;
+			border: 1px solid #546E7A;
+		}
+
+		.reveal table tr:nth-child(even) {
+			background: rgba(255, 255, 255, 0.04);
+		}
+
+		.reveal pre {
+			width: 100%;
+			font-size: 0.48em;
+			box-shadow: none;
+		}
+
+		.reveal pre code {
+			max-height: 500px;
+			padding: 1em;
+			border-radius: 8px;
+		}
+
+		.reveal .small-text {
+			font-size: 0.6em;
+			color: #B0BEC5;
+		}
+
+		.reveal .highlight-box {
+			background: rgba(79, 195, 247, 0.1);
+			border-left: 4px solid var(--accent);
+			padding: 0.5em 1em;
+			margin: 0.5em 0;
+			border-radius: 4px;
+			font-size: 0.7em;
+		}
+
+		.pipeline {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0;
+			margin: 1em 0;
+			flex-wrap: nowrap;
+		}
+
+		.pipeline-step {
+			background: rgba(79, 195, 247, 0.12);
+			border: 2px solid var(--accent);
+			border-radius: 10px;
+			padding: 0.6em 0.8em;
+			text-align: center;
+			font-size: 0.55em;
+			min-width: 140px;
+		}
+
+		.pipeline-step.step2 {
+			border-color: var(--accent2);
+			background: rgba(129, 199, 132, 0.12);
+		}
+
+		.pipeline-step.step3 {
+			border-color: var(--accent3);
+			background: rgba(255, 183, 77, 0.12);
+		}
+
+		.pipeline-arrow {
+			font-size: 1.5em;
+			color: #78909C;
+			margin: 0 0.2em;
+		}
+
+		.two-columns {
+			display: flex;
+			gap: 1.5em;
+			align-items: flex-start;
+		}
+
+		.two-columns>div {
+			flex: 1;
+		}
+
+		.metric-card {
+			background: rgba(255, 255, 255, 0.05);
+			border-radius: 8px;
+			padding: 0.5em 0.7em;
+			margin: 0.3em 0;
+			font-size: 0.55em;
+			text-align: left;
+		}
+
+		.metric-card strong {
+			color: var(--accent);
+		}
+
+		.result-img {
+			max-width: 90%;
+			max-height: 55vh;
+			border-radius: 6px;
+			margin: 0.4em auto;
+			display: block;
+			object-fit: contain;
+		}
+
+		.result-img-small {
+			max-width: 48%;
+			max-height: 50vh;
+			border-radius: 6px;
+			display: inline-block;
+			vertical-align: top;
+			object-fit: contain;
+		}
+
+		.tag {
+			display: inline-block;
+			background: rgba(79, 195, 247, 0.2);
+			color: var(--accent);
+			padding: 0.15em 0.5em;
+			border-radius: 4px;
+			font-size: 0.7em;
+			margin: 0.1em;
+		}
+
+		.tag.green {
+			background: rgba(129, 199, 132, 0.2);
+			color: var(--accent2);
+		}
+
+		.tag.orange {
+			background: rgba(255, 183, 77, 0.2);
+			color: var(--accent3);
+		}
+
+		.reveal ul {
+			font-size: 0.7em;
+		}
+
+		.reveal .subtitle {
+			font-size: 0.55em;
+			color: #90A4AE;
+			margin-top: 0.3em;
+		}
+
+		.winner {
+			color: var(--accent2);
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 1: CAPA -->
+			<!-- ============================================================ -->
+			<section>
+				<h2 style="color: var(--accent);">Avaliação de LLMs no Exame da OAB</h2>
+				<p class="subtitle" style="font-size: 0.6em;">
+					Curadoria de Datasets e Inferência com Modelos de Linguagem<br>
+					no Domínio Jurídico
+				</p>
+				<br>
+				<p style="font-size: 0.5em; color: #90A4AE;">
+					Tópicos Avançados em Eng. de Software e SI I &mdash; 2026.1<br>
+					Universidade Federal de Sergipe (UFS)<br>
+					<strong style="color: var(--accent);">Equipe 3 &mdash; Domínio Jurídico (JUD)</strong>
+				</p>
+				<p style="font-size: 0.45em; color: #78909C; margin-top: 1.5em;">Abril 2026</p>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 2: AUTOR -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Autor</h2>
+				<br>
+				<h3 style="color: var(--accent);">Éricles dos Santos Cunha</h3>
+				<br>
+				<p style="font-size: 0.6em; color: #B0BEC5;">
+					Departamento de Computação &mdash; UFS<br>
+					Equipe JUD 3 &mdash; Domínio Jurídico
+				</p>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 3: MODELOS ESCOLHIDOS -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Modelos Escolhidos</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Modelo</th>
+							<th>Parâmetros</th>
+							<th>Desenvolvedor</th>
+							<th>Comando Ollama</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Llama 3.2</td>
+							<td>3B</td>
+							<td>Meta</td>
+							<td><code>ollama run llama3.2:3b</code></td>
+						</tr>
+						<tr>
+							<td>Gemma 2</td>
+							<td>2B</td>
+							<td>Google</td>
+							<td><code>ollama run gemma2:2b</code></td>
+						</tr>
+						<tr>
+							<td>Qwen 2.5</td>
+							<td>3B</td>
+							<td>Alibaba</td>
+							<td><code>ollama run qwen2.5:3b</code></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="highlight-box" style="margin-top: 1em;">
+					Todos executados <strong>localmente via Ollama</strong> &mdash;
+					diversidade de arquitetura (Meta, Google, Alibaba),
+					suporte a português e compatibilidade com hardware limitado.
+				</div>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 4: MÁQUINA UTILIZADA -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Máquina Utilizada</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Componente</th>
+							<th>Especificação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>GPU</td>
+							<td>NVIDIA GeForce RTX 4050 (6 GB VRAM)</td>
+						</tr>
+						<tr>
+							<td>RAM</td>
+							<td>32 GB</td>
+						</tr>
+						<tr>
+							<td>SO</td>
+							<td>Windows 11 Pro</td>
+						</tr>
+						<tr>
+							<td>Runtime</td>
+							<td>Ollama (execução local)</td>
+						</tr>
+						<tr>
+							<td>Python</td>
+							<td>3.12+</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="small-text" style="margin-top: 1em;">
+					Restrição de 6 GB de VRAM limita modelos a ~3B parâmetros
+				</p>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 5: QUESTÕES ATRIBUÍDAS -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Questões Atribuídas</h2>
+				<div class="two-columns" style="margin-top: 1em;">
+					<div>
+						<h4 style="color: var(--accent);">J1 &mdash; Questões Abertas</h4>
+						<p style="font-size: 0.6em;">
+							Índices <strong>153&ndash;164</strong><br>
+							<span class="tag">12 questões</span>
+							<span class="tag green">OAB Bench (Maritaca AI)</span>
+						</p>
+						<p class="small-text">Dissertativas com rubrica oficial e subquestões</p>
+					</div>
+					<div>
+						<h4 style="color: var(--accent2);">J2 &mdash; Múltipla Escolha</h4>
+						<p style="font-size: 0.6em;">
+							Índices <strong>1600&ndash;1722</strong><br>
+							<span class="tag">122 questões</span>
+							<span class="tag orange">OAB Exams (HuggingFace)</span>
+						</p>
+						<p class="small-text">Alternativas A-D com gabarito oficial</p>
+					</div>
+				</div>
+				<pre><code class="language-python"># src/load_dataset.py
+OPEN_SLICE = slice(153, 165)    # linhas 153-164 inclusive (12 questões abertas)
+MC_SLICE   = slice(1600, 1723)  # linhas 1600-1722 inclusive (122 múltipla escolha)
+
+my_open = df_questions.iloc[OPEN_SLICE]
+my_mc   = splits_mc["train"].iloc[MC_SLICE]</code></pre>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 6: PIPELINE DO PROJETO -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Pipeline do Projeto</h2>
+				<div class="pipeline">
+					<div class="pipeline-step">
+						<strong style="color: var(--accent);">Etapa 1</strong><br>
+						Carregar Dados<br>
+						<span class="small-text">load_dataset.py</span>
+					</div>
+					<span class="pipeline-arrow">&rarr;</span>
+					<div class="pipeline-step step2">
+						<strong style="color: var(--accent2);">Etapa 2</strong><br>
+						Inferência + Curadoria<br>
+						<span class="small-text">run_models.py</span>
+					</div>
+					<span class="pipeline-arrow">&rarr;</span>
+					<div class="pipeline-step step3">
+						<strong style="color: var(--accent3);">Etapa 3</strong><br>
+						Avaliação + Leaderboard<br>
+						<span class="small-text">evaluation.py</span>
+					</div>
+				</div>
+				<pre><code class="language-python"># main.py — Orquestração do pipeline
+def main():
+    # ETAPA 1/3 — Carregando e preparando datasets
+    ld.prepare_my_questions()
+
+    # ETAPA 2/3 — Inferência com LLMs + Curadoria
+    rm.run_open_questions()
+    rm.run_multiple_choice_questions()
+    rm.run_curator_tasks()
+
+    # ETAPA 3/3 — Avaliação e Leaderboard
+    df_open = ev.evaluate_open_questions()
+    df_mc = ev.evaluate_multiple_choice()
+    df_comparative = ev.evaluate_comparative()
+    df_cross = ev.evaluate_cross_metrics()
+    ev.generate_leaderboard(df_open, df_mc, df_comparative, df_cross)</code></pre>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 7: INFERÊNCIA — CÓDIGO -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Inferência com os Modelos</h2>
+				<pre><code class="language-python"># src/run_models.py — Definição dos modelos e inferência
+MODELS = ["llama3.2:3b", "gemma2:2b", "qwen2.5:3b"]
+client = ollama.Client(timeout=120.0)
+
+# Para cada questao x modelo:
+for _, row in df.iterrows():
+    messages = [
+        {"role": "system", "content": system},
+        {"role": "user",   "content": question},
+    ]
+    for turn in turns:                              # subquestões
+        messages.append({"role": "user", "content": turn})
+
+    for model in MODELS:
+        response = client.chat(model=model, messages=messages)
+        answer   = response["message"]["content"]</code></pre>
+				<pre><code class="language-python"># Múltipla escolha — templates Jinja2 para formatação
+system_prompt = env.render_template("multiple_choice_system.jinja")
+user_prompt   = env.render_template("multiple_choice.jinja",
+                    question=question, choices=choices)
+messages = [
+    {"role": "system", "content": system_prompt},
+    {"role": "user",   "content": user_prompt},
+]</code></pre>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 8: CONCEITOS E MÉTRICAS -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Conceitos e Métricas</h2>
+				<div class="two-columns">
+					<div>
+						<h4 style="color: var(--accent2); font-size: 0.8em;">Múltipla Escolha</h4>
+						<div class="metric-card">
+							<strong>Accuracy</strong> &mdash; Proporção de respostas corretas
+						</div>
+						<div class="metric-card">
+							<strong>Precision</strong> &mdash; Corretude entre as respostas previstas (macro)
+						</div>
+						<div class="metric-card">
+							<strong>Recall</strong> &mdash; Cobertura das respostas corretas (macro)
+						</div>
+						<div class="metric-card">
+							<strong>F1-Score</strong> &mdash; Média harmônica entre Precision e Recall
+						</div>
+					</div>
+					<div>
+						<h4 style="color: var(--accent3); font-size: 0.8em;">Questões Abertas</h4>
+						<div class="metric-card">
+							<strong>BLEU</strong> &mdash; Sobreposição de n-gramas (similaridade léxica)
+						</div>
+						<div class="metric-card">
+							<strong>ROUGE</strong> (1, 2, L) &mdash; Recall de n-gramas e subsequências
+						</div>
+						<div class="metric-card">
+							<strong>BERTScore</strong> &mdash; Similaridade semântica via embeddings contextuais
+						</div>
+						<div class="metric-card">
+							<strong>LLM-as-a-Judge</strong> &mdash; Modelo juiz avalia com base em rubrica ou critérios
+							qualitativos
+						</div>
+					</div>
+				</div>
+				<div class="highlight-box" style="margin-top: 0.8em;">
+					Métricas léxicas (BLEU/ROUGE) capturam sobreposição literal;
+					<strong>BERTScore</strong> captura equivalência semântica &mdash;
+					essencial para respostas juridicas corretas com redação distinta.
+				</div>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 9: CÓDIGO — AVALIAÇÃO CROSS-MODEL -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Avaliação Cross-Model</h2>
+				<p class="small-text">Compara respostas entre todos os pares de modelos usando métricas automatizadas
+				</p>
+				<pre><code class="language-python"># src/evaluation.py — evaluate_cross_metrics()
+def evaluate_cross_metrics() -&gt; pd.DataFrame:
+    df = pd.DataFrame(data)
+    models = df["model"].unique().tolist()
+    pairs = list(itertools.combinations(models, 2))  # 3 pares
+
+    bleu_metric      = hf_evaluate.load("bleu")
+    rouge_metric     = hf_evaluate.load("rouge")
+    bertscore_metric = hf_evaluate.load("bertscore")
+
+    for model_a, model_b in pairs:
+        df_a = df[df["model"] == model_a].set_index("question_id")
+        df_b = df[df["model"] == model_b].set_index("question_id")
+        common = df_a.index.intersection(df_b.index)
+
+        refs  = [df_a.loc[q, "answer"] for q in common]
+        preds = [df_b.loc[q, "answer"] for q in common]
+
+        bleu  = bleu_metric.compute(predictions=preds, references=refs)
+        rouge = rouge_metric.compute(predictions=preds, references=refs)
+        bert  = bertscore_metric.compute(
+                    predictions=preds, references=refs, lang="pt")</code></pre>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 10: CÓDIGO — AVALIAÇÃO COMPARATIVA -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Avaliação Comparativa (LLM-as-a-Judge)</h2>
+				<p class="small-text">
+					Modelo juiz (<code>llama3.2:3b</code>, temperature=0) avalia as respostas de cada modelo
+					usando três critérios qualitativos (0&ndash;5)
+				</p>
+				<pre><code class="language-python"># src/evaluation.py — evaluate_comparative()
+# O juiz recebe a questao + respostas dos 3 modelos
+prompt = env.render_template("judge_comparative.jinja",
+    question=subset.iloc[0]["question"],
+    answers=[(row["model"], row["answer"]) for _, row in subset.iterrows()])
+
+response = client.chat(
+    model=JUDGE_MODEL,  # "llama3.2:3b"
+    options={"temperature": 0},
+    messages=[{"role": "user", "content": prompt}])
+
+# Formula ponderada do score final
+scores = json.loads(_extract_json(content))
+for model, r in scores.items():
+    final = (0.4 * r["argumentacao"]    # Argumentação Jurídica (40%)
+           + 0.4 * r["precisão"]        # Precisão Legal (40%)
+           + 0.2 * r["coesao"])         # Coesão Textual (20%)</code></pre>
+				<div class="highlight-box">
+					<strong>Score Final</strong> = 40% Argumentação + 40% Precisão Legal + 20% Coesão Textual
+				</div>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 11: RESULTADOS — MÚLTIPLA ESCOLHA (DADOS) -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Resultados: Múltipla Escolha</h2>
+				<p class="small-text">122 questões objetivas do OAB Exams &mdash; Accuracy, Precision, Recall e F1
+					(macro)</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Modelo</th>
+							<th>Accuracy</th>
+							<th>Precision</th>
+							<th>Recall</th>
+							<th>F1</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>llama3.2:3b</td>
+							<td>46.34%</td>
+							<td>0.4096</td>
+							<td>0.3662</td>
+							<td>0.3632</td>
+						</tr>
+						<tr>
+							<td>gemma2:2b</td>
+							<td>40.65%</td>
+							<td>0.4124</td>
+							<td>0.3979</td>
+							<td>0.3884</td>
+						</tr>
+						<tr>
+							<td class="winner">qwen2.5:3b</td>
+							<td class="winner">50.41%</td>
+							<td class="winner">0.5250</td>
+							<td class="winner">0.4903</td>
+							<td class="winner">0.4742</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="highlight-box" style="margin-top: 1em;">
+					<strong>Qwen 2.5</strong> lidera em todos os indicadores (50.41% accuracy).
+					Todos abaixo do mínimo da OAB &mdash; esperado para modelos &lt;4B.
+				</div>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 11b: RESULTADOS — MÚLTIPLA ESCOLHA (GRÁFICO) -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Múltipla Escolha: Métricas de Classificação</h2>
+				<img src="../images/ericles/multipla-escolha-metricas-classificacao.png"
+					alt="Métricas de Classificação - Múltipla Escolha" class="result-img">
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 12: RESULTADOS — SIMILARIDADE CROSS-MODEL (DADOS) -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Resultados: Similaridade Cross-Model</h2>
+				<p class="small-text">Comparação entre pares de modelos nas 12 questões abertas</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Par de Modelos</th>
+							<th>BLEU</th>
+							<th>ROUGE-1</th>
+							<th>ROUGE-2</th>
+							<th>ROUGE-L</th>
+							<th>BERTScore F1</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>llama3.2 vs gemma2</td>
+							<td>0.155</td>
+							<td>0.500</td>
+							<td>0.225</td>
+							<td>0.265</td>
+							<td><strong>0.757</strong></td>
+						</tr>
+						<tr>
+							<td>llama3.2 vs qwen2.5</td>
+							<td>0.129</td>
+							<td>0.480</td>
+							<td>0.208</td>
+							<td>0.241</td>
+							<td><strong>0.753</strong></td>
+						</tr>
+						<tr>
+							<td>gemma2 vs qwen2.5</td>
+							<td>0.115</td>
+							<td>0.500</td>
+							<td>0.186</td>
+							<td>0.222</td>
+							<td><strong>0.750</strong></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="highlight-box" style="margin-top: 1em;">
+					BERTScore F1 &gt; 0.75 em todos os pares (alta concordância semântica),
+					apesar de BLEU baixo (~0.12) &mdash; modelos concordam no conteúdo mas divergem na redação.
+				</div>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 12b: RESULTADOS — SIMILARIDADE CROSS-MODEL (GRÁFICO) -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Cross-Model: Métricas Automatizadas</h2>
+				<img src="../images/ericles/metricas-cross-model-questoes-abertas.png" alt="Métricas Cross-Model"
+					class="result-img">
+			</section>
+			<!-- ============================================================ -->
+			<!-- SLIDE 13: RESULTADOS — RUBRICA (DADOS) -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Resultados: Avaliação por Rubrica</h2>
+				<p class="small-text">Modelo juiz avalia respostas abertas contra a rubrica oficial (% de
+					aproveitamento)</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Modelo</th>
+							<th>Média Rubrica (%)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="winner">llama3.2:3b</td>
+							<td class="winner">25.00%</td>
+						</tr>
+						<tr>
+							<td>gemma2:2b</td>
+							<td>21.45%</td>
+						</tr>
+						<tr>
+							<td>qwen2.5:3b</td>
+							<td>16.67%</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="highlight-box" style="margin-top: 1em;">
+					Scores baixos refletem a dificuldade de modelos pequenos com raciocínio jurídico complexo.
+					<strong>Direito do Trabalho</strong> foi ponto cego (0% para todos); <strong>Direito
+						Empresarial</strong> teve melhor desempenho.
+				</div>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 14: RESULTADOS — AVALIAÇÃO COMPARATIVA -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Resultados: Avaliação Comparativa</h2>
+				<p class="small-text">Qualidade de escrita avaliada pelo modelo juiz (0&ndash;5)</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Modelo</th>
+							<th>Argumentação</th>
+							<th>Precisão</th>
+							<th>Coesão</th>
+							<th>Score Final</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="winner">gemma2:2b</td>
+							<td class="winner">4.83</td>
+							<td class="winner">4.83</td>
+							<td class="winner">4.83</td>
+							<td class="winner">4.83</td>
+						</tr>
+						<tr>
+							<td>qwen2.5:3b</td>
+							<td>4.67</td>
+							<td>4.67</td>
+							<td>4.67</td>
+							<td>4.67</td>
+						</tr>
+						<tr>
+							<td>llama3.2:3b</td>
+							<td>4.00</td>
+							<td>3.92</td>
+							<td>4.00</td>
+							<td>3.97</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="highlight-box" style="margin-top: 1em;">
+					Apesar de scores baixos na rubrica, a <strong>qualidade textual</strong> e alta (&gt;3.9/5).
+					Modelos produzem respostas bem escritas, mas sem a precisão técnica exigida pela OAB.
+				</div>
+			</section>
+
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 14b: RESULTADOS — RUBRICA (GRÁFICO) -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Questões Abertas: Comparação de Modelos</h2>
+				<img src="../images/ericles/questoes-abertas-comparacao-modelos.png"
+					alt="Comparação de Modelos - Questões Abertas" class="result-img">
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 15: RESULTADOS — CONSOLIDADO -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Resultados: Visão Consolidada</h2>
+				<p class="small-text">Ranking varia conforme a dimensão avaliada &mdash; não há vencedor absoluto</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Dimensão</th>
+							<th>Líder</th>
+							<th>Valor</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Múltipla Escolha (Accuracy)</td>
+							<td class="winner">Qwen 2.5</td>
+							<td>50.41%</td>
+						</tr>
+						<tr>
+							<td>Rubrica Oficial (%)</td>
+							<td class="winner">Llama 3.2</td>
+							<td>25.00%</td>
+						</tr>
+						<tr>
+							<td>Qualidade de Escrita (0-5)</td>
+							<td class="winner">Gemma 2</td>
+							<td>4.83</td>
+						</tr>
+						<tr>
+							<td>F1-Score MC (macro)</td>
+							<td class="winner">Qwen 2.5</td>
+							<td>0.4742</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="highlight-box" style="margin-top: 1em;">
+					<strong>Inversão de ranking:</strong> Qwen lidera em múltipla escolha,
+					Llama lidera em aderência a rubrica, e Gemma lidera em qualidade de escrita.
+					Avaliação unidimensional seria enganosa &mdash; cada métrica revela uma faceta diferente.
+				</div>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 16: LIMITAÇÕES -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Limitações</h2>
+				<ul>
+					<li class="fragment">
+						<strong>Modelos pequenos (&lt;4B parâmetros)</strong> apresentam dificuldade
+						com raciocínio jurídico complexo &mdash; nenhum atingiu o mínimo da OAB
+					</li>
+					<li class="fragment">
+						<strong>Viés de auto-preferência:</strong> o modelo juiz
+						(<code>llama3.2:3b</code>) é simultaneamente um dos avaliados,
+						podendo favorecer suas próprias respostas
+					</li>
+					<li class="fragment">
+						<strong>Sensibilidade ao dataset:</strong> resultados variam conforme
+						o subconjunto de questões &mdash; ranking inverte entre batches diferentes
+					</li>
+					<li class="fragment">
+						<strong>Hardware limitado</strong> (6 GB VRAM) restringe o uso de
+						modelos maiores que poderiam ter desempenho superior
+					</li>
+				</ul>
+				<pre class="fragment"><code class="language-python"># O juiz e um dos modelos avaliados — potencial conflito
+JUDGE_MODEL = "llama3.2:3b"  # src/evaluation.py:25
+MODELS = ["llama3.2:3b", "gemma2:2b", "qwen2.5:3b"]  # src/run_models.py:23</code></pre>
+			</section>
+
+			<!-- ============================================================ -->
+			<!-- SLIDE 17: ENCERRAMENTO -->
+			<!-- ============================================================ -->
+			<section>
+				<h2>Conclusões</h2>
+				<ul style="font-size: 0.65em;">
+					<li class="fragment">
+						Pipeline <strong>completo</strong> de avaliação de LLMs
+						com recursos limitados e execução 100% local
+					</li>
+					<li class="fragment">
+						Modelos pequenos produzem texto jurídico <strong>coeso</strong>,
+						mas falham na <strong>precisão técnica</strong> exigida pela OAB
+					</li>
+					<li class="fragment">
+						Avaliação <strong>multidimensional</strong> é essencial &mdash;
+						nenhuma métrica única conta a história completa
+					</li>
+					<li class="fragment">
+						A <strong>inversão de ranking</strong> entre métricas demonstra
+						a complexidade de avaliar LLMs de forma justa
+					</li>
+				</ul>
+				<br>
+				<h3 class="fragment" style="color: var(--accent); margin-top: 1em;">Obrigado!</h3>
+			</section>
+
+		</div>
+	</div>
+
+	<script type="module">
+		import Reveal from 'https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.esm.min.js';
+		import Highlight from 'https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.esm.min.js';
+
+		Reveal.initialize({
+			hash: true,
+			slideNumber: true,
+			plugins: [Highlight],
+			width: 1280,
+			height: 720,
+			margin: 0.04,
+			transition: 'slide',
+		});
+	</script>
+</body>
+
+</html>

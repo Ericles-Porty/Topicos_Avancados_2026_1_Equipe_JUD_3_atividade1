@@ -15,7 +15,7 @@ python src/load_dataset.py
 Este script:
 - Baixa o dataset OAB Bench (questoes abertas) do GitHub da Maritaca AI
 - Baixa o dataset OAB Exams (multipla escolha) do HuggingFace
-- Extrai o subconjunto de questoes designadas (12 abertas + 123 multipla escolha)
+- Extrai o subconjunto de questoes designadas (12 abertas + 122 multipla escolha)
 - Salva os arquivos CSV em `src/dataset/`
 
 ### Etapa 2 — Executar inferencia + curadoria

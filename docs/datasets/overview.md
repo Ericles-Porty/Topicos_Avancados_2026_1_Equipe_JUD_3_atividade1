@@ -7,7 +7,7 @@ A Equipe 3 atua no **Dominio Juridico**, utilizando dois datasets de questoes do
 | Dataset | Tipo | Total | Subconjunto | Fonte |
 |---|---|---|---|---|
 | **J1 — OAB Bench** | Questoes discursivas | 210 | 12 questoes | [maritaca-ai/oab-bench](https://github.com/maritaca-ai/oab-bench) |
-| **J2 — OAB Exams** | Multipla escolha | 2210 | 123 questoes | [eduagarcia/oab_exams](https://huggingface.co/datasets/eduagarcia/oab_exams) |
+| **J2 — OAB Exams** | Multipla escolha | 2210 | 122 questoes | [eduagarcia/oab_exams](https://huggingface.co/datasets/eduagarcia/oab_exams) |
 
 ## Papel de cada dataset
 

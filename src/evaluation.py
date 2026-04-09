@@ -23,7 +23,7 @@ TEMPLATES_DIR = os.path.join(os.path.dirname(__file__), "templates")
 env = Environment(loader=lambda name: open(os.path.join(TEMPLATES_DIR, name), encoding="utf-8").read())
 
 JUDGE_MODEL = "llama3.2:3b"
-OLLAMA_TIMEOUT = 120.0
+OLLAMA_TIMEOUT = 300.0
 client = ollama.Client(timeout=OLLAMA_TIMEOUT)
 
 

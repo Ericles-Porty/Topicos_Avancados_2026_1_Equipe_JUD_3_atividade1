@@ -32,4 +32,4 @@ Este repositorio contem as contribuicoes realizadas pelo aluno **Ericles dos San
 | Dataset | Tipo | Quantidade total | Subconjunto utilizado |
 |---|---|---|---|
 | **J1 — OAB Bench** | Questoes Abertas | 210 | 12 questoes (indices 153–164) |
-| **J2 — OAB Exams** | Multipla Escolha | 2210 | 123 questoes (indices 1600–1722) |
+| **J2 — OAB Exams** | Multipla Escolha | 2210 | 122 questoes (indices 1600–1722) |

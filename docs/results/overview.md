@@ -9,7 +9,7 @@ Apos a execucao completa do pipeline, os seguintes arquivos sao gerados em `src/
 | Arquivo | Descricao |
 |---|---|
 | `open_questions.json` | Respostas dos 3 modelos as 12 questoes abertas |
-| `multiple_choice.json` | Respostas dos 3 modelos as 123 questoes de multipla escolha |
+| `multiple_choice.json` | Respostas dos 3 modelos as 122 questoes de multipla escolha |
 | `curator_annotations.json` | Anotacoes de curadoria (dificuldade + legislacao) para todas as questoes |
 
 ### Avaliacao

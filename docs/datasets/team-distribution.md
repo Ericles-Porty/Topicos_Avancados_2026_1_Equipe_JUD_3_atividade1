@@ -22,7 +22,7 @@ Este repositorio processa as questoes designadas para **Ericles**:
 | Dataset | Intervalo | Indices Python (base zero) | Quantidade |
 |---|---|---|---|
 | **OAB Bench** | 153 a 164 | `slice(153, 165)` | 12 questoes |
-| **OAB Exams** | 1600 a 1722 | `slice(1600, 1723)` | 123 questoes |
+| **OAB Exams** | 1600 a 1722 | `slice(1600, 1723)` | 122 questoes |
 
 ### Implementacao no codigo
 
