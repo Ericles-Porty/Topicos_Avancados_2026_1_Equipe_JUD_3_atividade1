@@ -57,13 +57,6 @@ Este projeto atua no **Domínio Jurídico**, trabalhando com os seguintes datase
       </a><br/>
       <a href="https://github.com/Ericles-Porty">Éricles dos Santos</a>
     </td>
-	<td align="center">
-      <a href="https://github.com/ReinanHS">
-        <img src="https://github.com/reinanhs.png" height="64" width="64" alt="Reinan Gabriel"/>
-      </a><br/>
-      <a href="https://github.com/ReinanHS">Reinan Gabriel</a>
-    </td>
-
   </tr>
 </table>
 </div>
