@@ -87,13 +87,39 @@ def load_multiple_choice_questions() -> dict[str, pd.DataFrame]:
 
 
 # ── Preparação das questões selecionadas ───────────────────────────────────────
+#
+# Como Ericles ficou responsavel por cobrir suas proprias questoes + as de
+# Julia + as de Mikaela na Atividade 2, e Reinan (que usa o range do meio)
+# possui seu proprio repositorio, usamos uma LISTA de fatias para pular
+# o intervalo do Reinan sem desperdicar chamadas ao Ollama.
+#
+# Cada fatia eh uma tupla (owner, start, end) com fim exclusivo.
 
-OPEN_SLICE = slice(153, 165)        # linhas 153–164 inclusive
-MC_SLICE   = slice(1600, 1723)      # linhas 1600–1722 inclusive
+OPEN_SLICES = [
+    ("ericles", 153, 165),     # 153–164 (Ericles)
+    ("julia",   165, 177),     # 165–176 (Julia)
+    ("mikaela", 189, 201),     # 189–200 (Mikaela)
+]
+
+MC_SLICES = [
+    ("ericles", 1600, 1723),   # 1600–1722 (Ericles)
+    ("julia",   1723, 1846),   # 1723–1845 (Julia)
+    ("mikaela", 1969, 2092),   # 1969–2091 (Mikaela)
+]
+
+
+def _slice_with_owner(df: pd.DataFrame, slices: list[tuple[str, int, int]]) -> pd.DataFrame:
+    """Concatena varias fatias de `df`, marcando cada linha com a coluna `owner`."""
+    parts = []
+    for owner, start, end in slices:
+        chunk = df.iloc[start:end].copy()
+        chunk["owner"] = owner
+        parts.append(chunk)
+    return pd.concat(parts, ignore_index=True)
 
 
 def prepare_my_questions() -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Carrega os datasets completos e extrai o subconjunto de questões selecionadas."""
+    """Carrega os datasets completos e extrai a uniao das fatias selecionadas."""
     total_steps = 4
 
     _progress(1, total_steps, "Carregando questões abertas...")
@@ -103,15 +129,20 @@ def prepare_my_questions() -> tuple[pd.DataFrame, pd.DataFrame]:
     splits_mc = load_multiple_choice_questions()
 
     _progress(3, total_steps, "Preparando subconjunto de questões abertas...")
-    my_open = df_questions.iloc[OPEN_SLICE]
+    my_open = _slice_with_owner(df_questions, OPEN_SLICES)
     my_open.to_csv(os.path.join(MY_QUESTIONS_DIR, "open_questions.csv"), index=False)
 
     _progress(4, total_steps, "Preparando subconjunto de múltipla escolha...")
-    my_mc = splits_mc["train"].iloc[MC_SLICE]
+    my_mc = _slice_with_owner(splits_mc["train"], MC_SLICES)
     my_mc.to_csv(os.path.join(MY_QUESTIONS_DIR, "multiple_choice.csv"), index=False)
 
     print(f"\n\nQuestões abertas selecionadas:             {len(my_open)}")
     print(f"Questões de múltipla escolha selecionadas: {len(my_mc)}")
+
+    print("\nDistribuição por aluno (abertas):")
+    print(my_open["owner"].value_counts().to_string())
+    print("\nDistribuição por aluno (múltipla escolha):")
+    print(my_mc["owner"].value_counts().to_string())
 
     return my_open, my_mc
 
