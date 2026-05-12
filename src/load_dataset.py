@@ -89,9 +89,11 @@ def load_multiple_choice_questions() -> dict[str, pd.DataFrame]:
 # ── Preparação das questões selecionadas ───────────────────────────────────────
 #
 # Como Ericles ficou responsavel por cobrir suas proprias questoes + as de
-# Julia + as de Mikaela na Atividade 2, e Reinan (que usa o range do meio)
-# possui seu proprio repositorio, usamos uma LISTA de fatias para pular
-# o intervalo do Reinan sem desperdicar chamadas ao Ollama.
+# Julia + as de Mikaela + as de Fernanda na Atividade 2, e Reinan (que usa
+# o range do meio) possui seu proprio repositorio, usamos uma LISTA de
+# fatias para pular o intervalo do Reinan sem desperdicar chamadas ao Ollama.
+# As fatias de questoes abertas (OPEN_SLICES) cobrem apenas Ericles/Julia/Mikaela
+# pois Fernanda foi adicionada apos a execucao das discursivas.
 #
 # Cada fatia eh uma tupla (owner, start, end) com fim exclusivo.
 
@@ -102,9 +104,10 @@ OPEN_SLICES = [
 ]
 
 MC_SLICES = [
-    ("ericles", 1600, 1723),   # 1600–1722 (Ericles)
-    ("julia",   1723, 1846),   # 1723–1845 (Julia)
-    ("mikaela", 1969, 2092),   # 1969–2091 (Mikaela)
+    ("ericles",  1600, 1723),   # 1600–1722 (Ericles)
+    ("fernanda", 1477, 1600),   # 1477–1599 (Fernanda)
+    ("julia",    1723, 1846),   # 1723–1845 (Julia)
+    ("mikaela",  1969, 2092),   # 1969–2091 (Mikaela)
 ]
 
 

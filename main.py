@@ -1,3 +1,4 @@
+import argparse
 import sys
 import os
 
@@ -8,31 +9,62 @@ import run_models as rm
 import evaluation as ev
 
 
+STAGES = ["prepare", "mc", "open", "curator", "eval", "all"]
+
+
+def _header(label: str) -> None:
+    print("\n" + "=" * 60)
+    print(f"  {label}")
+    print("=" * 60)
+
+
+def run_stage(stage: str) -> None:
+    selected = set(STAGES if stage == "all" else [stage])
+
+    if "prepare" in selected:
+        _header("ETAPA — Carregando e preparando datasets")
+        ld.prepare_my_questions()
+
+    if "mc" in selected:
+        _header("ETAPA — Inferência: Múltipla Escolha")
+        rm.run_multiple_choice_questions()
+
+    if "open" in selected:
+        _header("ETAPA — Inferência: Questões Abertas (rubrica)")
+        rm.run_open_questions()
+
+    if "curator" in selected:
+        _header("ETAPA — Curadoria (dificuldade + legislação + subdomínio)")
+        rm.run_curator_tasks()
+
+    if "eval" in selected:
+        _header("ETAPA — Avaliação e Leaderboard")
+        df_open = ev.evaluate_open_questions()
+        df_mc = ev.evaluate_multiple_choice()
+        df_comparative = ev.evaluate_comparative()
+        df_cross = ev.evaluate_cross_metrics()
+        ev.generate_leaderboard(df_open, df_mc, df_comparative, df_cross)
+
+
 def main():
-    print("=" * 60)
-    print("  ETAPA 1/3 — Carregando e preparando datasets")
-    print("=" * 60)
-    ld.prepare_my_questions()
+    parser = argparse.ArgumentParser(
+        description=(
+            "Pipeline da Atividade 1. Use --stage para executar apenas uma etapa. "
+            "Combine chamadas (ex.: `--stage prepare` e depois `--stage mc`) "
+            "para rodar somente múltipla escolha sem reexecutar a rubrica."
+        )
+    )
+    parser.add_argument(
+        "--stage",
+        choices=STAGES,
+        default="all",
+        help="Estágio a executar (default: all).",
+    )
+    args = parser.parse_args()
 
-    print("\n" + "=" * 60)
-    print("  ETAPA 2/3 — Inferência com LLMs + Curadoria")
-    print("=" * 60)
-    rm.run_open_questions()
-    rm.run_multiple_choice_questions()
-    rm.run_curator_tasks()
+    run_stage(args.stage)
 
-    print("\n" + "=" * 60)
-    print("  ETAPA 3/3 — Avaliação e Leaderboard")
-    print("=" * 60)
-    df_open = ev.evaluate_open_questions()
-    df_mc = ev.evaluate_multiple_choice()
-    df_comparative = ev.evaluate_comparative()
-    df_cross = ev.evaluate_cross_metrics()
-    ev.generate_leaderboard(df_open, df_mc, df_comparative, df_cross)
-
-    print("\n" + "=" * 60)
-    print("  Pipeline concluído com sucesso!")
-    print("=" * 60)
+    _header("Pipeline concluído com sucesso!")
 
 
 if __name__ == "__main__":
