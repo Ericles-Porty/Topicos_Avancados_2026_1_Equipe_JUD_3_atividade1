@@ -22,5 +22,5 @@ Sua tarefa é analisar o enunciado de uma questão da OAB e classificar o nível
 {% endfor %}
 {% endif %}
 
-Retorne APENAS um JSON válido, sem markdown:
-{"question_id": "{{ question_id }}", "dificuldade": 0, "nivel": ""}
+Retorne APENAS um JSON válido, sem markdown. Preencha `dificuldade` com 1, 2 ou 3 e `nivel` com o rótulo completo correspondente (ex.: "Nível 1 — Recuperação Factual Direta", "Nível 2 — Raciocínio Lógico-Dedutivo" ou "Nível 3 — Hermenêutica Jurídica Complexa"). Exemplo de retorno:
+{"question_id": "{{ question_id }}", "dificuldade": 2, "nivel": "Nível 2 — Raciocínio Lógico-Dedutivo"}

@@ -165,6 +165,12 @@ def run_multiple_choice_questions() -> None:
 
 CURATOR_MODEL = "llama3.2:3b"
 
+NIVEL_BY_DIFICULDADE = {
+    1: "Nível 1 — Recuperação Factual Direta",
+    2: "Nível 2 — Raciocínio Lógico-Dedutivo",
+    3: "Nível 3 — Hermenêutica Jurídica Complexa",
+}
+
 
 def _extract_json(text: str) -> str | None:
     text = text.replace("```json", "").replace("```", "").strip()
@@ -275,12 +281,16 @@ def run_curator_tasks() -> None:
             entry["dificuldade"] = None
             entry["nivel"] = None
 
+        if not entry.get("nivel") and entry.get("dificuldade") in NIVEL_BY_DIFICULDADE:
+            entry["nivel"] = NIVEL_BY_DIFICULDADE[entry["dificuldade"]]
+
         try:
             leg_json = json.loads(_extract_json(leg_resp["message"]["content"]))
-            entry["corpus_referencia"] = leg_json.get("corpus_referencia", "")
+            corpus = leg_json.get("corpus_referencia") or "Inconclusivo"
+            entry["corpus_referencia"] = corpus
         except Exception as e:
             logger.warning("JSON inválido (corpus de referência) q:%s — %s", q["question_id"], e)
-            entry["corpus_referencia"] = None
+            entry["corpus_referencia"] = "Inconclusivo"
 
         try:
             spec_json = json.loads(_extract_json(spec_resp["message"]["content"]))
