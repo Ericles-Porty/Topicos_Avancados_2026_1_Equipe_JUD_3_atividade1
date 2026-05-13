@@ -176,10 +176,20 @@ def run_curator_tasks() -> None:
     """Classifica dificuldade e identifica legislação base de cada questão."""
     df_open = pd.read_csv(os.path.join(ld.MY_QUESTIONS_DIR, "open_questions.csv"))
     df_mc = pd.read_csv(os.path.join(ld.MY_QUESTIONS_DIR, "multiple_choice.csv"))
+    dest = os.path.join(RESULTS_DIR, "curator_annotations.json")
+
+    if os.path.exists(dest):
+        with open(dest, encoding="utf-8") as f:
+            results = json.load(f)
+    else:
+        results = []
+    done = {r["question_id"] for r in results}
 
     all_questions = []
 
     for _, row in df_open.iterrows():
+        if row["question_id"] in done:
+            continue
         turns = ast.literal_eval(row["turns"])
         all_questions.append({
             "question_id": row["question_id"],
@@ -189,6 +199,8 @@ def run_curator_tasks() -> None:
         })
 
     for _, row in df_mc.iterrows():
+        if row["id"] in done:
+            continue
         all_questions.append({
             "question_id": row["id"],
             "statement": row["question"].replace("\\n", "\n"),
@@ -197,7 +209,9 @@ def run_curator_tasks() -> None:
         })
 
     total = len(all_questions)
-    results = []
+    if total == 0:
+        print(f"Nada a fazer — {len(results)} anotações já presentes em {dest}.")
+        return
 
     for i, q in enumerate(all_questions, 1):
         _progress(i, total, f"curadoria: {q['question_id']}")
@@ -276,8 +290,8 @@ def run_curator_tasks() -> None:
             entry["subdominio_semantico"] = None
 
         results.append(entry)
+        done.add(q["question_id"])
 
-    dest = os.path.join(RESULTS_DIR, "curator_annotations.json")
     with open(dest, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=4, ensure_ascii=False)
     print(f"\nAnotações de curadoria salvas em {dest}")
