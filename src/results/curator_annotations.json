@@ -4798,5 +4798,373 @@
         "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
         "corpus_referencia": "Código de Processo Civil - Lei 9.504/1997",
         "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "43_direito_do_trabalho_questao_4",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "43_direito_empresarial_peca_profissional",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Empresarial"
+    },
+    {
+        "question_id": "43_direito_empresarial_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Empresarial"
+    },
+    {
+        "question_id": "43_direito_empresarial_questao_3",
+        "type": "open",
+        "dificuldade": 2,
+        "nivel": "Nível 2 — Raciocínio Lógico-Dedutivo",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Empresarial"
+    },
+    {
+        "question_id": "43_direito_penal_questao_2",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "44_direito_constitucional_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "44_direito_constitucional_questao_3",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "44_direito_empresarial_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Empresarial"
+    },
+    {
+        "question_id": "44_direito_empresarial_questao_2",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Empresarial"
+    },
+    {
+        "question_id": "44_direito_empresarial_questao_4",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Empresarial"
+    },
+    {
+        "question_id": "2016-19_56",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2016-19_74",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-17_66",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Código de Processo Civil - Lei 9.507/1997",
+        "subdominio_semantico": "Direito Processual Penal"
+    },
+    {
+        "question_id": "2015-18_3",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_17",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_25",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "2015-18_36",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Ambiental"
+    },
+    {
+        "question_id": "2016-19_6",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-19_21",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Internacional"
+    },
+    {
+        "question_id": "2016-20a_2",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-20a_6",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-20a_24",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Internacional"
+    },
+    {
+        "question_id": "2016-20a_53",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2016-20a_59",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2016-21_1",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-21_4",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2016-21_5",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-21_10",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-21_13",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "2016-21_15",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "2016-21_21",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direitos Humanos"
+    },
+    {
+        "question_id": "2017-23_18",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2017-23_25",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "2017-23_62",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2017-24_6",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2017-24_18",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direitos Humanos"
+    },
+    {
+        "question_id": "2017-24_40",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2017-24_42",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2017-24_45",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2017-24_53",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2018-25_10",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2018-25_28",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2018-25_33",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Ambiental"
+    },
+    {
+        "question_id": "2018-25_45",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2018-25_49",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2018-25_50",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Empresarial"
     }
 ]
