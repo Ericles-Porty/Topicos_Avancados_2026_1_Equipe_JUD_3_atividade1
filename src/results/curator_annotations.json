@@ -3238,5 +3238,1085 @@
         "nivel": "Hermenéutica Jurídica Complexa",
         "corpus_referencia": null,
         "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_administrativo_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943 e Lei 9.784/1998",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "43_direito_administrativo_questao_2",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "43_direito_administrativo_questao_3",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Lei nº 12.846/2013",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "43_direito_administrativo_questao_4",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Lei nà 11.107/2005 e Lei nà 14.133/2021",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "43_direito_civil_peca_profissional",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Código de Defesa do Consumidor (Lei 8.078/1990) e a Lei nº 9.514/1998",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_civil_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Cço de Família - Lei 11.236/2005",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_civil_questao_2",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 - Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943 e Código Civil - Lei 10.406/2002",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_civil_questao_3",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código Civil de 2002 - Artigos 581, 682 e 683",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_civil_questao_4",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Código Civil - Art. 3°, inciso I",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_do_trabalho_peca_profissional",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943, Código de Processo Civil - Lei 5.100/2000 e Lei 9.472/1997",
+        "subdominio_semantico": "Direito do Trabalho"
+    },
+    {
+        "question_id": "43_direito_do_trabalho_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito do Trabalho"
+    },
+    {
+        "question_id": "43_direito_do_trabalho_questao_2",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-17_65",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Processo Penal - Artigos 342 e 385",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-17_66",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Processo Civil - Lei 9.507/1997",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-17_67",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Processo Civil - Lei 9.507/1997",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-17_68",
+        "type": "multiple_choice",
+        "dificuldade": 2,
+        "nivel": "Nível 3",
+        "corpus_referencia": "Código de Processo Civil - Lei 9.099/1996",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-17_69",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Processo Civil - Artigos 340 e 341",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-17_70",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-17_71",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-17_72",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-17_73",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-17_74",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-17_75",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-17_77",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-17_78",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-17_79",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Empresarial"
+    },
+    {
+        "question_id": "2015-17_80",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_1",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Ética da OAB",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_2",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_3",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Ética e Disciplina do Ministério Público (Lei 8.437/1992)",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_4",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_5",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_6",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Processo Civil - Lei 9.507/1997",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_7",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "2015-18_8",
+        "type": "multiple_choice",
+        "dificuldade": 2,
+        "nivel": "Raciocínio Lógico-Dedutivo",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943 e Código de Processo Civil - Lei 5.530/2006",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_9",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_10",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Ética e Disciplina do Ministério Público (Lei nº 9.730/1998)",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_11",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_12",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_13",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2015-18_14",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "2015-18_15",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição da República de 1988",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "2015-18_16",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_17",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": null,
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_18",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "2015-18_19",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2015-18_20",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Convençó Americana sobre os Direitos Humanos",
+        "subdominio_semantico": "Direitos Humanos"
+    },
+    {
+        "question_id": "2015-18_21",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direitos Humanos"
+    },
+    {
+        "question_id": "2015-18_22",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direitos Humanos"
+    },
+    {
+        "question_id": "2015-18_23",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Lei de Introdução às Normas do Direito Brasileiro (LINDB)",
+        "subdominio_semantico": "Direito Internacional"
+    },
+    {
+        "question_id": "2015-18_24",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Convençó Interamericana sobre Cartas Rogatórias",
+        "subdominio_semantico": "Direito Internacional"
+    },
+    {
+        "question_id": "2015-18_25",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": null,
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "2015-18_26",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa (Complex Hermeneutics)",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943 e Código Tributário Nacional (CTN) - Lei 5.172/1966",
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "2015-18_27",
+        "type": "multiple_choice",
+        "dificuldade": 2,
+        "nivel": "Nível 2 — Raciocínio Lógico-Dedutivo (Logical Deduction)",
+        "corpus_referencia": "Decreto 123/2015",
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "2015-18_28",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Lei 9.868/1998 - Estatuto da Criança e do Adolescente (ECA)",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2015-18_29",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2015-18_30",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2015-18_31",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa (Complex Hermeneutics)",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_32",
+        "type": "multiple_choice",
+        "dificuldade": 2,
+        "nivel": "Nível 2 — Raciocínio Lógico-Dedutivo (Logical Deduction)",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_33",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_34",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2015-18_35",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Lei 6.938/1997",
+        "subdominio_semantico": "Direito Ambiental"
+    },
+    {
+        "question_id": "2015-18_36",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": null,
+        "subdominio_semantico": "Direito Ambiental"
+    },
+    {
+        "question_id": "2015-18_37",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_38",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_39",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código Civil - Lei 10.406/2002",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_40",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Cçídio Civil - Lei 10.406/2002",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_41",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_42",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_43",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_44",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código Civil de 2002 - Artigos 1.629 a 1.638",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_45",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Estatuto da Crianº e do Adolescente - Lei 8.069/1990",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_46",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Código de Defesa do Consumidor - Lei 8.078/1990",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_47",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Proteção e Defesa do Consumidor - Lei 8.078/1990",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_48",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_49",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943 e Código de Processo Civil - Lei 5.101/2000",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_50",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Empresarial"
+    },
+    {
+        "question_id": "2015-18_51",
+        "type": "multiple_choice",
+        "dificuldade": 2,
+        "nivel": "Nível 3",
+        "corpus_referencia": "Cüdigo Civil - Lei 10.406/2002",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_52",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Lei nº 11.101/2005",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_53",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_54",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Código de Processo Civil - Lei 9.507/1997",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_55",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943 e Código de Processo Civil - Lei 9.509/1998",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_56",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_57",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Convenção de Viena sobre Relações Civis Internacionais (1961) e a Lei nº 9.512/1998 do Brasil",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_58",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Processo Civil - Lei 9.507/1997",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_59",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_60",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Código Civil - Lei 10.406/2002",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_61",
+        "type": "multiple_choice",
+        "dificuldade": 2,
+        "nivel": "Nível 2 — Raciocínio Lógico-Dedutivo (Logical Deduction)",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_62",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código Civil - Lei 10.406/2002",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_63",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_64",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Trânsito Brasileiro - Lei nº 9.504/97",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_65",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Processo Civil - Lei 9.507/1997",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_66",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943 e Código de Processo Penal - Lei 7.210/1984",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_67",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Processo Civil - Lei 9.507/1997",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_68",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Lei 7.170/1983",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2015-18_69",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Processo Civil - Lei 9.507/1997",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2015-18_70",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_71",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_72",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2015-18_73",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_74",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_75",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_76",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_77",
+        "type": "multiple_choice",
+        "dificuldade": 2,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_78",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_79",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2015-18_80",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "2016-19_1",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Estatuto da OAB - Art. 36",
+        "subdominio_semantico": "Estatuto da OAB"
+    },
+    {
+        "question_id": "2016-19_2",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2016-19_3",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2016-19_4",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": null,
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-19_5",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943 e Código de Processo Civil - Lei 5.170/1966",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-19_6",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": null,
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-19_7",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Ética e Disciplina da OAB - Artigos 41 a 43",
+        "subdominio_semantico": "Direito Empresarial"
+    },
+    {
+        "question_id": "2016-19_8",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-19_9",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2016-19_10",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Estatuto da OAB - Artigos 12 e 13",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2016-19_11",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-19_12",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direitos Humanos"
+    },
+    {
+        "question_id": "2016-19_13",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "2016-19_14",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "2016-19_15",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Inconclusivo",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "2016-19_16",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2016-19_17",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "2016-19_18",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Constitucional"
+    },
+    {
+        "question_id": "2016-19_19",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2016-19_20",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Convenção sobre a Eliminação de Todas as Formas de Discriminação contra a Mulher",
+        "subdominio_semantico": "Direito do Consumidor"
+    },
+    {
+        "question_id": "2016-19_21",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": null,
+        "subdominio_semantico": "Direito Internacional"
+    },
+    {
+        "question_id": "2016-19_22",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código Civil - Lei 10.406/2002",
+        "subdominio_semantico": "Direito do Consumidor"
+    },
+    {
+        "question_id": "2016-19_23",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "2016-19_24",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Convenção sobre os Aspectos Civis do Sequestro Internacional de Crianúes",
+        "subdominio_semantico": "Direito Internacional"
+    },
+    {
+        "question_id": "2016-19_25",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Lei nº 6.830/80",
+        "subdominio_semantico": "Direito Processual Civil"
+    },
+    {
+        "question_id": "2016-19_26",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "2016-19_27",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código de Processo Civil - Artigos 183 e 184",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "2016-19_28",
+        "type": "multiple_choice",
+        "dificuldade": 3,
+        "nivel": "Nível 3",
+        "corpus_referencia": "Constituição Federal de 1988",
+        "subdominio_semantico": "Direito Tributário"
     }
 ]
