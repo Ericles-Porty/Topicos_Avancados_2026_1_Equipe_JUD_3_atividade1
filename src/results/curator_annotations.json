@@ -5262,5 +5262,85 @@
         "nivel": "",
         "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
         "subdominio_semantico": "Direito Trabalhista"
+    },
+    {
+        "question_id": "44_direito_tributario_peca_profissional",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Código Tributário Nacional - Lei nº 5.172/1966",
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "44_direito_tributario_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Constituição Federal",
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "44_direito_tributario_questao_2",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Código Tributário Nacional, Lei nº 5.172/1966",
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "44_direito_tributario_questao_3",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Lei Complementar Municipal",
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "44_direito_tributario_questao_4",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Lei nº 6.830/1980",
+        "subdominio_semantico": "Direito Tributário"
+    },
+    {
+        "question_id": "44_direito_penal_peca_profissional",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Código Penal brasileiro",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "44_direito_penal_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Código Penal",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "44_direito_penal_questao_2",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Código Penal",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "44_direito_penal_questao_3",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Código Penal",
+        "subdominio_semantico": "Direito Penal"
+    },
+    {
+        "question_id": "44_direito_penal_questao_4",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "Código Penal",
+        "subdominio_semantico": "Direito Penal"
     }
 ]
