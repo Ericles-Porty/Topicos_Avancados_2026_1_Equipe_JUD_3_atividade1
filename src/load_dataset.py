@@ -108,6 +108,7 @@ MC_SLICES = [
     ("fernanda", 1477, 1600),   # 1477–1599 (Fernanda)
     ("julia",    1723, 1846),   # 1723–1845 (Julia)
     ("mikaela",  1969, 2092),   # 1969–2091 (Mikaela)
+    ("victor",   2092, 2210),   # 2092–2209 (Victor)
 ]
 
 

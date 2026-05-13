@@ -39,11 +39,26 @@ def _progress(current: int, total: int, label: str = "") -> None:
 
 def run_open_questions() -> None:
     df = pd.read_csv(os.path.join(ld.MY_QUESTIONS_DIR, "open_questions.csv"))
-    total = len(df) * len(MODELS)
+    dest = os.path.join(RESULTS_DIR, "open_questions.json")
+
+    if os.path.exists(dest):
+        with open(dest, encoding="utf-8") as f:
+            results = json.load(f)
+    else:
+        results = []
+    done = {(r["question_id"], r["model"]) for r in results}
+
+    total = sum(1 for _, row in df.iterrows() for m in MODELS if (row["question_id"], m) not in done)
     step = 0
-    results = []
+    if total == 0:
+        print(f"Nada a fazer — {len(results)} entradas já presentes em {dest}.")
+        return
 
     for _, row in df.iterrows():
+        pending_models = [m for m in MODELS if (row["question_id"], m) not in done]
+        if not pending_models:
+            continue
+
         question = row["statement"]
         system   = row["system"]
         turns    = ast.literal_eval(row["turns"])
@@ -56,7 +71,7 @@ def run_open_questions() -> None:
             if turn.strip():
                 messages.append({"role": "user", "content": turn})
 
-        for model in MODELS:
+        for model in pending_models:
             step += 1
             _progress(step, total, f"q:{row['question_id']} | {model}")
 
@@ -73,8 +88,8 @@ def run_open_questions() -> None:
                 "question":    question,
                 "answer":      answer,
             })
+            done.add((row["question_id"], model))
 
-    dest = os.path.join(RESULTS_DIR, "open_questions.json")
     with open(dest, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=4, ensure_ascii=False)
     print(f"\nRespostas abertas salvas em {dest}")
@@ -87,11 +102,26 @@ CHOICE_LABELS = ["A", "B", "C", "D"]
 
 def run_multiple_choice_questions() -> None:
     df = pd.read_csv(os.path.join(ld.MY_QUESTIONS_DIR, "multiple_choice.csv"))
-    total = len(df) * len(MODELS)
+    dest = os.path.join(RESULTS_DIR, "multiple_choice.json")
+
+    if os.path.exists(dest):
+        with open(dest, encoding="utf-8") as f:
+            results = json.load(f)
+    else:
+        results = []
+    done = {(r["question_id"], r["model"]) for r in results}
+
+    total = sum(1 for _, row in df.iterrows() for m in MODELS if (row["id"], m) not in done)
     step = 0
-    results = []
+    if total == 0:
+        print(f"Nada a fazer — {len(results)} entradas já presentes em {dest}.")
+        return
 
     for _, row in df.iterrows():
+        pending_models = [m for m in MODELS if (row["id"], m) not in done]
+        if not pending_models:
+            continue
+
         question = row["question"].replace("\\n", "\n")
         choices  = [
             (label, row[f"choice_{label.lower()}"].replace("\\n", "\n"))
@@ -105,7 +135,7 @@ def run_multiple_choice_questions() -> None:
             {"role": "user", "content": user_prompt},
         ]
 
-        for model in MODELS:
+        for model in pending_models:
             step += 1
             _progress(step, total, f"q:{row['id']} | {model}")
 
@@ -124,8 +154,8 @@ def run_multiple_choice_questions() -> None:
                 "answer":      answer,
                 "correct":     row["answerKey"],
             })
+            done.add((row["id"], model))
 
-    dest = os.path.join(RESULTS_DIR, "multiple_choice.json")
     with open(dest, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=4, ensure_ascii=False)
     print(f"\nRespostas de múltipla escolha salvas em {dest}")
