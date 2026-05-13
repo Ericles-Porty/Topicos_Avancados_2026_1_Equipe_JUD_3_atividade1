@@ -5166,5 +5166,101 @@
         "nivel": "Nível 3 — Hermenêutica Jurídica Complexa",
         "corpus_referencia": "Inconclusivo",
         "subdominio_semantico": "Direito Empresarial"
+    },
+    {
+        "question_id": "43_direito_administrativo_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943 e Lei 9.784/1998",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "43_direito_administrativo_questao_2",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "43_direito_administrativo_questao_3",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Lei nº 12.846/2013",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "43_direito_administrativo_questao_4",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Lei nà 11.107/2005 e Lei nà 14.133/2021",
+        "subdominio_semantico": "Direito Administrativo"
+    },
+    {
+        "question_id": "43_direito_civil_peca_profissional",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Código de Defesa do Consumidor (Lei 8.078/1990) e a Lei nº 9.514/1998",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_civil_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Cço de Família - Lei 11.236/2005",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_civil_questao_2",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Nível 3 - Hermenêutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943 e Código Civil - Lei 10.406/2002",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_civil_questao_3",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "Código Civil de 2002 - Artigos 581, 682 e 683",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_civil_questao_4",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "Código Civil - Art. 3°, inciso I",
+        "subdominio_semantico": "Direito Civil"
+    },
+    {
+        "question_id": "43_direito_do_trabalho_peca_profissional",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943, Código de Processo Civil - Lei 5.100/2000 e Lei 9.472/1997",
+        "subdominio_semantico": "Direito do Trabalho"
+    },
+    {
+        "question_id": "43_direito_do_trabalho_questao_1",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "Hermenéutica Jurídica Complexa",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito do Trabalho"
+    },
+    {
+        "question_id": "43_direito_do_trabalho_questao_2",
+        "type": "open",
+        "dificuldade": 3,
+        "nivel": "",
+        "corpus_referencia": "CLT - Decreto-Lei 5.452/1943",
+        "subdominio_semantico": "Direito Trabalhista"
     }
 ]
