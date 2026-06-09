@@ -42,14 +42,18 @@ ollama pull llama3.2:3b
 ollama pull gemma2:2b
 ollama pull qwen2.5:3b
 
-# 2) Indexar a legislação no ChromaDB (uma única vez)
+# 2) Preparar os datasets de entrada (baixa as questões e gera os CSVs em
+#    src/dataset/my_questions/). OBRIGATÓRIO antes de mc/open. Requer internet.
+python main.py --stage prepare
+
+# 3) Indexar a legislação no ChromaDB (uma única vez)
 python main.py --stage rag-populate
 
-# 3) Inferência COM RAG  ->  src/results/multiple_choice_rag.json e open_questions_rag.json
+# 4) Inferência COM RAG  ->  src/results/multiple_choice_rag.json e open_questions_rag.json
 python main.py --stage mc   --rag --top-k 10
 python main.py --stage open --rag --top-k 10
 
-# 4) Linha de base SEM RAG  ->  src/results/multiple_choice.json e open_questions.json
+# 5) Linha de base SEM RAG  ->  src/results/multiple_choice.json e open_questions.json
 python main.py --stage mc
 python main.py --stage open
 ```
@@ -60,6 +64,7 @@ python main.py --stage open
 
 | Comando | O que faz |
 |---|---|
+| `python main.py --stage prepare` | Baixa os datasets da OAB e gera os CSVs de entrada em `src/dataset/my_questions/` (obrigatório antes de `mc`/`open`). |
 | `python main.py --stage rag-populate` | Indexa `database/rag/*.html` no ChromaDB. |
 | `python main.py --stage mc --rag` | Múltipla escolha **com** RAG → `multiple_choice_rag.json`. |
 | `python main.py --stage open --rag` | Questões abertas **com** RAG → `open_questions_rag.json`. |
