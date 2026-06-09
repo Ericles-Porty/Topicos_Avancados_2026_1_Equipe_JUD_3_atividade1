@@ -30,6 +30,102 @@ OLLAMA_TIMEOUT = 120.0
 client = ollama.Client(timeout=OLLAMA_TIMEOUT)
 
 
+# ── RAG (Retrieval-Augmented Generation) ───────────────────────────────────────
+# Port fiel da implementação do Reinan (src/rag): chunking + embeddings +
+# ChromaDB + busca híbrida (vetorial + lexical) + rerank + porta de confiança.
+
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+RAG_DIR = os.path.join(_PROJECT_ROOT, "database", "rag")
+RAG_DB_PATH = os.path.join(_PROJECT_ROOT, ".chroma")
+RAG_COLLECTION = "legislacao"
+EMBEDDING_MODEL = "qwen3-embedding:8b"
+
+_USE_RAG = False
+_RAG_TOP_K = 10
+_rag_builder = None
+
+
+def set_rag(enabled: bool) -> None:
+    """Habilita/desabilita o uso do RAG na inferência."""
+    global _USE_RAG
+    _USE_RAG = enabled
+
+
+def set_top_k(top_k: int) -> None:
+    """Define quantos trechos de lei o RAG injeta no prompt."""
+    global _RAG_TOP_K
+    _RAG_TOP_K = top_k
+
+
+def _get_rag_builder():
+    """Inicializa (uma vez) o banco vetorial e o construtor de contexto RAG."""
+    global _rag_builder
+    if _rag_builder is None:
+        from rag.database import LegislationVectorDB
+        from rag.embeddings import OllamaEmbeddingProvider
+        from rag.context_builder import RagContextBuilder
+
+        provider = OllamaEmbeddingProvider(model_name=EMBEDDING_MODEL)
+        db = LegislationVectorDB(
+            db_path=RAG_DB_PATH,
+            collection_name=RAG_COLLECTION,
+            embedding_provider=provider,
+        )
+        _rag_builder = RagContextBuilder(db, top_k=_RAG_TOP_K)
+    return _rag_builder
+
+
+def _augment_with_rag(user_content: str, q: dict, model: str):
+    """Recupera a legislação de suporte e a prefixa ao prompt do usuário."""
+    builder = _get_rag_builder()
+    context_str, rag_info = builder.get_context_and_info(
+        q, top_k=_RAG_TOP_K, model=model
+    )
+    if not context_str:
+        return user_content, rag_info
+    augmented = (
+        "Considere a legislação de suporte abaixo obtida da base de conhecimento "
+        "jurídica para responder à questão:\n"
+        "[LEGISLAÇÃO DE SUPORTE]\n"
+        f"{context_str}\n"
+        "--- FIM DA LEGISLAÇÃO DE SUPORTE ---\n\n"
+        f"{user_content}"
+    )
+    return augmented, rag_info
+
+
+def run_rag_populate() -> None:
+    """Indexa a legislação de database/rag/ no ChromaDB (chunking + embeddings)."""
+    from pathlib import Path
+    from rag.chunker import LegislationChunker
+    from rag.embeddings import OllamaEmbeddingProvider
+    from rag.database import LegislationVectorDB
+
+    rag_dir = Path(RAG_DIR)
+    html_files = sorted(rag_dir.glob("*.html"))
+    if not html_files:
+        print(f"Nenhum arquivo HTML encontrado em {rag_dir}.")
+        return
+    print(f"Encontrados {len(html_files)} arquivos para indexação.")
+
+    chunker = LegislationChunker()
+    all_chunks = []
+    for fp in html_files:
+        chunks = chunker.chunk_file(fp)
+        all_chunks.extend(chunks)
+        print(f"  {fp.name}: {len(chunks)} trechos")
+    print(f"Total de chunks extraídos: {len(all_chunks)}")
+
+    provider = OllamaEmbeddingProvider(model_name=EMBEDDING_MODEL)
+    db = LegislationVectorDB(
+        db_path=RAG_DB_PATH,
+        collection_name=RAG_COLLECTION,
+        embedding_provider=provider,
+    )
+    db.populate(all_chunks, reset=True)
+    print("Indexação concluída no ChromaDB.")
+
+
 def _progress(current: int, total: int, label: str = "") -> None:
     pct = current / total * 100
     print(f"\r  [{current}/{total}] ({pct:.1f}%) {label}".ljust(80), end="", flush=True)
@@ -39,7 +135,8 @@ def _progress(current: int, total: int, label: str = "") -> None:
 
 def run_open_questions() -> None:
     df = pd.read_csv(os.path.join(ld.MY_QUESTIONS_DIR, "open_questions.csv"))
-    dest = os.path.join(RESULTS_DIR, "open_questions.json")
+    suffix = "_rag" if _USE_RAG else ""
+    dest = os.path.join(RESULTS_DIR, f"open_questions{suffix}.json")
 
     if os.path.exists(dest):
         with open(dest, encoding="utf-8") as f:
@@ -63,17 +160,24 @@ def run_open_questions() -> None:
         system   = row["system"]
         turns    = ast.literal_eval(row["turns"])
 
-        messages = [
-            {"role": "system", "content": system},
-            {"role": "user",   "content": question},
-        ]
-        for turn in turns:
-            if turn.strip():
-                messages.append({"role": "user", "content": turn})
-
         for model in pending_models:
             step += 1
             _progress(step, total, f"q:{row['question_id']} | {model}")
+
+            user_content = question
+            rag_info = []
+            if _USE_RAG:
+                user_content, rag_info = _augment_with_rag(
+                    question, {"statement": question}, model
+                )
+
+            messages = [
+                {"role": "system", "content": system},
+                {"role": "user",   "content": user_content},
+            ]
+            for turn in turns:
+                if turn.strip():
+                    messages.append({"role": "user", "content": turn})
 
             try:
                 response = client.chat(model=model, messages=messages)
@@ -82,12 +186,16 @@ def run_open_questions() -> None:
                 logger.warning("Ollama falhou em q:%s model:%s — %s", row["question_id"], model, e)
                 answer = ""
 
-            results.append({
+            entry = {
                 "question_id": row["question_id"],
                 "model":       model,
                 "question":    question,
                 "answer":      answer,
-            })
+            }
+            if _USE_RAG:
+                entry["used_rag"] = True
+                entry["rag_info"] = rag_info
+            results.append(entry)
             done.add((row["question_id"], model))
 
     with open(dest, "w", encoding="utf-8") as f:
@@ -102,7 +210,8 @@ CHOICE_LABELS = ["A", "B", "C", "D"]
 
 def run_multiple_choice_questions() -> None:
     df = pd.read_csv(os.path.join(ld.MY_QUESTIONS_DIR, "multiple_choice.csv"))
-    dest = os.path.join(RESULTS_DIR, "multiple_choice.json")
+    suffix = "_rag" if _USE_RAG else ""
+    dest = os.path.join(RESULTS_DIR, f"multiple_choice{suffix}.json")
 
     if os.path.exists(dest):
         with open(dest, encoding="utf-8") as f:
@@ -129,15 +238,30 @@ def run_multiple_choice_questions() -> None:
         ]
 
         system_prompt = env.render_template("multiple_choice_system.jinja")
-        user_prompt = env.render_template("multiple_choice.jinja", question=question, choices=choices)
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ]
+        base_user_prompt = env.render_template("multiple_choice.jinja", question=question, choices=choices)
+
+        # Estrutura esperada pelo banco vetorial do Reinan: choices = {"label": [...], "text": [...]}
+        rag_q = {
+            "question": question,
+            "choices": {
+                "label": [label for label, _ in choices],
+                "text": [text for _, text in choices],
+            },
+        }
 
         for model in pending_models:
             step += 1
             _progress(step, total, f"q:{row['id']} | {model}")
+
+            user_prompt = base_user_prompt
+            rag_info = []
+            if _USE_RAG:
+                user_prompt, rag_info = _augment_with_rag(base_user_prompt, rag_q, model)
+
+            messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ]
 
             try:
                 response = client.chat(model=model, messages=messages)
@@ -146,14 +270,18 @@ def run_multiple_choice_questions() -> None:
                 logger.warning("Ollama falhou em q:%s model:%s — %s", row["id"], model, e)
                 answer = ""
 
-            results.append({
+            entry = {
                 "question_id": row["id"],
                 "model":       model,
                 "question":    question,
                 "choices":     dict(choices),
                 "answer":      answer,
                 "correct":     row["answerKey"],
-            })
+            }
+            if _USE_RAG:
+                entry["used_rag"] = True
+                entry["rag_info"] = rag_info
+            results.append(entry)
             done.add((row["id"], model))
 
     with open(dest, "w", encoding="utf-8") as f:

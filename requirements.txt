@@ -8,3 +8,5 @@ datasets
 evaluate
 rouge-score
 bert-score
+chromadb
+beautifulsoup4
