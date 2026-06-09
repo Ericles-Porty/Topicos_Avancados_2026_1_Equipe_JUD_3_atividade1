@@ -7,7 +7,7 @@ comparativo. A implementação é um port fiel da arquitetura do Reinan.
 ## Visão geral do pipeline
 
 1. **Indexação** (`rag-populate`): cada lei em `database/rag/*.html` é quebrada
-   por artigo (chunking), transformada em embeddings (`qwen3-embedding:8b`) e
+   por artigo (chunking), transformada em embeddings (`qwen3-embedding:0.6b`) e
    persistida no **ChromaDB** (`.chroma/`, coleção `legislacao`).
 2. **Recuperação + inferência** (`--rag`): para cada questão, o sistema reescreve
    a consulta, faz **busca híbrida** (vetorial + lexical), aplica **rerank
@@ -26,9 +26,9 @@ comparativo. A implementação é um port fiel da arquitetura do Reinan.
 | Ollama | 0.3+ | runtime local dos modelos |
 | Git | 2.x | controle de versão |
 
-> **Hardware:** o modelo de embedding `qwen3-embedding:8b` é grande (~8B). Exige
-> VRAM/RAM suficiente. A indexação roda só uma vez; depois fica em cache no
-> `.chroma/`.
+> **Hardware:** o modelo de embedding `qwen3-embedding:0.6b` é leve (~640 MB) e
+> roda tranquilamente em GPU modesta ou até em CPU. A indexação roda só uma vez;
+> depois fica em cache no `.chroma/`.
 
 ## Passo a passo
 
@@ -37,7 +37,7 @@ comparativo. A implementação é um port fiel da arquitetura do Reinan.
 pip install -r requirements.txt
 
 # 1) Modelos no Ollama (o embedding também é baixado automaticamente)
-ollama pull qwen3-embedding:8b
+ollama pull qwen3-embedding:0.6b
 ollama pull llama3.2:3b
 ollama pull gemma2:2b
 ollama pull qwen2.5:3b

@@ -38,7 +38,7 @@ _PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
 RAG_DIR = os.path.join(_PROJECT_ROOT, "database", "rag")
 RAG_DB_PATH = os.path.join(_PROJECT_ROOT, ".chroma")
 RAG_COLLECTION = "legislacao"
-EMBEDDING_MODEL = "qwen3-embedding:8b"
+EMBEDDING_MODEL = "qwen3-embedding:0.6b"
 
 _USE_RAG = False
 _RAG_TOP_K = 10
