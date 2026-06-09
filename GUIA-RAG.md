@@ -50,8 +50,8 @@ python main.py --stage prepare
 python main.py --stage rag-populate
 
 # 4) Inferência COM RAG  ->  src/results/multiple_choice_rag.json e open_questions_rag.json
-python main.py --stage mc   --rag --top-k 10
-python main.py --stage open --rag --top-k 10
+python main.py --stage mc   --rag --top-k 3
+python main.py --stage open --rag --top-k 3
 
 # 5) Linha de base SEM RAG  ->  src/results/multiple_choice.json e open_questions.json
 python main.py --stage mc
